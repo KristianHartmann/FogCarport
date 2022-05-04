@@ -2,74 +2,65 @@ package dat.startcode.model.entities;
 
 import java.util.Objects;
 
-public class User
-{
-    private String username;
-    private String password;
+public class User {
+    private int user_id;
     private String role;
+    private int balance;
+    private String password;
+    private String email;
 
-    public User(String username, String password, String role)
-    {
-        this.username = username;
-        this.password = password;
+    public User(int user_id, String role, int balance, String password, String email) {
+        this.user_id = user_id;
         this.role = role;
+        this.balance = balance;
+        this.password = password;
+        this.email = email;
+    }
+    public User(String role, String password, String email) {
+        this.role = role;
+        this.balance = 0;
+        this.password = password;
+        this.email = email;
+    }
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
 
 
-    @Override
-    public String toString()
-    {
-        return "User{" +
-                "brugerNavn='" + username + '\'' +
-                ", kodeord='" + password + '\'' +
-                ", rolle='" + role + '\'' +
-                '}';
+    public String getEmail() {
+        return email;
     }
 
-    public String getUsername()
-    {
-        return username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getRole()
-    {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(String role)
-    {
+    public void setRole(String role) {
         this.role = role;
-    }
-
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return getUsername().equals(user.getUsername()) && getPassword().equals(user.getPassword()) &&
-                getRole().equals(user.getRole());
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return Objects.hash(getUsername(), getPassword(), getRole());
     }
 }
