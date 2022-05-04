@@ -106,46 +106,46 @@
                                     <label for="cpwidth">Carport bredde:</label>
                                     <select class="form-control" id="cpwidth">
                                         <option value="" selected disabled hidden>Vælg bredde</option>
-                                        <option value="240">240 cm</option>
-                                        <option value="270">270 cm</option>
-                                        <option value="300">300 cm</option>
-                                        <option value="330">330 cm</option>
-                                        <option value="360">360 cm</option>
-                                        <option value="390">390 cm</option>
-                                        <option value="420">420 cm</option>
-                                        <option value="450">450 cm</option>
-                                        <option value="480">480 cm</option>
-                                        <option value="510">510 cm</option>
-                                        <option value="540">540 cm</option>
-                                        <option value="570">570 cm</option>
-                                        <option value="600">600 cm</option>
+                                        <c:forEach begin="240" end="600" var="i" step="30">
+                                            <option value="${i}">${i} cm</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cpwidth">Carport bredde:</label>
-                                    <select class="form-control" id="cpwidth">
+                                    <label for="cplength">Carport længde:</label>
+                                    <select class="form-control" id="cplength">
                                         <option value="" selected disabled hidden>Vælg længde</option>
-                                        <option value="240">240 cm</option>
-                                        <option value="270">270 cm</option>
-                                        <option value="300">300 cm</option>
-                                        <option value="330">330 cm</option>
-                                        <option value="360">360 cm</option>
-                                        <option value="390">390 cm</option>
-                                        <option value="420">420 cm</option>
-                                        <option value="450">450 cm</option>
-                                        <option value="480">480 cm</option>
-                                        <option value="510">510 cm</option>
-                                        <option value="540">540 cm</option>
-                                        <option value="570">570 cm</option>
-                                        <option value="600">600 cm</option>
-                                        <option value="630">630 cm</option>
-                                        <option value="660">660 cm</option>
-                                        <option value="690">690 cm</option>
-                                        <option value="720">720 cm</option>
-                                        <option value="750">750 cm</option>
-                                        <option value="780">780 cm</option>
+                                        <c:forEach begin="240" end="780" var="i" step="30">
+                                            <option value="${i}">${i} cm</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
+                                <p><strong>Redskabsrum:</strong><br>
+                                    NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet*</p>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" onclick="showShed()" type="checkbox" role="switch" id="cpshed">
+                                    <label class="form-check-label" for="cpshed">Tilføj redskabskur</label>
+                                </div>
+                                <div class="form-group" id="cpshedwidthdiv">
+                                    <labe for="cpshedwidth">Redskabsrum bredde:</labe>
+                                    <select class="form-control" id="cpshedwidth">
+                                        <option value="" selected disabled hidden>Ønsker ikke redskabsrum</option>
+                                        <c:forEach begin="210" end="720" var="i" step="30">
+                                            <option value="${i}">${i} cm</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="cpshedlengthdiv">
+                                    <labe for="cpshedlength">Redskabsrum længde:</labe>
+                                    <select class="form-control" id="cpshedlength">
+                                        <option value="" selected disabled hidden>Ønsker ikke redskabsrum</option>
+                                        <c:forEach begin="150" end="690" var="i" step="30">
+                                            <option value="${i}">${i} cm</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Bestil</button>
+                                <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet maksimalt måle <strong>210x330 cm.</strong></p>
                             </form>
                         </div>
                     </div>
