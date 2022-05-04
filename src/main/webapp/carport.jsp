@@ -13,46 +13,46 @@
     </jsp:attribute>
 
     <jsp:body>
-<%--                <div class="row">--%>
-<%--                    <div class="col"><h1>Choose a prefixed carport</h1></div>--%>
-<%--                    <div class="col"><h1>OR</h1></div>--%>
-<%--                    <div class="col"><h1>Build your own</h1></div>--%>
-<%--                </div>--%>
-<%--                <div class="row p-2">--%>
-<%--                    <div class="col" style="height: 700px; overflow-y: scroll">--%>
-<%--                        <div class="row" style="justify-content: space-between">--%>
-<%--                            <c:forEach begin="1" end="7" var="i">--%>
-<%--                                <div class="card p-0" style="width: 18rem; margin-bottom: 10px;">--%>
-<%--                                    <img src="images/ProductModel${i}.png" class="card-img-top" alt="Product model ${i}">--%>
-<%--                                    <div class="card-body">--%>
-<%--                                        <p class="card-text">Some quick example text to build on the card title and make up the--%>
-<%--                                            bulk--%>
-<%--                                            of--%>
-<%--                                            the card's content.</p>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="card-footer">--%>
-<%--                                        <div class="row justify-content-center" style="height: 40px">--%>
-<%--                                            <div class="col">--%>
-<%--                                                <input type="number" min="1" class="form-control" value="1" style="height: 100%">--%>
-<%--                                            </div>--%>
-<%--                                            <div class="col">--%>
-<%--                                                <button class="btn btn-primary" style="font-size: small; height: 100%; width: 100%;" type="submit">Add to cart</button>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </c:forEach>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="vr"></div>--%>
-<%--                    <div class="col">--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+        <%--                <div class="row">--%>
+        <%--                    <div class="col"><h1>Choose a prefixed carport</h1></div>--%>
+        <%--                    <div class="col"><h1>OR</h1></div>--%>
+        <%--                    <div class="col"><h1>Build your own</h1></div>--%>
+        <%--                </div>--%>
+        <%--                <div class="row p-2">--%>
+        <%--                    <div class="col" style="height: 700px; overflow-y: scroll">--%>
+        <%--                        <div class="row" style="justify-content: space-between">--%>
+        <%--                            <c:forEach begin="1" end="7" var="i">--%>
+        <%--                                <div class="card p-0" style="width: 18rem; margin-bottom: 10px;">--%>
+        <%--                                    <img src="images/ProductModel${i}.png" class="card-img-top" alt="Product model ${i}">--%>
+        <%--                                    <div class="card-body">--%>
+        <%--                                        <p class="card-text">Some quick example text to build on the card title and make up the--%>
+        <%--                                            bulk--%>
+        <%--                                            of--%>
+        <%--                                            the card's content.</p>--%>
+        <%--                                    </div>--%>
+        <%--                                    <div class="card-footer">--%>
+        <%--                                        <div class="row justify-content-center" style="height: 40px">--%>
+        <%--                                            <div class="col">--%>
+        <%--                                                <input type="number" min="1" class="form-control" value="1" style="height: 100%">--%>
+        <%--                                            </div>--%>
+        <%--                                            <div class="col">--%>
+        <%--                                                <button class="btn btn-primary" style="font-size: small; height: 100%; width: 100%;" type="submit">Add to cart</button>--%>
+        <%--                                            </div>--%>
+        <%--                                        </div>--%>
+        <%--                                    </div>--%>
+        <%--                                </div>--%>
+        <%--                            </c:forEach>--%>
+        <%--                        </div>--%>
+        <%--                    </div>--%>
+        <%--                    <div class="vr"></div>--%>
+        <%--                    <div class="col">--%>
+        <%--                    </div>--%>
+        <%--                </div>--%>
         <div class="row">
-            <h1>QUICKBYG</h1>
+            <h1 class="col offset-1">QUICKBYG</h1>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-3 offset-1">
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list"
                        href="#list-home" role="tab" aria-controls="list-home">QUICKBYG</a>
@@ -93,8 +93,9 @@
                     </div>
                     <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                         <div class="row">
-                            <h3>QUICK-BYG TILBUD - CARPORT MED REJSNING</h3>
-                            <p>Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram.
+                            <h3>QUICK-BYG TILBUD - CARPORT MED FLADT TAG</h3>
+                            <p>Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en
+                                skitsetegning på en carport indenfor vores standardprogram.
 
                                 Tilbud og skitsetegning fremsendes med post hurtigst muligt.
                                 Standardbyggevejledning medfølger ved bestilling.</p>
@@ -123,7 +124,8 @@
                                 <p><strong>Redskabsrum:</strong><br>
                                     NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet*</p>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch" id="cpshed">
+                                    <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
+                                           id="cpshed">
                                     <label class="form-check-label" for="cpshed">Tilføj redskabskur</label>
                                 </div>
                                 <div class="form-group" id="cpshedwidthdiv" style="display: none">
@@ -145,15 +147,45 @@
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Bestil</button>
-                                <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet maksimalt måle <strong>210x330 cm.</strong></p>
+                                <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet
+                                    maksimalt måle <strong>210x330 cm.</strong></p>
                             </form>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                        ...
+                        <h1>under construction</h1>
                     </div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                        ...
+                        <div class="row" style="justify-content: space-between">
+                            <h3>Standard Carporte</h3>
+                            <c:forEach begin="1" end="7" var="i">
+                                <div class="card p-0" style="width: 18rem; margin-bottom: 10px;">
+                                    <img src="images/ProductModel${i}.png" class="card-img-top"
+                                         alt="Product model ${i}">
+                                    <div class="card-body">
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up the
+                                            bulk
+                                            of
+                                            the card's content.</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row justify-content-center" style="height: 40px">
+                                            <div class="col">
+                                                <input type="number" min="1" class="form-control" value="1"
+                                                       style="height: 100%">
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary"
+                                                        style="font-size: small; height: 100%; width: 100%;"
+                                                        type="submit">Add to cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
             </div>
