@@ -13,41 +13,41 @@
     </jsp:attribute>
 
     <jsp:body>
-        <%--                <div class="row">--%>
-        <%--                    <div class="col"><h1>Choose a prefixed carport</h1></div>--%>
-        <%--                    <div class="col"><h1>OR</h1></div>--%>
-        <%--                    <div class="col"><h1>Build your own</h1></div>--%>
-        <%--                </div>--%>
-        <%--                <div class="row p-2">--%>
-        <%--                    <div class="col" style="height: 700px; overflow-y: scroll">--%>
-        <%--                        <div class="row" style="justify-content: space-between">--%>
-        <%--                            <c:forEach begin="1" end="7" var="i">--%>
-        <%--                                <div class="card p-0" style="width: 18rem; margin-bottom: 10px;">--%>
-        <%--                                    <img src="images/ProductModel${i}.png" class="card-img-top" alt="Product model ${i}">--%>
-        <%--                                    <div class="card-body">--%>
-        <%--                                        <p class="card-text">Some quick example text to build on the card title and make up the--%>
-        <%--                                            bulk--%>
-        <%--                                            of--%>
-        <%--                                            the card's content.</p>--%>
-        <%--                                    </div>--%>
-        <%--                                    <div class="card-footer">--%>
-        <%--                                        <div class="row justify-content-center" style="height: 40px">--%>
-        <%--                                            <div class="col">--%>
-        <%--                                                <input type="number" min="1" class="form-control" value="1" style="height: 100%">--%>
-        <%--                                            </div>--%>
-        <%--                                            <div class="col">--%>
-        <%--                                                <button class="btn btn-primary" style="font-size: small; height: 100%; width: 100%;" type="submit">Add to cart</button>--%>
-        <%--                                            </div>--%>
-        <%--                                        </div>--%>
-        <%--                                    </div>--%>
-        <%--                                </div>--%>
-        <%--                            </c:forEach>--%>
-        <%--                        </div>--%>
-        <%--                    </div>--%>
-        <%--                    <div class="vr"></div>--%>
-        <%--                    <div class="col">--%>
-        <%--                    </div>--%>
-        <%--                </div>--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col"><h1>Choose a prefixed carport</h1></div>--%>
+<%--                    <div class="col"><h1>OR</h1></div>--%>
+<%--                    <div class="col"><h1>Build your own</h1></div>--%>
+<%--                </div>--%>
+<%--                <div class="row p-2">--%>
+<%--                    <div class="col" style="height: 700px; overflow-y: scroll">--%>
+<%--                        <div class="row" style="justify-content: space-between">--%>
+<%--                            <c:forEach begin="1" end="7" var="i">--%>
+<%--                                <div class="card p-0" style="width: 18rem; margin-bottom: 10px;">--%>
+<%--                                    <img src="images/ProductModel${i}.png" class="card-img-top" alt="Product model ${i}">--%>
+<%--                                    <div class="card-body">--%>
+<%--                                        <p class="card-text">Some quick example text to build on the card title and make up the--%>
+<%--                                            bulk--%>
+<%--                                            of--%>
+<%--                                            the card's content.</p>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="card-footer">--%>
+<%--                                        <div class="row justify-content-center" style="height: 40px">--%>
+<%--                                            <div class="col">--%>
+<%--                                                <input type="number" min="1" class="form-control" value="1" style="height: 100%">--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col">--%>
+<%--                                                <button class="btn btn-primary" style="font-size: small; height: 100%; width: 100%;" type="submit">Add to cart</button>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </c:forEach>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="vr"></div>--%>
+<%--                    <div class="col">--%>
+<%--                    </div>--%>
+<%--                </div>--%>
         <div class="row">
             <h1>QUICKBYG</h1>
         </div>
@@ -80,19 +80,74 @@
                                 Rekvirér tilbud - start med at vælge type: </p>
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="row justify-content-center" style="text-align: center">
                             <h6>Carport med fladt tag</h6>
-                            <img src="images/quickurejs.png" alt="carport med flat tag">
+                            <img src="images/quickurejs.png" alt="carport med flat tag" style="width: 350px">
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="row justify-content-center" style="text-align: center">
                             <h6>Carport med rejsning</h6>
-                            <img src="images/quickmrejs.png" alt="carport med rejsning">
+                            <img src="images/quickmrejs.png" style="width: 350px;" alt="carport med rejsning">
                         </div>
                         <hr>
                     </div>
                     <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                        ...
+                        <div class="row">
+                            <h3>QUICK-BYG TILBUD - CARPORT MED REJSNING</h3>
+                            <p>Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram.
+
+                                Tilbud og skitsetegning fremsendes med post hurtigst muligt.
+                                Standardbyggevejledning medfølger ved bestilling.</p>
+                            <p><strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
+                                Felter markeret * SKAL udfyldes!</p>
+                            <p>Ønsket carport mål:</p>
+                            <form>
+                                <div class="form-group">
+                                    <label for="cpwidth">Carport bredde:</label>
+                                    <select class="form-control" id="cpwidth">
+                                        <option value="" selected disabled hidden>Vælg bredde</option>
+                                        <option value="240">240 cm</option>
+                                        <option value="270">270 cm</option>
+                                        <option value="300">300 cm</option>
+                                        <option value="330">330 cm</option>
+                                        <option value="360">360 cm</option>
+                                        <option value="390">390 cm</option>
+                                        <option value="420">420 cm</option>
+                                        <option value="450">450 cm</option>
+                                        <option value="480">480 cm</option>
+                                        <option value="510">510 cm</option>
+                                        <option value="540">540 cm</option>
+                                        <option value="570">570 cm</option>
+                                        <option value="600">600 cm</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpwidth">Carport bredde:</label>
+                                    <select class="form-control" id="cpwidth">
+                                        <option value="" selected disabled hidden>Vælg længde</option>
+                                        <option value="240">240 cm</option>
+                                        <option value="270">270 cm</option>
+                                        <option value="300">300 cm</option>
+                                        <option value="330">330 cm</option>
+                                        <option value="360">360 cm</option>
+                                        <option value="390">390 cm</option>
+                                        <option value="420">420 cm</option>
+                                        <option value="450">450 cm</option>
+                                        <option value="480">480 cm</option>
+                                        <option value="510">510 cm</option>
+                                        <option value="540">540 cm</option>
+                                        <option value="570">570 cm</option>
+                                        <option value="600">600 cm</option>
+                                        <option value="630">630 cm</option>
+                                        <option value="660">660 cm</option>
+                                        <option value="690">690 cm</option>
+                                        <option value="720">720 cm</option>
+                                        <option value="750">750 cm</option>
+                                        <option value="780">780 cm</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
                         ...
