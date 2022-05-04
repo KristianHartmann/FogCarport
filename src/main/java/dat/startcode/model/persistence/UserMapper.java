@@ -7,75 +7,74 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserMapper implements IUserMapper
-{
+public class UserMapper implements IUserMapper {
     ConnectionPool connectionPool;
 
-    public UserMapper(ConnectionPool connectionPool)
-    {
+    public UserMapper(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
     @Override
-    public User login(String username, String password) throws DatabaseException
-    {
+    public User login(String email, String password) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
         User user = null;
 
-        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
 
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
-                ps.setString(1, username);
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next())
-                {
+                if (rs.next()) {
+                    int user_id = rs.getInt("user_id");
                     String role = rs.getString("role");
-                    user = new User(username, password, role);
-                } else
-                {
-                    throw new DatabaseException("Wrong username or password");
+                    int balance = rs.getInt("balance");
+                    user = new User(user_id, role, balance, password, email);
+                } else {
+                    throw new DatabaseException("Wrong email or password");
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
         }
         return user;
     }
 
     @Override
-    public User createUser(String username, String password, String role) throws DatabaseException
-    {
+    public User createUser(String email, String password, String role) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
-        String sql = "insert into user (username, password, role) values (?,?,?)";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
-                ps.setString(1, username);
-                ps.setString(2, password);
-                ps.setString(3, role);
+        String getEmailFromPerson = "select email from person where email = '" + email + "'";
+        String insertUserIntoDb = "insert into user (email, password, role) values (?,?,?)";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(getEmailFromPerson)) {
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1)
-                {
-                    user = new User(username, password, role);
-                } else
-                {
-                    throw new DatabaseException("The user with username = " + username + " could not be inserted into the database");
+                if (rowsAffected == 1) {
+                        try (PreparedStatement ps2 = connection.prepareStatement(insertUserIntoDb)) {
+                            ResultSet rs = ps.executeQuery();
+                            if (rs.next()) {
+                                ps2.setString(1, rs.getString("email"));
+                                ps2.setString(2, password);
+                                ps2.setString(3, role);
+                            }
+                            int rowsAffected2 = ps2.executeUpdate();
+                            if (rowsAffected2 == 1) {
+                                user = new User(email, password, role);
+                            } else {
+                                throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
+                            }
+                        }
+                } else {
+                    throw new DatabaseException("Could not find a person with this email.");
                 }
             }
-        }
-        catch (SQLException ex)
-        {
-            throw new DatabaseException(ex, "Could not insert username into database");
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "Failed");
         }
         return user;
+
     }
 
 
