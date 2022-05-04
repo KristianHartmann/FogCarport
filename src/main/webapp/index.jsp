@@ -25,10 +25,15 @@
                     href="login.jsp">Login</a></p>
         </c:if>
 
-        <form action="fc/zipcodeGenerator" method="post">
-            <input type="hidden" name="command" value="zipcodeGenerator"/>
-            <input type="submit" value="Pray"/>
-        </form>
+
+
+
+
+<%--        this button auto generates zip codes into database. Use this button carefully. Make sure path is correct in excelmapper--%>
+<%--        <form action="fc/zipcodeGenerator" method="post">--%>
+<%--            <input type="hidden" name="command" value="zipcodeGenerator"/>--%>
+<%--            <input type="submit" value="Pray"/>--%>
+<%--        </form>--%>
 
     </jsp:body>
 
