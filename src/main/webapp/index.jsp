@@ -21,8 +21,7 @@
         </c:if>
 
         <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="login.jsp">Login</a></p>
+            <p>You are not logged in yet. You can do it here: <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></p>
         </c:if>
 
     </jsp:body>
