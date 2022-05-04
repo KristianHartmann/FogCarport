@@ -123,10 +123,10 @@
                                 <p><strong>Redskabsrum:</strong><br>
                                     NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet*</p>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" onclick="showShed()" type="checkbox" role="switch" id="cpshed">
+                                    <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch" id="cpshed">
                                     <label class="form-check-label" for="cpshed">Tilføj redskabskur</label>
                                 </div>
-                                <div class="form-group" id="cpshedwidthdiv">
+                                <div class="form-group" id="cpshedwidthdiv" style="display: none">
                                     <labe for="cpshedwidth">Redskabsrum bredde:</labe>
                                     <select class="form-control" id="cpshedwidth">
                                         <option value="" selected disabled hidden>Ønsker ikke redskabsrum</option>
@@ -135,7 +135,7 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group" id="cpshedlengthdiv">
+                                <div class="form-group" id="cpshedlengthdiv" style="display: none">
                                     <labe for="cpshedlength">Redskabsrum længde:</labe>
                                     <select class="form-control" id="cpshedlength">
                                         <option value="" selected disabled hidden>Ønsker ikke redskabsrum</option>
