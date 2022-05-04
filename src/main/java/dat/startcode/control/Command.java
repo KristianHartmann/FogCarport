@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 abstract class Command
 {
-
     private static HashMap<String, Command> commands;
 
     private static void initCommands() {
@@ -16,6 +15,7 @@ abstract class Command
         commands.put("login", new Login());
         commands.put("logout", new Logout());
         commands.put("about", new About());
+        commands.put("zipcodeGenerator", new ZipcodeGenerator());
     }
 
     static Command from( HttpServletRequest request ) {
@@ -28,5 +28,4 @@ abstract class Command
 
     abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
             throws DatabaseException;
-
 }
