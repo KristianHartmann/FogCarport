@@ -24,7 +24,7 @@
         <div class="px-3 py-2 bg-dark text-white">
             <div class="container-fluid">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="index.jsp"
+                    <a href="${pageContext.request.contextPath}/index.jsp"
                        class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
                         <img width="75" src="<%=request.getContextPath()%>/images/logo.png">
                     </a>
