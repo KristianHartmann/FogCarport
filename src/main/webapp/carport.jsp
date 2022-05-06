@@ -4,11 +4,10 @@
 <%@page errorPage="/error.jsp" isErrorPage="false" %>
 
 <t:pagetemplate>
-    <%-- header så vi får en titel på siden(kan også bruges til overskrift på den gældende side) --%>
     <jsp:attribute name="header">
          Choose your prefered carport
     </jsp:attribute>
-    <%-- footer (bliver ikke rigtig brugt) er til teksten i footeren --%>
+
     <jsp:attribute name="footer">
         Welcome to the frontpage
     </jsp:attribute>
@@ -128,7 +127,7 @@
                             <nav id="navbar-example2" class="navbar navbar-light px-3">
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#scrollspyHeading1">Enkelt</a>
+                                        <a class="nav-link active" href="#scrollspyHeading1">Enkelt</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#scrollspyHeading2">Dobbelt</a>
@@ -144,83 +143,80 @@
                                     </li>
                                 </ul>
                             </nav>
-                            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="50"
+                            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="25" tabindex="0"
                                  class="scrollspy-example"
                                  style="overflow-y: scroll; height: 500px; position: relative">
                                 <h4 id="scrollspyHeading1">Enkelt Carport</h4>
-                                <p>...</p>
+                                <hr>
+                                <div class="row">
+                                    <c:forEach begin="1" end="7" var="i">
+                                        <div class="col-auto">
+                                            <div class="card" style="width: 17rem; margin-bottom: 20px">
+                                                <img src="images/ProductModel${i}.png" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Card title</h5>
+                                                    <p class="card-text">Some quick example text to build on the card
+                                                        title and make up the bulk of the card's content.</p>
+                                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h2>KØB DIN NYE CARPORT HOS FOG</h2>
+                                        <p>Vælg mellem vores mange standard Byg-Selv modeller eller lad os give dig et
+                                            konkret tilbud på en carport i nøjagtig de mål, som du ønsker - med eller
+                                            uden redskabsrum</p>
+                                        <h2>STANDARD MODELLER</h2>
+                                        <p>Leveres som Byg-selv sæt - usamlet og ubehandlet!
+                                            Altid kvalitetsmaterialer.
+                                            Udførlig byggevejledning til carport og spær medfølger.
+
+                                            Levering i hele Danmark inden for ca. 10 hverdage.</p>
+                                    </div>
+                                    <div class="col">
+                                        <h2>TILBEHØRSPAKKER</h2>
+                                        <p>Vælg mellem en lang række tilkøbspakker til din carport. Det kan eksempelvis
+                                            være tagrender, beklædning og tagbelægning.
+
+                                            Se valgmuligheder på de enkelte produktsider.</p>
+                                        <h2>CARPORT I TILPASSEDE MÅL?</h2>
+                                        <p>Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og
+                                            udskrive en skitsetegning på en carport indenfor vores standardprogram - i
+                                            de mål du ønsker.
+                                            Tilbud og skitsetegning fremsendes med post hurtigst muligt.</p>
+                                    </div>
+                                </div>
                                 <h4 id="scrollspyHeading2">Dobbelt Carport</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading3">Third heading</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading4">Fourth heading</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading5">Fifth heading</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading6">Fifth heading</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading7">Fifth heading</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading8">Fifth heading</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading9">Fifth heading</h4>
+                                <hr>
                                 <p>...</p>
                                 <h4 id="scrollspyHeading10">Fifth heading</h4>
+                                <hr>
                                 <p>...</p>
-
                             </div>
-                                <%--                            <div class="list-group list-group-horizontal" id="list-tab" role="tablist">--%>
-                                <%--                                <a class="list-group-item list-group-item-action active" id="list-home-list"--%>
-                                <%--                                   data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Enkelt</a>--%>
-                                <%--                                <a class="list-group-item list-group-item-action" id="list-profile-list"--%>
-                                <%--                                   data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Dobbelt</a>--%>
-                                <%--                                <a class="list-group-item list-group-item-action" id="list-messages-list"--%>
-                                <%--                                   data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Brænde&Redskabsrum</a>--%>
-                                <%--                            </div>--%>
-                                <%--                            <div class="tab-content" id="nav-tabContent">--%>
-                                <%--                                <div class="tab-pane fade show active" id="list-home" role="tabpanel"--%>
-                                <%--                                     aria-labelledby="list-home-list">--%>
-                                <%--                                    <div class="row">--%>
-                                <%--                                        <h3>Enkelte Carporte</h3>--%>
-                                <%--                                    </div>--%>
-                                <%--                                    <div class="row" style="justify-content: space-between">--%>
-                                <%--                                        <c:forEach begin="1" end="7" var="i">--%>
-                                <%--                                            <div class="card p-0" style="width: 18rem; margin-bottom: 10px;">--%>
-                                <%--                                                <img src="images/ProductModel${i}.png" class="card-img-top"--%>
-                                <%--                                                     alt="Product model ${i}">--%>
-                                <%--                                                <div class="card-body">--%>
-                                <%--                                                    <p class="card-text">Some quick example text to build on the card--%>
-                                <%--                                                        title and make--%>
-                                <%--                                                        up the--%>
-                                <%--                                                        bulk--%>
-                                <%--                                                        of--%>
-                                <%--                                                        the card's content.</p>--%>
-                                <%--                                                </div>--%>
-                                <%--                                                <div class="card-footer">--%>
-                                <%--                                                    <div class="row justify-content-center" style="height: 40px">--%>
-                                <%--                                                        <div class="col">--%>
-                                <%--                                                            <input type="number" min="1" class="form-control" value="1"--%>
-                                <%--                                                                   style="height: 100%">--%>
-                                <%--                                                        </div>--%>
-                                <%--                                                        <div class="col">--%>
-                                <%--                                                            <button class="btn btn-primary"--%>
-                                <%--                                                                    style="font-size: small; height: 100%; width: 100%;"--%>
-                                <%--                                                                    type="submit">Add to cart--%>
-                                <%--                                                            </button>--%>
-                                <%--                                                        </div>--%>
-                                <%--                                                    </div>--%>
-                                <%--                                                </div>--%>
-                                <%--                                            </div>--%>
-                                <%--                                        </c:forEach>--%>
-                                <%--                                    </div>--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="tab-pane fade" id="list-profile" role="tabpanel"--%>
-                                <%--                                     aria-labelledby="list-profile-list">...--%>
-                                <%--                                </div>--%>
-                                <%--                                <div class="tab-pane fade" id="list-messages" role="tabpanel"--%>
-                                <%--                                     aria-labelledby="list-messages-list">...--%>
-                                <%--                                </div>--%>
-                                <%--                            </div>--%>
                         </div>
                     </div>
                 </div>

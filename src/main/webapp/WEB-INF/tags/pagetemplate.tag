@@ -75,21 +75,21 @@
         </div>
     </header>
 
-    <div id="body" class="container-fluid" style="min-height: 400px;">
+    <div id="body" class="container-fluid" style="height: calc(100vh - calc(146.27px + 81.08px + 1rem));">
         <jsp:doBody/>
     </div>
 
     <!-- Footer -->
     <div class="container-fluid p-0">
         <footer>
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <ul class="nav justify-content-center border-bottom pb-1 mb-1">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
             </ul>
-            <p class="text-center text-muted">&copy; Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby</p>
+            <p class="text-center text-muted m-0 pb-2">&copy; Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby</p>
         </footer>
     </div>
 </div>
