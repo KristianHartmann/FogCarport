@@ -145,7 +145,7 @@
                             </nav>
                             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="10" tabindex="0"
                                  class="scrollspy-example"
-                                 style="overflow-y: scroll; height: calc(732.9px - 55.95px - 33.59px - 0.5rem); position: relative">
+                                 style="overflow-y: scroll; height: 520px; position: relative">
                                 <h4 id="scrollspyHeading1">Enkelt Carport</h4>
                                 <hr class="mt-0">
                                 <div class="row">
