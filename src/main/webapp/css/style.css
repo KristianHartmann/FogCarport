@@ -11,5 +11,14 @@ th, td {
     padding:15px;
 }
 
+div.scrollspy-example > h4{
+    color: #014687; !important;
+}
+
+div.scrollspy-example > hr{
+    height: 3px; !important;
+    background-color: #014687; !important;
+}
+
 
 

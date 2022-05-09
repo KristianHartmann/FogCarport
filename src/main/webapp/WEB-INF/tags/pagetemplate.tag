@@ -13,7 +13,7 @@
     <title>
         <jsp:invoke fragment="header"/>
     </title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -24,7 +24,7 @@
         <div class="px-3 py-2 bg-dark text-white">
             <div class="container-fluid">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <a href="index.jsp"
+                    <a href="${pageContext.request.contextPath}/index.jsp"
                        class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
                         <img width="75" src="<%=request.getContextPath()%>/images/logo.png">
                     </a>
@@ -75,21 +75,21 @@
         </div>
     </header>
 
-    <div id="body" class="container-fluid" style="min-height: 400px;">
+    <div id="body" class="container-fluid" style="height: calc(100vh - calc(146.27px + 81.08px + 1rem));">
         <jsp:doBody/>
     </div>
 
     <!-- Footer -->
     <div class="container-fluid p-0">
         <footer>
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <ul class="nav justify-content-center border-bottom pb-1 mb-1">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
             </ul>
-            <p class="text-center text-muted">&copy; Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby</p>
+            <p class="text-center text-muted m-0 pb-2">&copy; Johannes Fog A/S - Firskovvej 20 - 2800 Lyngby</p>
         </footer>
     </div>
 </div>
@@ -136,6 +136,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-<script src="<%request.getContextPath();%>/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/js/script.js"></script>
 </body>
 </html>
