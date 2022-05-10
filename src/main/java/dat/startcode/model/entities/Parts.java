@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class Part {
+public class Parts {
     int parts_id;
     private double length;
     private String name;
@@ -15,7 +15,7 @@ public class Part {
 
 
 
-    public Part(int parts_id, String name, String description, double length, String unit, int price) {
+    public Parts(int parts_id, String name, String description, double length, String unit, int price) {
         this.parts_id = parts_id;
         this.name = name;
         this.description = description;
