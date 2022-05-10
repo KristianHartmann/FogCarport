@@ -2,6 +2,11 @@ package dat.startcode.model.services;
 
 public class RaisedRoofCalc implements ICalculator{
     @Override
+    public int exstraShedBeams() {
+        return 0;
+    }
+
+    @Override
     public int underStern360Calc() {
         return 0;
     }

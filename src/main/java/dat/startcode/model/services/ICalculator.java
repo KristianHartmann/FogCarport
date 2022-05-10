@@ -2,6 +2,7 @@ package dat.startcode.model.services;
 
 public interface ICalculator {
 
+    int exstraShedBeams(); // EKSTRA STOLER TIL SKUR
     int underStern360Calc(); // UNDERSTERN 360
     int underStern540Calc(); // UNDERSTERN 540
     int overStern360Calc(); // OVERSTERN 360
