@@ -190,7 +190,7 @@
                                             de mål du ønsker.
                                             Tilbud og skitsetegning fremsendes med post hurtigst muligt.</p>
                                     </div>
-                                </div>
+                                 </div>
                                 <h4 id="scrollspyHeading2">Dobbelt Carport</h4>
                                 <hr class="mt-0">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique, ligula
@@ -203,7 +203,7 @@
                                     vulputate tortor.
 
                                     Proin ullamcorper vestibulum sem, ut commodo ante malesuada a. Quisque ac magna non
-                                    neque sagittis luctus. Sed tempor tellus ligula, non pharetra urna auctor in.
+                                    neque sagittis luctus. Sed tempor tellus ligula, non <pharetr></pharetr>a urna auctor in.
                                     Vestibulum suscipit fermentum arcu, at bibendum libero egestas in. Pellentesque
                                     imperdiet, mi et euismod porttitor, metus ante ultrices erat, ac maximus tortor
                                     lacus a ligula. Fusce efficitur magna molestie sapien suscipit, sed dignissim mi

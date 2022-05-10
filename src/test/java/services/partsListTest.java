@@ -1,6 +1,6 @@
 package services;
 
-import dat.startcode.model.entities.Part;
+import dat.startcode.model.entities.Parts;
 import dat.startcode.model.entities.PartsList;
 import dat.startcode.model.entities.PartsListItem;
 import dat.startcode.model.services.FlatRoofCalc;
@@ -25,11 +25,11 @@ public class partsListTest {
     @BeforeEach
     void setUp() {
         testPartsList.getPartsListItemArrayList().clear();
-        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(1, "board", "25x200 mm. trykmp. Brædt",
+        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Parts(1, "board", "25x200 mm. trykmp. Brædt",
                 360, "stk", 60), 0, "understernbrædder til for & bag ende"));
-        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(2, "board", "25x200 mm. trykmp. Brædt",
+        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Parts(2, "board", "25x200 mm. trykmp. Brædt",
                 540, "stk", 65), 0, "understernbrædder til siderne"));
-        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(3, "beam", "97x97 mm. trykimp. Stolpe",
+        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Parts(3, "beam", "97x97 mm. trykimp. Stolpe",
                 300, "stk", 40), 0, "Stolper nedgraves 90 cm. i jord"));
     }
 
@@ -54,12 +54,12 @@ public class partsListTest {
     @Test
     void testPartsList(){
         assertEquals(3, testPartsList.getPartsListItemArrayList().size());
-        assertEquals("board", testPartsList.getPartsListItemArrayList().get(0).getPart().getName());
-        assertEquals(360, testPartsList.getPartsListItemArrayList().get(0).getPart().getLength());
-        assertEquals("board", testPartsList.getPartsListItemArrayList().get(1).getPart().getName());
-        assertEquals(540, testPartsList.getPartsListItemArrayList().get(1).getPart().getLength());
-        assertEquals("beam", testPartsList.getPartsListItemArrayList().get(2).getPart().getName());
-        assertEquals(300, testPartsList.getPartsListItemArrayList().get(2).getPart().getLength());
+        assertEquals("board", testPartsList.getPartsListItemArrayList().get(0).getParts().getName());
+        assertEquals(360, testPartsList.getPartsListItemArrayList().get(0).getParts().getLength());
+        assertEquals("board", testPartsList.getPartsListItemArrayList().get(1).getParts().getName());
+        assertEquals(540, testPartsList.getPartsListItemArrayList().get(1).getParts().getLength());
+        assertEquals("beam", testPartsList.getPartsListItemArrayList().get(2).getParts().getName());
+        assertEquals(300, testPartsList.getPartsListItemArrayList().get(2).getParts().getLength());
     }
 
 }
