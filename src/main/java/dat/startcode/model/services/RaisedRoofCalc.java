@@ -62,6 +62,11 @@ public class RaisedRoofCalc implements ICalculator{
     }
 
     @Override
+    public int getAmount(int partsID) {
+        return 0;
+    }
+
+    @Override
     public int dressShedCalc() {
         return 0;
     }

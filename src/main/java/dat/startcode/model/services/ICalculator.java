@@ -13,7 +13,11 @@ public interface ICalculator {
     int remCarCalc(); // REM I SIDER
     int remShedCalc(); // REM I SIDER SKUR
     int raftersCalc(); // SPPÆR
-    int beamsCalc(); //STOLPER
+
+    int beamsCalc();
+
+    int getAmount(int partsID);
+
     int dressShedCalc(); // TIL BEKLÆDNING AF SKUR
     int waterBoardSidesCalc(); // VANDBRÆT TIL SIDE
     int waterBoardEndsCalc(); // VANDBRÆT TIL ENDER

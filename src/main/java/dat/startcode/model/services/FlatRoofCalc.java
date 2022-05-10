@@ -19,6 +19,79 @@ public class FlatRoofCalc implements ICalculator {
     }
 
     @Override
+    public int getAmount(int partsID){
+        switch (partsID){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                return beamsCalc();
+            case 11:
+                break;
+            case 12:
+                break;
+            case 13:
+                break;
+            case 14:
+                break;
+            case 15:
+                break;
+            case 16:
+                break;
+            case 17:
+                break;
+            case 18:
+                break;
+            case 19:
+                break;
+            case 20:
+                break;
+            case 21:
+                break;
+            case 22:
+                break;
+            case 23:
+                break;
+            case 24:
+                break;
+            case 25:
+                break;
+            case 26:
+                break;
+            case 27:
+                break;
+            case 28:
+                break;
+            case 29:
+                break;
+            case 30:
+                break;
+            case 31:
+                break;
+            case 32:
+                break;
+                default:
+                return 0;
+        }
+        return 0;
+    }
+
+    @Override
     public int exstraShedBeams() {
         if(shedWidth <= 0 && shedLength <= 0){
             return 0;
@@ -96,34 +169,36 @@ public class FlatRoofCalc implements ICalculator {
         return 0;
     }
 
+
+
     @Override
     public int beamsCalc() {
-        int first = 0;
-        int second = 0;
-        int third = 0;
-        int fourth = 0;
+            int first = 0;
+            int second = 0;
+            int third = 0;
+            int fourth = 0;
 
-        if (carportLength >= 240 && carportLength <= 440) {
-            first = 4;
-        } else if (carportLength >= 470 && carportLength <= 750) {
-            first = 6;
-        } else if (carportLength > 750 && carportLength <= 780) {
-            first = 8;
-        }
-        if (carportLength > 380) {
-            second = 1;
-        }
-        if ((((carportLength-130)-shedLength)/310)<1) {
-            third = 2;
-        }
-        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth) {
-            if (shedLength <= 310) {
-                fourth = 2;
-            } else {
-                fourth = 3;
+            if (carportLength >= 240 && carportLength <= 440) {
+                first = 4;
+            } else if (carportLength >= 470 && carportLength <= 750) {
+                first = 6;
+            } else if (carportLength > 750 && carportLength <= 780) {
+                first = 8;
             }
-        }
-        return first + second + shedBeams + third + fourth;
+            if (carportLength > 380) {
+                second = 1;
+            }
+            if ((((carportLength - 130) - shedLength) / 310) < 1) {
+                third = 2;
+            }
+            if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth) {
+                if (shedLength <= 310) {
+                    fourth = 2;
+                } else {
+                    fourth = 3;
+                }
+            }
+            return first + second + shedBeams + third + fourth;
     }
 
     @Override
