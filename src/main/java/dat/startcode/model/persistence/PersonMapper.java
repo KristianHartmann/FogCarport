@@ -20,9 +20,8 @@ public class PersonMapper implements IPersonMapper{
     public Person createPerson(String email, String address, String name, String phonenumber, int zipcode) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         Person person;
-        String sql = "INSERT INTO `carport`.`person` (`email`, `address`, `name`, `phonenumber`, `zipcode`) VALUES  (?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.createPerson)) {
                 ps.setString(1, email);
                 ps.setString(2, address);
                 ps.setString(3, name);

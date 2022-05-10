@@ -14,9 +14,12 @@
     </jsp:attribute>
 
   <jsp:body>
-
-        <div>
-
-        </div>
+      <c:forEach items="${applicationScope.partsList}" var="partsListItem">
+          PartlistItem Description &nbsp;${partsListItem.description}
+          PartlistItem Amount &nbsp;${partsListItem.amount}
+          Part Description &nbsp;${partsListItem.parts.description}
+          Part name &nbsp;${partsListItem.parts.name}
+<br>
+      </c:forEach>
   </jsp:body>
 </t:pagetemplate>
