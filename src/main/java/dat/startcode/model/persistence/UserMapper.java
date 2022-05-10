@@ -1,9 +1,11 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +15,8 @@ public class UserMapper implements IUserMapper {
     public UserMapper(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
+
+
 
     @Override
     public User login(String email, String password) throws DatabaseException {
@@ -75,6 +79,27 @@ public class UserMapper implements IUserMapper {
         }
         return user;
 
+    }
+
+    public User getUserInfoById (int user_id) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        User user = null;
+        String sql = "select * from carport.user where user_id = ?";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("user_id");
+                    String email = rs.getString("user_email");
+                    String role = rs.getString("role");
+                    int balance = rs.getInt("balance");
+                    String password = rs.getString("password");
+                    user = new User(id, role,  balance,  password,  email);
+                }
+                return user;
+            }
+
+        }
     }
 
 
