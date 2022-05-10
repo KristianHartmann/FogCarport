@@ -32,12 +32,12 @@ public class RaisedRoofCalc implements ICalculator{
     }
 
     @Override
-    public int looseHolterEnds() {
+    public int looseHolterWidth() {
         return 0;
     }
 
     @Override
-    public int looseHolterSides() {
+    public int looseHolterLength() {
         return 0;
     }
 

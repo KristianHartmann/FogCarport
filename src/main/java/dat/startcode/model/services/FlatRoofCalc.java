@@ -84,7 +84,7 @@ public class FlatRoofCalc implements ICalculator {
     }
 
     @Override
-    public int zShedDoorCalc() {
+    public int zShedDoorCalc() { // regner om der er valgt et skur eller ej.
         if (shedLength > 0 && shedWidth > 0) {
             return 1;
         } else {
@@ -93,7 +93,7 @@ public class FlatRoofCalc implements ICalculator {
     }
 
     @Override
-    public int looseHolterEnds() {
+    public int looseHolterWidth() {
         int first = 0;
         int secound = 0;
 
@@ -110,7 +110,7 @@ public class FlatRoofCalc implements ICalculator {
     }
 
     @Override
-    public int looseHolterSides() {
+    public int looseHolterLength() {
         int first = 0;
         int secound = 0;
         int third = 0;
@@ -398,6 +398,6 @@ public class FlatRoofCalc implements ICalculator {
 
     @Override
     public int angleBracketCalc() {
-        return (looseHolterEnds()+looseHolterSides())*2;
+        return (looseHolterWidth()+ looseHolterLength())*2;
     }
 }
