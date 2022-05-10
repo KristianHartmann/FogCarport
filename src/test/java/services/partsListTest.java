@@ -26,11 +26,11 @@ public class partsListTest {
     void setUp() {
         testPartsList.getPartsListItemArrayList().clear();
         testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(1, "board", "25x200 mm. trykmp. Brædt",
-                360, "stk", 60, 1), 0, "understernbrædder til for & bag ende"));
+                360, "stk", 60), 0, "understernbrædder til for & bag ende"));
         testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(2, "board", "25x200 mm. trykmp. Brædt",
-                540, "stk", 65, 1), 0, "understernbrædder til siderne"));
+                540, "stk", 65), 0, "understernbrædder til siderne"));
         testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(3, "beam", "97x97 mm. trykimp. Stolpe",
-                300, "stk", 40, 1), 0, "Stolper nedgraves 90 cm. i jord"));
+                300, "stk", 40), 0, "Stolper nedgraves 90 cm. i jord"));
     }
 
     @Test

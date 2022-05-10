@@ -5,21 +5,22 @@ import lombok.Setter;
 
 @Getter @Setter
 public class Part {
-    int part_ID;
-    String name;
-    String description;
-    double length;
-    String unit;
-    int piecePrice;
-    int categori;
+    int parts_id;
+    private double length;
+    private String name;
+    private String description;
+    private String unit;
 
-    public Part(int part_ID, String name, String description, double length, String unit, int piecePrice, int categori) {
-        this.part_ID = part_ID;
+    private int price;
+
+
+
+    public Part(int parts_id, String name, String description, double length, String unit, int price) {
+        this.parts_id = parts_id;
         this.name = name;
         this.description = description;
         this.length = length;
         this.unit = unit;
-        this.piecePrice = piecePrice;
-        this.categori = categori;
+        this.price = price;
     }
 }
