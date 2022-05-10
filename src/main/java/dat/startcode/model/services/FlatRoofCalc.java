@@ -8,8 +8,6 @@ public class FlatRoofCalc implements ICalculator {
     private int shedBeams;
     private int maxShedWidth = carportWidth - 70;
     private double maxHalfShedWidth = maxShedWidth * 0.5;
-    private double maxQuarterShedWidth = maxShedWidth * 0.25;
-    private double maxThreeQuarterShedWidth = maxShedWidth * 0.75;
 
 
     public FlatRoofCalc(int carportWidth, int carportLength, int shedWidth, int shedLength) {
@@ -101,9 +99,9 @@ public class FlatRoofCalc implements ICalculator {
     @Override
     public int beamsCalc() {
         int first = 0;
-        int secound = 0;
+        int second = 0;
+        int third = 0;
         int fourth = 0;
-        int fifth = 0;
 
         if (carportLength >= 240 && carportLength <= 440) {
             first = 4;
@@ -113,19 +111,19 @@ public class FlatRoofCalc implements ICalculator {
             first = 8;
         }
         if (carportLength > 380) {
-            secound = 1;
+            second = 1;
         }
         if ((((carportLength-130)-shedLength)/310)<1) {
-            fourth = 2;
+            third = 2;
         }
         if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth) {
             if (shedLength <= 310) {
-                fifth = 2;
+                fourth = 2;
             } else {
-                fifth = 3;
+                fourth = 3;
             }
         }
-        return first + secound + shedBeams + fourth + fifth;
+        return first + second + shedBeams + third + fourth;
     }
 
     @Override

@@ -3,7 +3,6 @@ package services;
 import dat.startcode.model.entities.Part;
 import dat.startcode.model.entities.PartsList;
 import dat.startcode.model.entities.PartsListItem;
-import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.services.FlatRoofCalc;
 import dat.startcode.model.services.ICalculator;
 import org.junit.jupiter.api.BeforeAll;
