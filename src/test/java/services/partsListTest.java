@@ -31,7 +31,14 @@ public class partsListTest {
                 540, "stk", 65), 0, "understernbrædder til siderne"));
         testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(3, "beam", "97x97 mm. trykimp. Stolpe",
                 300, "stk", 40), 0, "Stolper nedgraves 90 cm. i jord"));
+        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(4, "rafters", "45x195 mm. spærtræ ubh.",
+                600, "stk", 40), 0, "Spær, monteres på rem"));
+        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(5, "universalBrackets", "universal 190 mm",
+                0, "stk", 40), 0, "Til montering af spær på rem"));
+        testPartsList.addToPartsListItemArrayList(new PartsListItem(new Part(6, "universalBrackets", "universal 190 mm",
+                0, "stk", 40), 0, "Til montering af spær på rem"));
     }
+
 
     @Test
     void testUnderBoard360(){
@@ -53,7 +60,7 @@ public class partsListTest {
 
     @Test
     void testPartsList(){
-        assertEquals(3, testPartsList.getPartsListItemArrayList().size());
+        assertEquals(6, testPartsList.getPartsListItemArrayList().size());
         assertEquals("board", testPartsList.getPartsListItemArrayList().get(0).getPart().getName());
         assertEquals(360, testPartsList.getPartsListItemArrayList().get(0).getPart().getLength());
         assertEquals("board", testPartsList.getPartsListItemArrayList().get(1).getPart().getName());
@@ -61,5 +68,25 @@ public class partsListTest {
         assertEquals("beam", testPartsList.getPartsListItemArrayList().get(2).getPart().getName());
         assertEquals(300, testPartsList.getPartsListItemArrayList().get(2).getPart().getLength());
     }
+
+    @Test
+    void testRaftersCalc(){
+        testPartsList.getPartsListItemArrayList().get(3).setAmount(flatcalc.raftersCalc());
+        assertEquals(15, testPartsList.getPartsListItemArrayList().get(3).getAmount());
+    }
+
+    @Test
+    void testUniversalBracketRightCalc(){
+        testPartsList.getPartsListItemArrayList().get(4).setAmount(flatcalc.universalBracketRightCalc());
+        assertEquals(15, testPartsList.getPartsListItemArrayList().get(4).getAmount());
+
+    }
+    @Test
+    void testUniversalBracketLeftCalc(){
+        testPartsList.getPartsListItemArrayList().get(5).setAmount(flatcalc.universalBracketLeftCalc());
+        assertEquals(15, testPartsList.getPartsListItemArrayList().get(5).getAmount());
+
+    }
+
 
 }

@@ -2,7 +2,7 @@ package dat.startcode.model.services;
 
 public class RaisedRoofCalc implements ICalculator{
     @Override
-    public int exstraShedBeams() {
+    public int extraShedBeams() {
         return 0;
     }
 
@@ -120,6 +120,7 @@ public class RaisedRoofCalc implements ICalculator{
     public int universalBracketLeftCalc() {
         return 0;
     }
+
 
     @Override
     public int sternScrewsCalc() {
