@@ -95,7 +95,7 @@
                                     <label class="form-check-label" for="cpshed">Tilføj redskabskur</label>
                                 </div>
                                 <div class="form-group" id="cpshedwidthdiv" style="display: none">
-                                    <labe for="cpshedwidth">Redskabsrum bredde:</labe>
+                                    <label for="cpshedwidth">Redskabsrum bredde:</label>
                                     <select class="form-control" id="cpshedwidth">
                                         <option value="" selected disabled hidden>Vælg bredde</option>
                                         <c:forEach begin="210" end="540" var="i" step="30">
@@ -104,7 +104,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group" id="cpshedlengthdiv" style="display: none">
-                                    <labe for="cpshedlength">Redskabsrum længde:</labe>
+                                    <label for="cpshedlength">Redskabsrum længde:</label>
                                     <select class="form-control" id="cpshedlength">
                                         <option value="" selected disabled hidden>Vælg længde</option>
                                         <c:forEach begin="150" end="390" var="i" step="30">
@@ -112,7 +112,9 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Bestil</button>
+                                <button type="button" data-bs-target="#confirmModal" data-bs-toggle="modal"
+                                        class="btn btn-primary">Bestil
+                                </button>
                                 <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet
                                     maksimalt måle <strong>210x330 cm.</strong></p>
                             </form>
@@ -344,6 +346,53 @@
                                 <p>...</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%-- Modals --%>
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" style="text-align: center">
+                        <img class="mb-4" src="images/logo.png" alt="logo" width="75">
+                        <div id="carouselSVGCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%; height: 300px">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselSVGCaptions" data-bs-slide-to="0"
+                                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselSVGCaptions" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="images/topviewsvg.png" style="height: 250px; width: 80%;">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/sideviewsvg.png" style="height: 250px; width: 80%;">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselSVGCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselSVGCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-info dropdown-toggle">Vis stykliste</button>
+                        <div class="fixed-table-container" style="height: 345px; padding-bottom: 50px;"></div>
+                        <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-muted">&copy; Johannes Fog A/S</p>
                     </div>
                 </div>
             </div>
