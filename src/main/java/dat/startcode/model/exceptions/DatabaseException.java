@@ -9,7 +9,7 @@ public class DatabaseException extends Exception {
         Logger.getLogger("web").log(Level.SEVERE, message);
     }
     public DatabaseException(Exception ex, String message) {
-        super(message);
+        super(ex.getMessage());
         Logger.getLogger("web").log(Level.SEVERE, message, ex.getMessage());
     }
 }

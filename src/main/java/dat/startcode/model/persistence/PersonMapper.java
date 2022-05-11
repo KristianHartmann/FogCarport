@@ -10,19 +10,18 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PersonMapper implements IPersonMapper{
-    ConnectionPool connectionPool;
+public class PersonMapper extends SuperMapper implements IPersonMapper{
 
-    public PersonMapper(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+
+        public PersonMapper(ConnectionPool connectionPool) {
+        super(connectionPool);
     }
 
     public Person createPerson(String email, String address, String name, String phonenumber, int zipcode) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         Person person;
-        String sql = "INSERT INTO `carport`.`person` (`email`, `address`, `name`, `phonenumber`, `zipcode`) VALUES  (?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.createPerson)) {
                 ps.setString(1, email);
                 ps.setString(2, address);
                 ps.setString(3, name);

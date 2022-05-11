@@ -9,25 +9,20 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserMapper implements IUserMapper {
-    ConnectionPool connectionPool;
+public class UserMapper extends SuperMapper implements IUserMapper {
+
 
     public UserMapper(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+        super(connectionPool);
     }
-
-
 
     @Override
     public User login(String email, String password) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
         User user = null;
-
-        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.SelectUserFromEmailAndPassword)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
@@ -51,12 +46,11 @@ public class UserMapper implements IUserMapper {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
         String getEmailFromPerson = "select email from person where email = '" + email + "'";
-        String insertUserIntoDb = "insert into user (email, password, role) values (?,?,?)";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(getEmailFromPerson)) {
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
-                        try (PreparedStatement ps2 = connection.prepareStatement(insertUserIntoDb)) {
+                        try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.insertUser)){
                             ResultSet rs = ps.executeQuery();
                             if (rs.next()) {
                                 ps2.setString(1, rs.getString("email"));
