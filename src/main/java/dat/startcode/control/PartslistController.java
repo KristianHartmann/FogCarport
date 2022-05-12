@@ -21,8 +21,8 @@ public class PartslistController extends Command{
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(super.connectionPool);
         PartslistGenerator generator = new PartslistGenerator(super.connectionPool);
         CarportRequest carportRequest = carportRequestMapper.getCarportRequestById(1);
-        PartsList partsList = generator.generatePartsList(carportRequest);
-        context.setAttribute("partsList", partsList.getPartsListItemArrayList());
+//        PartsList partsList = generator.generatePartsList(carportRequest);
+//        context.setAttribute("partsList", partsList.getPartsListItemArrayList());
         return "partslist";
     }
 }
