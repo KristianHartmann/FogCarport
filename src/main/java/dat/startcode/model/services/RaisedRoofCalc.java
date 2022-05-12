@@ -98,7 +98,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int looseHolterWidth() {
+    public int looseHolter270() {
         int first = 0;
         int second = 0;
 
@@ -115,7 +115,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int looseHolterLength() {
+    public int looseHolter240() {
         int first = 0;
         int second = 0;
         int third = 0;
@@ -138,7 +138,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int remCarCalc() {
+    public int remCarCalc() { // Beregner hvor mange 600 Rem vi skal bruge
         int first = 0;
         int second = 0;
         int third = 0;
@@ -160,7 +160,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int remShedCalc() {
+    public int remShedCalc() { // Beregner hvor mange 480 Rem vi skal bruge
         int first = 0;
         int second = 0;
         int third = 0;
@@ -185,7 +185,7 @@ public class RaisedRoofCalc implements ICalculator {
 
 
     @Override
-    public int raftersCalc() { // Denne regner hvor mange spær, der skal bruges.
+    public int raftersCalc() { // Denne regner hvor mange spær, der skal bruges inklusiv dem på skrå tag
         double raisedLength; // Længden på en side af det skrå tag
         double raisedHeight; // Højden på midterstykket der holder skråtaget
         double totalLength; // Den totale længde af ekstra spær der skal bruges
@@ -236,13 +236,13 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int dressShedCalc() {
+    public int dressShedCalc() { // Denne beregner hvor mange brædder der skal bruges rundt om skuret
         int dressingBoards = (int) (shedLength * 2) + (shedWidth * 2);
         return (int) (dressingBoards / 7.4);
     }
 
     @Override
-    public int waterBoardSidesCalc() {
+    public int waterBoardSidesCalc() { // Denne beregner hvor mange 540 vandbræt der skal bruges
         int first = 0;
         int second = 0;
 
@@ -256,7 +256,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int waterBoardEndsCalc() {
+    public int waterBoardEndsCalc() {  // Denne beregner hvor mange 360 vandbræt der skal bruges
         int first = 0;
         int second = 0;
 
@@ -270,7 +270,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int roofPlates600Calc() { // Math.ceil runder op til nærmeste heltal i float og vi parser til int for at fjerne ".0" i heltallet
+    public int roofPlates600Calc() { // Math.ceil runder op til nærmeste heltal i double og vi parser til int for at fjerne ".0" i heltallet
         double radians = Math.toRadians(angle);
         double raisedLength = (0.5 * carportWidth) / Math.cos(radians); // Længden på en side af det skrå tag
         if (raisedLength > 360) {
@@ -282,7 +282,7 @@ public class RaisedRoofCalc implements ICalculator {
 
 
     @Override
-    public int roofPlates360Calc() { // Math.ceil runder op til nærmeste heltal i float og vi parser til int for at fjerne ".0" i heltallet
+    public int roofPlates360Calc() { // Math.ceil runder op til nærmeste heltal i double og vi parser til int for at fjerne ".0" i heltallet
         double radians = Math.toRadians(angle);
         double raisedLength = (0.5 * carportWidth) / Math.cos(radians); // Længden på en side af det skrå tag
         if (raisedLength <= 360) {
@@ -295,7 +295,7 @@ public class RaisedRoofCalc implements ICalculator {
 
 
     @Override
-    public int roofBackCalc() {
+    public int roofBackCalc() { // Tagryggen.
         if (carportLength <= 400) {
             return 1;
         } else {
@@ -304,7 +304,7 @@ public class RaisedRoofCalc implements ICalculator {
 
     }
 
-    @Override
+    @Override // Lægter på 360
     public int laths360Calc() {
         if(carportLength >= 240 && carportLength <= 360) {
             return 1;
@@ -318,7 +318,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int laths480Calc() {
+    public int laths480Calc() { // Lægter på 480
         if(carportLength > 360 && carportLength <= 480 || carportLength > 720 && carportLength <= 780) {
             return 1;
         } else {
@@ -367,7 +367,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int bracketScrewsCalc() {
+    public int bracketScrewsCalc() { // 9 skruer pr alle forskellige slags beslag vi skal bruge. 250 skruer i en pakke
         int beslagSkruer = 9 * (universalBracketRightCalc() + universalBracketLeftCalc() + angleBracketCalc() + holePlate());
         //Antal universalbeslaghøjre + universalbeslag venstre + antal vinkel beslag + antal hulplader
 
@@ -376,17 +376,33 @@ public class RaisedRoofCalc implements ICalculator {
 
 
     @Override
-    public int boardBoltCalc() {
-        return (beamsCalc() - 2) * 2;
+    public int boardBoltCalc() { // Hvor mange bolte der skal bruges
+        int maxShedWidth = carportWidth-70;
+        int maxHalfShedWidth = (carportWidth-70)/2;
+        int beamsThatNeedBolt = beamsCalc();
+
+        // Det nedenunder kommer til at virke perfekt, hvis de vores beregning for de kan vælge halvt skur
+        // og 3 kvart skur er korrekte på hjemmesiden!
+
+        if (shedWidth > 0 && shedLength > 0) {
+            beamsThatNeedBolt = beamsThatNeedBolt - 2;
+        }
+        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth) {
+            beamsThatNeedBolt = beamsThatNeedBolt - 1;
+        }
+        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth && shedLength > 310) {
+            beamsThatNeedBolt = beamsThatNeedBolt - 1;
+        }
+        return beamsThatNeedBolt*2;
     }
 
     @Override
-    public int squareDiscsCalc() {
+    public int squareDiscsCalc() { // Hvor mange discs der skal bruges
         return (int) ((boardBoltCalc() * 0.6666666) + 1);
     }
 
     @Override
-    public int outerDressScrewsCalc() {
+    public int outerDressScrewsCalc() { // Skruer til ydre beklædning
         if ((2 * shedLength) + (2 * shedWidth) > 0 && (2 * shedLength) + (2 * shedWidth) <= 740) {
             return 1;
         } else if ((2 * shedLength) + (2 * shedWidth) > 740 && (2 * shedLength) + (2 * shedWidth) <= 1480) {
@@ -400,12 +416,12 @@ public class RaisedRoofCalc implements ICalculator {
 
 
     @Override
-    public int innerDressScrewsCalc() {
+    public int innerDressScrewsCalc() { // Skruer til indre beklædning
         return outerDressScrewsCalc();
     }
 
     @Override
-    public int barnDoorHandlesCalc() {
+    public int barnDoorHandlesCalc() {  // Standard ting der bruges til alle skurer
         if (shedLength > 0 && shedWidth > 0) {
             return 1;
         } else {
@@ -414,7 +430,7 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
-    public int tHingeCalc() {
+    public int tHingeCalc() { // Standard ting der bruges til alle skurer
         if (shedLength > 0 && shedWidth > 0) {
             return 2;
         } else {
@@ -424,11 +440,11 @@ public class RaisedRoofCalc implements ICalculator {
 
     @Override
     public int angleBracketCalc() {
-        return (looseHolterWidth() + looseHolterLength()) * 2;
+        return (looseHolter270() + looseHolter240()) * 2;
     }
 
     @Override
-    public int holePlate() {
+    public int holePlate() { // beslag der bruges til de skrå spær i raised roof
         int rafters = (int) Math.ceil((double) carportLength/55); // Hvor mange spær der går på tværs
         return (rafters-1)*8; // Der bruges 8 hulplader pr spær (-1 fordi der kun bruges 4 i hver ende)
     }
