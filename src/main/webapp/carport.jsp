@@ -361,34 +361,48 @@
                     </div>
                     <div class="modal-body" style="text-align: center">
                         <img class="mb-4" src="images/logo.png" alt="logo" width="75">
-                        <div id="carouselSVGCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel" style="width: 100%; height: 300px">
+                        <div id="carouselSVGCaptions" class="carousel carousel-dark slide" data-bs-interval="false" style="width: 100%; height: 300px">
                             <div class="carousel-indicators">
                                 <button type="button" data-bs-target="#carouselSVGCaptions" data-bs-slide-to="0"
                                         class="active" aria-current="true" aria-label="Slide 1"></button>
                                 <button type="button" data-bs-target="#carouselSVGCaptions" data-bs-slide-to="1"
                                         aria-label="Slide 2"></button>
                             </div>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="images/topviewsvg.png" style="height: 250px; width: 80%;">
+                            <div class="carousel-inner" style="height: 85%;">
+                                <div class="carousel-item active" style="height: 100%;">
+                                    <svg width="100%" height="100%" viewBox="0 0 100% 100%">
+                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
+                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
+                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
+                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" stroke="black" fill-opacity="0"></rect>
+                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black" transform="rotate(1.28)" stroke-width="1" fill-opacity="0"></rect>
+                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="1" transform="rotate(1.28)"></rect>
+                                    </svg>
                                 </div>
-                                <div class="carousel-item">
-                                    <img src="images/sideviewsvg.png" style="height: 250px; width: 80%;">
+                                <div class="carousel-item" style="height: 100%;">
+                                    <svg width="100%" height="100%" viewBox="0 0 100% 100%" style="background-color: #014687">
+                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
+                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
+                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
+                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" stroke="black" fill-opacity="0"></rect>
+                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black" transform="rotate(1.28)" stroke-width="1" fill-opacity="0"></rect>
+                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="1" transform="rotate(1.28)"></rect>
+                                    </svg>
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselSVGCaptions" data-bs-slide="prev">
+                                    data-bs-target="#carouselSVGCaptions" data-bs-slide="prev" style="height: 85%">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselSVGCaptions" data-bs-slide="next">
+                                    data-bs-target="#carouselSVGCaptions" data-bs-slide="next" style="height: 85%">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
                         <button type="button" class="btn btn-info dropdown-toggle">Vis stykliste</button>
-                        <div class="fixed-table-container" style="height: 345px; padding-bottom: 50px;"></div>
+                        <div class="fixed-table-container" style="height: 345px; padding-bottom: 50px; display: none"></div>
                         <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
                     </div>
                     <div class="modal-footer">
