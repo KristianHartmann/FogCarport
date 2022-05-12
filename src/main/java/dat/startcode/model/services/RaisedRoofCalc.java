@@ -25,6 +25,80 @@ public class RaisedRoofCalc implements ICalculator {
     }
 
     @Override
+    public int getAmount(int partsID) {
+        switch (partsID) {
+            case 1:
+                return underStern360Calc();
+            case 2:
+                return underStern540Calc();
+            case 3:
+                return overStern360Calc();
+            case 4:
+                return overStern540Calc();
+            case 5:
+                return zShedDoorCalc();
+            case 6:
+                return looseHolter270();
+            case 7:
+                return looseHolter240();
+            case 8:
+                return remCarCalc();
+            case 9:
+                return remShedCalc();
+            case 10:
+                return beamsCalc();
+            case 11:
+                return dressShedCalc();
+            case 12:
+                return waterBoardSidesCalc();
+            case 13:
+                return waterBoardEndsCalc();
+            case 14:
+                return roofPlates600Calc();
+            case 15:
+                return roofPlates360Calc();
+            case 16:
+                return roofBackCalc();
+            case 17:
+                return laths360Calc();
+            case 18:
+                return laths480Calc();
+            case 19:
+                return roofScrewsCalc();
+            case 20:
+                return holeBandCalc();
+            case 21:
+                return universalBracketRightCalc();
+            case 22:
+                return sternScrewsCalc();
+            case 23:
+                return bracketScrewsCalc();
+            case 24:
+                return boardBoltCalc();
+            case 25:
+                return squareDiscsCalc();
+            case 26:
+                return outerDressScrewsCalc();
+            case 27:
+                return innerDressScrewsCalc();
+            case 28:
+                return barnDoorHandlesCalc();
+            case 29:
+                return tHingeCalc();
+            case 30:
+                return angleBracketCalc();
+            case 31:
+                return universalBracketLeftCalc();
+            case 32:
+                return holePlate();
+            case 33:
+            default:
+                return 0;
+        }
+
+    }
+
+    @Override
     public int extraShedBeams() { // Denne regner ud hvor mange stolper der skal lægges til MED skur
         if (shedWidth <= 0 && shedLength <= 0) {
             return 0;

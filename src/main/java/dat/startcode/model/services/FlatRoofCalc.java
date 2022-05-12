@@ -3,7 +3,8 @@ package dat.startcode.model.services;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class FlatRoofCalc implements ICalculator {
     private int carportWidth;
     private int carportLength;
@@ -23,76 +24,77 @@ public class FlatRoofCalc implements ICalculator {
     }
 
     @Override
-    public int getAmount(int partsID){
-        switch (partsID){
+    public int getAmount(int partsID) {
+        switch (partsID) {
             case 1:
-                break;
+                return underStern360Calc();
             case 2:
-                break;
+                return underStern540Calc();
             case 3:
-                break;
+                return overStern360Calc();
             case 4:
-                break;
+                return overStern540Calc();
             case 5:
-                break;
+                return zShedDoorCalc();
             case 6:
-                break;
+                return looseHolter270();
             case 7:
-                break;
+                return looseHolter240();
             case 8:
-                break;
+                return remCarCalc();
             case 9:
-                break;
+                return remShedCalc();
             case 10:
                 return beamsCalc();
             case 11:
-                break;
+                return dressShedCalc();
             case 12:
-                break;
+                return waterBoardSidesCalc();
             case 13:
-                break;
+                return waterBoardEndsCalc();
             case 14:
-                break;
+                return roofPlates600Calc();
             case 15:
-                break;
+                return roofPlates360Calc();
             case 16:
-                break;
+                return roofBackCalc();
             case 17:
-                break;
+                return laths360Calc();
             case 18:
-                break;
+                return laths480Calc();
             case 19:
-                break;
+                return roofScrewsCalc();
             case 20:
-                break;
+                return holeBandCalc();
             case 21:
-                break;
+                return universalBracketRightCalc();
             case 22:
-                break;
+                return sternScrewsCalc();
             case 23:
-                break;
+                return bracketScrewsCalc();
             case 24:
-                break;
+                return boardBoltCalc();
             case 25:
-                break;
+                return squareDiscsCalc();
             case 26:
-                break;
+                return outerDressScrewsCalc();
             case 27:
-                break;
+                return innerDressScrewsCalc();
             case 28:
-                break;
+                return barnDoorHandlesCalc();
             case 29:
-                break;
+                return tHingeCalc();
             case 30:
-                break;
+                return angleBracketCalc();
             case 31:
-                break;
+                return universalBracketLeftCalc();
             case 32:
-                break;
-                default:
+                return holePlate();
+            case 33:
+            default:
                 return 0;
         }
-        return 0;
+
     }
 
     @Override
@@ -255,7 +257,7 @@ public class FlatRoofCalc implements ICalculator {
 
     @Override
     public int raftersCalc() { // Denne regner hvor mange spær, der skal bruges på tværs af carporten
-        return (int) Math.ceil((double) carportLength/55);
+        return (int) Math.ceil((double) carportLength / 55);
     }
 
     @Override
@@ -336,7 +338,7 @@ public class FlatRoofCalc implements ICalculator {
         if (carportLength <= 360) {
             return (int) Math.ceil((float) carportWidth / 100);
         } else if (carportLength > 600 && carportLength <= 700) {
-            return (int) Math.ceil((float) carportWidth / 100)*2;
+            return (int) Math.ceil((float) carportWidth / 100) * 2;
         } else if (carportLength > 700) {
             return (int) Math.ceil((float) carportWidth / 100);
         } else {
@@ -362,7 +364,7 @@ public class FlatRoofCalc implements ICalculator {
     @Override
     public int roofScrewsCalc() {
         int screws = (carportLength / 100) * (carportWidth / 100) * 12;
-        return (int) Math.ceil(((double) screws/200));
+        return (int) Math.ceil(((double) screws / 200));
     }
 
 
@@ -398,16 +400,16 @@ public class FlatRoofCalc implements ICalculator {
 
     @Override
     public int bracketScrewsCalc() { // 9 skruer pr alle forskellige slags beslag vi skal bruge. 250 skruer i en pakke
-        int beslagSkruer = 9 * (universalBracketRightCalc() + universalBracketLeftCalc() + angleBracketCalc()) ;
+        int beslagSkruer = 9 * (universalBracketRightCalc() + universalBracketLeftCalc() + angleBracketCalc());
         // Antal universalbeslaghøjre + universalbeslag venstre + antal vinkel beslag
-        return (int) Math.ceil((double) beslagSkruer/250);
+        return (int) Math.ceil((double) beslagSkruer / 250);
     }
 
 
     @Override
     public int boardBoltCalc() {
-        int maxShedWidth = carportWidth-70;
-        int maxHalfShedWidth = (carportWidth-70)/2;
+        int maxShedWidth = carportWidth - 70;
+        int maxHalfShedWidth = (carportWidth - 70) / 2;
         int beamsThatNeedBolt = beamsCalc();
 
         // Det nedenunder kommer til at virke perfekt, hvis de vores beregning for de kan vælge halvt skur
@@ -422,7 +424,7 @@ public class FlatRoofCalc implements ICalculator {
         if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth && shedLength > 310) {
             beamsThatNeedBolt = beamsThatNeedBolt - 1;
         }
-            return beamsThatNeedBolt*2;
+        return beamsThatNeedBolt * 2;
     }
 
     @Override
@@ -468,7 +470,7 @@ public class FlatRoofCalc implements ICalculator {
 
     @Override
     public int angleBracketCalc() {
-        return (looseHolter270()+ looseHolter240())*2;
+        return (looseHolter270() + looseHolter240()) * 2;
     }
 
     @Override
