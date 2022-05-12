@@ -8,8 +8,8 @@ public interface ICalculator {
     int overStern360Calc(); // OVERSTERN 360
     int overStern540Calc(); // OVERSTERN 540
     int zShedDoorCalc(); // Z TIL SKURDØR
-    int looseHolterWidth(); // LØSHOLTER TIL GAVL
-    int looseHolterLength(); // LØSHOLTER TIL SIDER
+    int looseHolter270(); // LØSHOLTER TIL GAVL
+    int looseHolter240(); // LØSHOLTER TIL SIDER
     int remCarCalc(); // REM I SIDER
     int remShedCalc(); // REM I SIDER SKUR
     int raftersCalc(); // SPPÆR

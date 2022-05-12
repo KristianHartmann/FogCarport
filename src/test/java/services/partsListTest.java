@@ -161,13 +161,13 @@ public class partsListTest {
         assertEquals(1, testPartsList.getPartsListItemArrayList().get(8).getAmount());
     }
     @Test
-    void testLooseHolterWidth(){
-        testPartsList.getPartsListItemArrayList().get(9).setAmount(flatcalc.looseHolterWidth());
+    void testLooseHolter270(){
+        testPartsList.getPartsListItemArrayList().get(9).setAmount(flatcalc.looseHolter270());
         assertEquals(12, testPartsList.getPartsListItemArrayList().get(9).getAmount());
     }
     @Test
-    void testLooseHolterLength(){
-        testPartsList.getPartsListItemArrayList().get(10).setAmount(flatcalc.looseHolterLength());
+    void testLooseHolter240(){
+        testPartsList.getPartsListItemArrayList().get(10).setAmount(flatcalc.looseHolter240());
         assertEquals(4, testPartsList.getPartsListItemArrayList().get(10).getAmount());
     }
     @Test
