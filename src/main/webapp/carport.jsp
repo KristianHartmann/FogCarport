@@ -361,7 +361,8 @@
                     </div>
                     <div class="modal-body" style="text-align: center">
                         <img class="mb-4" src="images/logo.png" alt="logo" width="75">
-                        <div id="carouselSVGCaptions" class="carousel carousel-dark slide" data-bs-interval="false" style="width: 100%; height: 300px">
+                        <div id="carouselSVGCaptions" class="carousel carousel-dark slide" data-bs-interval="false"
+                             style="width: 100%; height: 300px">
                             <div class="carousel-indicators">
                                 <button type="button" data-bs-target="#carouselSVGCaptions" data-bs-slide-to="0"
                                         class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -371,22 +372,70 @@
                             <div class="carousel-inner" style="height: 85%;">
                                 <div class="carousel-item active" style="height: 100%;">
                                     <svg width="100%" height="100%" viewBox="0 0 100% 100%">
-                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
-                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
-                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
-                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" stroke="black" fill-opacity="0"></rect>
-                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black" transform="rotate(1.28)" stroke-width="1" fill-opacity="0"></rect>
-                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="1" transform="rotate(1.28)"></rect>
+                                        <defs>
+                                            <!-- arrowhead marker definition -->
+                                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
+                                                    markerWidth="6" markerHeight="6"
+                                                    orient="auto-start-reverse">
+                                                <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                                            </marker>
+
+                                            <!-- simple dot marker definition -->
+                                            <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5"
+                                                    markerWidth="5" markerHeight="5">
+                                                <circle cx="5" cy="5" r="5" fill="red"></circle>
+                                            </marker>
+                                        </defs>
+                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              stroke="black" fill-opacity="0"></rect>
+                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black"
+                                              transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
+                                              fill="white"></rect>
+                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="0"
+                                              stroke-width="0.3" stroke="black"
+                                              transform="rotate(1.28)"></rect>
+                                        <line x1="0" x2="12.82%" y1="100%" y2="100%" stroke="black"
+                                              marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
                                     </svg>
                                 </div>
                                 <div class="carousel-item" style="height: 100%;">
-                                    <svg width="100%" height="100%" viewBox="0 0 100% 100%" style="background-color: #014687">
-                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
-                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
-                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" fill-opacity="0" stroke="black"></rect>
-                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1" stroke="black" fill-opacity="0"></rect>
-                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black" transform="rotate(1.28)" stroke-width="1" fill-opacity="0"></rect>
-                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="1" transform="rotate(1.28)"></rect>
+                                    <svg width="100%" height="100%" viewBox="0 0 100% 100%">
+                                        <defs>
+                                            <!-- arrowhead marker definition -->
+                                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
+                                                    markerWidth="6" markerHeight="6"
+                                                    orient="auto-start-reverse">
+                                                <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                                            </marker>
+
+                                            <!-- simple dot marker definition -->
+                                            <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5"
+                                                    markerWidth="5" markerHeight="5">
+                                                <circle cx="5" cy="5" r="5" fill="red"></circle>
+                                            </marker>
+                                        </defs>
+                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
+                                              stroke="black" fill-opacity="0"></rect>
+                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black"
+                                              transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
+                                              fill="white"></rect>
+                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="0"
+                                              stroke-width="0.3" stroke="black"
+                                              transform="rotate(1.28)"></rect>
+                                        <line x1="0" x2="12.82%" y1="90%" y2="90%" stroke="black"
+                                              marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
                                     </svg>
                                 </div>
                             </div>
@@ -402,7 +451,8 @@
                             </button>
                         </div>
                         <button type="button" class="btn btn-info dropdown-toggle">Vis stykliste</button>
-                        <div class="fixed-table-container" style="height: 345px; padding-bottom: 50px; display: none"></div>
+                        <div class="fixed-table-container"
+                             style="height: 345px; padding-bottom: 50px; display: none"></div>
                         <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
                     </div>
                     <div class="modal-footer">
