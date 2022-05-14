@@ -112,7 +112,7 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <button type="button" data-bs-target="#confirmModal" data-bs-toggle="modal"
+                                <button type="button" id="confirmOrderBtn"
                                         class="btn btn-primary">Bestil
                                 </button>
                                 <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet
@@ -372,70 +372,49 @@
                             <div class="carousel-inner" style="height: 85%;">
                                 <div class="carousel-item active" style="height: 100%;">
                                     <svg width="100%" height="100%" viewBox="0 0 100% 100%">
-                                        <defs>
-                                            <!-- arrowhead marker definition -->
-                                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
-                                                    markerWidth="6" markerHeight="6"
-                                                    orient="auto-start-reverse">
-                                                <path d="M 0 0 L 10 5 L 0 10 z"></path>
-                                            </marker>
-
-                                            <!-- simple dot marker definition -->
-                                            <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5"
-                                                    markerWidth="5" markerHeight="5">
-                                                <circle cx="5" cy="5" r="5" fill="red"></circle>
-                                            </marker>
-                                        </defs>
-                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              stroke="black" fill-opacity="0"></rect>
-                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black"
-                                              transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
-                                              fill="white"></rect>
-                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="0"
-                                              stroke-width="0.3" stroke="black"
-                                              transform="rotate(1.28)"></rect>
-                                        <line x1="0" x2="12.82%" y1="100%" y2="100%" stroke="black"
-                                              marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
+                                        <svg width="80%" height="80%" viewBox="0 0 780 230"
+                                             preserveAspectRatio="xMidYMid meet">
+                                            <rect x="100" y="20" height="210" width="10" stroke-width="1"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="313.333" y="20" height="210" width="10" stroke-width="1"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="526.666" y="20" height="210" width="10" stroke-width="1"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="750" y="20" height="210" width="10" stroke-width="1"
+                                                  stroke="black" fill-opacity="0"></rect>
+                                            <rect x="0" y="0" height="30" width="780" stroke="black"
+                                                  transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
+                                                  fill="white"></rect>
+                                            <rect x="0" y="15" height="1" width="780" fill-opacity="0"
+                                                  stroke-width="0.3" stroke="black"
+                                                  transform="rotate(1.28)"></rect>
+                                        </svg>
                                     </svg>
                                 </div>
                                 <div class="carousel-item" style="height: 100%;">
                                     <svg width="100%" height="100%" viewBox="0 0 100% 100%">
-                                        <defs>
-                                            <!-- arrowhead marker definition -->
-                                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
-                                                    markerWidth="6" markerHeight="6"
-                                                    orient="auto-start-reverse">
-                                                <path d="M 0 0 L 10 5 L 0 10 z"></path>
-                                            </marker>
-
-                                            <!-- simple dot marker definition -->
-                                            <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5"
-                                                    markerWidth="5" markerHeight="5">
-                                                <circle cx="5" cy="5" r="5" fill="red"></circle>
-                                            </marker>
-                                        </defs>
-                                        <rect x="12.82%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="40.17%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="67.52%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="94.87%" y="8.3%" height="91.7%" width="1.28%" stroke-width="1"
-                                              stroke="black" fill-opacity="0"></rect>
-                                        <rect x="0" y="0" height="13.02%" width="100%" stroke="black"
-                                              transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
-                                              fill="white"></rect>
-                                        <rect x="0" y="6.51%" height="1" width="100%" fill-opacity="0"
-                                              stroke-width="0.3" stroke="black"
-                                              transform="rotate(1.28)"></rect>
-                                        <line x1="0" x2="12.82%" y1="90%" y2="90%" stroke="black"
-                                              marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
+                                        <svg width="80%" height="80%" viewBox="0 0 780 600"
+                                             preserveAspectRatio="xMidYMid meet">
+                                            <rect x="0" y="0" height="600" width="780" stroke-width="1" fill-opacity="0" stroke="black"></rect>
+                                            <rect x="100" y="35" height="10" width="10" stroke-width="1.5"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="313.333" y="35" height="10" width="10" stroke-width="1.5"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="526.666" y="35" height="10" width="10" stroke-width="1.5"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="750" y="35" height="10" width="10" stroke-width="1.5"
+                                                  stroke="black" fill-opacity="0"></rect>
+                                            <rect x="100" y="565" height="10" width="10" stroke-width="1.5"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="313.333" y="565" height="10" width="10" stroke-width="1.5"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="526.666" y="565" height="10" width="10" stroke-width="1.5"
+                                                  fill-opacity="0" stroke="black"></rect>
+                                            <rect x="750" y="565" height="10" width="10" stroke-width="1.5"
+                                                  stroke="black" fill-opacity="0"></rect>
+                                            <rect x="0" y="35" height="9" width="780" stroke="black" stroke-width="1" fill-opacity="0"></rect>
+                                            <rect x="0" y="565" height="9" width="780" stroke="black" stroke-width="1" fill-opacity="0"></rect>
+                                        </svg>
                                     </svg>
                                 </div>
                             </div>
@@ -451,6 +430,7 @@
                             </button>
                         </div>
                         <button type="button" class="btn btn-info dropdown-toggle">Vis stykliste</button>
+                        <h2 id="ajaxtest"></h2>
                         <div class="fixed-table-container"
                              style="height: 345px; padding-bottom: 50px; display: none"></div>
                         <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
