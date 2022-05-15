@@ -9,15 +9,21 @@ function showShed() {
 }
 
 $(document).ready(function() {
-    $('#confirmOrderBtn').click(function (){
+    $('#confirmOrderForm').submit(function (e){
+       e.preventDefault();
+
+       var form = $(this);
+
         $.ajax({
-            url: './TestServlet',
-            type: 'POST',
-            data: {'msg': 'hello from the servlet'},
+            url: './' + form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
             success: function (response){
-                $('#ajaxtest').html(response);
+                $
+                $('#ajaxtest').html("this comes from the servlet :" + JSON.stringify(response));
                 $('#confirmModal').modal('show');
             }
         });
+
     });
 })

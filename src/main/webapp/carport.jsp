@@ -68,10 +68,10 @@
                             <p><strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
                                 Felter markeret * SKAL udfyldes!</p>
                             <p>Ønsket carport mål:</p>
-                            <form>
+                            <form action="TestServlet" id="confirmOrderForm" method="post">
                                 <div class="form-group">
                                     <label for="cpwidth">Carport bredde:</label>
-                                    <select class="form-control" id="cpwidth">
+                                    <select class="form-control" id="cpwidth" name="cpwidth">
                                         <option value="" selected disabled hidden>Vælg bredde</option>
                                         <c:forEach begin="240" end="600" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="cplength">Carport længde:</label>
-                                    <select class="form-control" id="cplength">
+                                    <select class="form-control" id="cplength" name="cplength">
                                         <option value="" selected disabled hidden>Vælg længde</option>
                                         <c:forEach begin="240" end="780" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="form-group" id="cpshedwidthdiv" style="display: none">
                                     <label for="cpshedwidth">Redskabsrum bredde:</label>
-                                    <select class="form-control" id="cpshedwidth">
+                                    <select class="form-control" id="cpshedwidth" name="cpshedwidth">
                                         <option value="" selected disabled hidden>Vælg bredde</option>
                                         <c:forEach begin="210" end="540" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
@@ -105,14 +105,14 @@
                                 </div>
                                 <div class="form-group" id="cpshedlengthdiv" style="display: none">
                                     <label for="cpshedlength">Redskabsrum længde:</label>
-                                    <select class="form-control" id="cpshedlength">
+                                    <select class="form-control" id="cpshedlength" name="cpshedlength">
                                         <option value="" selected disabled hidden>Vælg længde</option>
                                         <c:forEach begin="150" end="390" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <button type="button" id="confirmOrderBtn"
+                                <button type="submit"
                                         class="btn btn-primary">Bestil
                                 </button>
                                 <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet
@@ -393,7 +393,7 @@
                                 </div>
                                 <div class="carousel-item" style="height: 100%;">
                                     <svg width="100%" height="100%" viewBox="0 0 100% 100%">
-                                        <svg width="80%" height="80%" viewBox="0 0 780 600"
+                                        <svg width="80%" height="80%" viewBox="0 0 780 600" id="svgTopView"
                                              preserveAspectRatio="xMidYMid meet">
                                             <rect x="0" y="0" height="600" width="780" stroke-width="1" fill-opacity="0" stroke="black"></rect>
                                             <rect x="100" y="35" height="10" width="10" stroke-width="1.5"
@@ -429,10 +429,41 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <button type="button" class="btn btn-info dropdown-toggle">Vis stykliste</button>
-                        <h2 id="ajaxtest"></h2>
-                        <div class="fixed-table-container"
-                             style="height: 345px; padding-bottom: 50px; display: none"></div>
+                        <a class="btn btn-info dropdown-toggle" data-bs-toggle="collapse" href="#table-container" role="button" aria-expanded="false" aria-controls="collapseExample">Vis stykliste</a>
+                        <div id="table-container" class="collapse">
+                            <table class="table caption-top">
+                                <caption>StykListe</caption>
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p id="ajaxtest"></p>
                         <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
                     </div>
                     <div class="modal-footer">
