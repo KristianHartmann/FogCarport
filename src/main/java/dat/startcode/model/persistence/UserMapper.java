@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserMapper implements IUserMapper {
-    ConnectionPool connectionPool;
+public class UserMapper extends SuperMapper implements IUserMapper {
+
 
     public UserMapper(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+        super(connectionPool);
     }
-
-
 
     @Override
     public User login(String email, String password) throws DatabaseException {

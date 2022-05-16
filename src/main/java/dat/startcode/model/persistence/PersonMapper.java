@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PersonMapper implements IPersonMapper{
-    ConnectionPool connectionPool;
+public class PersonMapper extends SuperMapper implements IPersonMapper{
 
-    public PersonMapper(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+
+        public PersonMapper(ConnectionPool connectionPool) {
+        super(connectionPool);
     }
 
     public Person createPerson(String email, String address, String name, String phonenumber, int zipcode) throws DatabaseException {
