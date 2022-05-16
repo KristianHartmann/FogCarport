@@ -20,7 +20,7 @@ $(document).ready(function() {
             data: form.serialize(), // sætter den data vi gerne vil have med ind i TestServlet
             dataType: 'json', // vores data type for vores response, som vil være json, så vi kan få fat i de værdier vi nu vil sende tilbage til siden
             success: function (response){ // funktion for hvis ajax kaldet lykkedes, det parameter den får er vores response fra TestServlet
-                $('#ajaxtest').html("this comes from the servlet : Bruger med email: " + response.user.email + " har bestil en carport med mål: " + response.lenght + "X" + response.width); // sætter htmlen i et test tag jeg har lavet til vores data fra response
+                $('#svgSideViewPreview').html(response);
                 $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
             }
         });

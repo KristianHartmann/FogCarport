@@ -370,24 +370,24 @@
                                         aria-label="Slide 2"></button>
                             </div>
                             <div class="carousel-inner" style="height: 85%;">
-                                <div class="carousel-item active" style="height: 100%;">
-                                    <svg width="100%" height="100%" viewBox="0 0 780 230" id="svgSideViewPreview"
-                                         preserveAspectRatio="xMidYMid meet">
-                                        <rect x="100" y="20" height="210" width="10" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="313.333" y="20" height="210" width="10" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="526.666" y="20" height="210" width="10" stroke-width="1"
-                                              fill-opacity="0" stroke="black"></rect>
-                                        <rect x="750" y="20" height="210" width="10" stroke-width="1"
-                                              stroke="black" fill-opacity="0"></rect>
-                                        <rect x="0" y="0" height="30" width="780" stroke="black"
-                                              transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
-                                              fill="white"></rect>
-                                        <rect x="0" y="15" height="1" width="780" fill-opacity="0"
-                                              stroke-width="0.3" stroke="black"
-                                              transform="rotate(1.28)"></rect>
-                                    </svg>
+                                <div class="carousel-item active" style="height: 100%;" id="svgSideViewPreview">
+<%--                                    <svg width="100%" height="100%" viewBox="0 0 780 230" id="svgSideViewPreview"--%>
+<%--                                         preserveAspectRatio="xMidYMid meet">--%>
+<%--                                        <rect x="100" y="20" height="210" width="10" stroke-width="1"--%>
+<%--                                              fill-opacity="0" stroke="black"></rect>--%>
+<%--                                        <rect x="313.333" y="20" height="210" width="10" stroke-width="1"--%>
+<%--                                              fill-opacity="0" stroke="black"></rect>--%>
+<%--                                        <rect x="526.666" y="20" height="210" width="10" stroke-width="1"--%>
+<%--                                              fill-opacity="0" stroke="black"></rect>--%>
+<%--                                        <rect x="750" y="20" height="210" width="10" stroke-width="1"--%>
+<%--                                              stroke="black" fill-opacity="0"></rect>--%>
+<%--                                        <rect x="0" y="0" height="30" width="780" stroke="black"--%>
+<%--                                              transform="rotate(1.28)" stroke-width="1" fill-opacity="1"--%>
+<%--                                              fill="white"></rect>--%>
+<%--                                        <rect x="0" y="15" height="1" width="780" fill-opacity="0"--%>
+<%--                                              stroke-width="0.3" stroke="black"--%>
+<%--                                              transform="rotate(1.28)"></rect>--%>
+<%--                                    </svg>--%>
                                 </div>
                                 <div class="carousel-item" style="height: 100%;">
                                     <svg width="100%" height="100%" viewBox="0 0 780 600" id="svgTopViewPreview"
