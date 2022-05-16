@@ -98,7 +98,7 @@
                                     <label for="cpshedwidth">Redskabsrum bredde:</label>
                                     <select class="form-control" id="cpshedwidth" name="cpshedwidth">
                                         <option value="0" selected hidden>Vælg bredde</option>
-                                        <c:forEach begin="210" end="540" var="i" step="30">
+                                        <c:forEach begin="240" end="530" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
@@ -371,50 +371,49 @@
                             </div>
                             <div class="carousel-inner" style="height: 85%;">
                                 <div class="carousel-item active" style="height: 100%;">
-                                    <svg width="100%" height="100%" viewBox="0 0 100% 100%">
-                                        <svg width="80%" height="80%" viewBox="0 0 780 230"
-                                             preserveAspectRatio="xMidYMid meet">
-                                            <rect x="100" y="20" height="210" width="10" stroke-width="1"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="313.333" y="20" height="210" width="10" stroke-width="1"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="526.666" y="20" height="210" width="10" stroke-width="1"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="750" y="20" height="210" width="10" stroke-width="1"
-                                                  stroke="black" fill-opacity="0"></rect>
-                                            <rect x="0" y="0" height="30" width="780" stroke="black"
-                                                  transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
-                                                  fill="white"></rect>
-                                            <rect x="0" y="15" height="1" width="780" fill-opacity="0"
-                                                  stroke-width="0.3" stroke="black"
-                                                  transform="rotate(1.28)"></rect>
-                                        </svg>
+                                    <svg width="100%" height="100%" viewBox="0 0 780 230" id="svgSideViewPreview"
+                                         preserveAspectRatio="xMidYMid meet">
+                                        <rect x="100" y="20" height="210" width="10" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="313.333" y="20" height="210" width="10" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="526.666" y="20" height="210" width="10" stroke-width="1"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="750" y="20" height="210" width="10" stroke-width="1"
+                                              stroke="black" fill-opacity="0"></rect>
+                                        <rect x="0" y="0" height="30" width="780" stroke="black"
+                                              transform="rotate(1.28)" stroke-width="1" fill-opacity="1"
+                                              fill="white"></rect>
+                                        <rect x="0" y="15" height="1" width="780" fill-opacity="0"
+                                              stroke-width="0.3" stroke="black"
+                                              transform="rotate(1.28)"></rect>
                                     </svg>
                                 </div>
                                 <div class="carousel-item" style="height: 100%;">
-                                    <svg width="100%" height="100%" viewBox="0 0 100% 100%">
-                                        <svg width="80%" height="80%" viewBox="0 0 780 600" id="svgTopView"
-                                             preserveAspectRatio="xMidYMid meet">
-                                            <rect x="0" y="0" height="600" width="780" stroke-width="1" fill-opacity="0" stroke="black"></rect>
-                                            <rect x="100" y="35" height="10" width="10" stroke-width="1.5"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="313.333" y="35" height="10" width="10" stroke-width="1.5"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="526.666" y="35" height="10" width="10" stroke-width="1.5"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="750" y="35" height="10" width="10" stroke-width="1.5"
-                                                  stroke="black" fill-opacity="0"></rect>
-                                            <rect x="100" y="565" height="10" width="10" stroke-width="1.5"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="313.333" y="565" height="10" width="10" stroke-width="1.5"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="526.666" y="565" height="10" width="10" stroke-width="1.5"
-                                                  fill-opacity="0" stroke="black"></rect>
-                                            <rect x="750" y="565" height="10" width="10" stroke-width="1.5"
-                                                  stroke="black" fill-opacity="0"></rect>
-                                            <rect x="0" y="35" height="9" width="780" stroke="black" stroke-width="1" fill-opacity="0"></rect>
-                                            <rect x="0" y="565" height="9" width="780" stroke="black" stroke-width="1" fill-opacity="0"></rect>
-                                        </svg>
+                                    <svg width="100%" height="100%" viewBox="0 0 780 600" id="svgTopViewPreview"
+                                         preserveAspectRatio="xMidYMid meet">
+                                        <rect x="0" y="0" height="600" width="780" stroke-width="1" fill-opacity="0"
+                                              stroke="black"></rect>
+                                        <rect x="100" y="35" height="10" width="10" stroke-width="1.5"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="313.333" y="35" height="10" width="10" stroke-width="1.5"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="526.666" y="35" height="10" width="10" stroke-width="1.5"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="750" y="35" height="10" width="10" stroke-width="1.5"
+                                              stroke="black" fill-opacity="0"></rect>
+                                        <rect x="100" y="565" height="10" width="10" stroke-width="1.5"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="313.333" y="565" height="10" width="10" stroke-width="1.5"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="526.666" y="565" height="10" width="10" stroke-width="1.5"
+                                              fill-opacity="0" stroke="black"></rect>
+                                        <rect x="750" y="565" height="10" width="10" stroke-width="1.5"
+                                              stroke="black" fill-opacity="0"></rect>
+                                        <rect x="0" y="35" height="9" width="780" stroke="black" stroke-width="1"
+                                              fill-opacity="0"></rect>
+                                        <rect x="0" y="565" height="9" width="780" stroke="black" stroke-width="1"
+                                              fill-opacity="0"></rect>
                                     </svg>
                                 </div>
                             </div>
@@ -429,7 +428,8 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <a class="btn btn-info dropdown-toggle" data-bs-toggle="collapse" href="#table-container" role="button" aria-expanded="false" aria-controls="collapseExample">Vis stykliste</a>
+                        <a class="btn btn-info dropdown-toggle" data-bs-toggle="collapse" href="#table-container"
+                           role="button" aria-expanded="false" aria-controls="collapseExample">Vis stykliste</a>
                         <div id="table-container" class="collapse">
                             <table class="table caption-top">
                                 <caption>StykListe</caption>
