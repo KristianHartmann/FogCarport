@@ -31,30 +31,31 @@
 
                     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                         <li>
-                            <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link text-secondary">
+                            <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link text-white">
                                 Home
                             </a>
                         </li>
                         <li>
                             <a href="${pageContext.request.contextPath}/carport.jsp" class="nav-link text-white">
-                                Carport
+                                Quick-byg
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link text-white">
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link text-white">
-                                Orders
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link text-white">
-                                Customers
-                            </a>
-                        </li>
+                        <c:choose>
+                            <c:when test="${sessionScope.user.role.equals('admin')}">
+                                <li>
+                                    <a href="#" class="nav-link text-white">
+                                        Dashboard
+                                    </a>
+                                </li>
+                            </c:when>
+                            <c:when test="${sessionScope.user.role.equals('user')}">
+                                <li>
+                                    <a href="#" class="nav-link text-white">
+                                        Profile
+                                    </a>
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </ul>
                 </div>
             </div>
@@ -66,10 +67,10 @@
                 </form>
 
                 <div class="text-end">
-                    <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
-                            data-bs-target="#loginModal">Login
-                    </button>
-                    <button type="button" class="btn btn-primary">Sign-up</button>
+                        <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
+                                data-bs-target="#loginModal">Login
+                        </button>
+                        <button type="button" class="btn btn-primary">Sign-up</button>
                 </div>
             </div>
         </div>
@@ -84,8 +85,6 @@
         <footer>
             <ul class="nav justify-content-center border-bottom pb-1 mb-1">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
             </ul>
@@ -134,7 +133,9 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="./webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="./webjars/jquery.ajax/1.2.0/src/jquery.ajaxs.js"></script>
 <script type="text/javascript" rel="script" src="${pageContext.request.contextPath}/js/script.js"></script>
