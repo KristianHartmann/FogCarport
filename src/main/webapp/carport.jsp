@@ -72,7 +72,7 @@
                                 <div class="form-group">
                                     <label for="cpwidth">Carport bredde:</label>
                                     <select class="form-control" id="cpwidth" name="cpwidth">
-                                        <option value="" selected disabled hidden>Vælg bredde</option>
+                                        <option value="0" selected hidden>Vælg bredde</option>
                                         <c:forEach begin="240" end="600" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     <label for="cplength">Carport længde:</label>
                                     <select class="form-control" id="cplength" name="cplength">
-                                        <option value="" selected disabled hidden>Vælg længde</option>
+                                        <option value="0" selected hidden>Vælg længde</option>
                                         <c:forEach begin="240" end="780" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
@@ -97,7 +97,7 @@
                                 <div class="form-group" id="cpshedwidthdiv" style="display: none">
                                     <label for="cpshedwidth">Redskabsrum bredde:</label>
                                     <select class="form-control" id="cpshedwidth" name="cpshedwidth">
-                                        <option value="" selected disabled hidden>Vælg bredde</option>
+                                        <option value="0" selected hidden>Vælg bredde</option>
                                         <c:forEach begin="210" end="540" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
@@ -106,7 +106,7 @@
                                 <div class="form-group" id="cpshedlengthdiv" style="display: none">
                                     <label for="cpshedlength">Redskabsrum længde:</label>
                                     <select class="form-control" id="cpshedlength" name="cpshedlength">
-                                        <option value="" selected disabled hidden>Vælg længde</option>
+                                        <option value="0" selected hidden>Vælg længde</option>
                                         <c:forEach begin="150" end="390" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>

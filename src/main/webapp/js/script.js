@@ -9,19 +9,19 @@ function showShed() {
 }
 
 $(document).ready(function() {
-    $('#confirmOrderForm').submit(function (e){
-       e.preventDefault();
+    $('#confirmOrderForm').submit(function (e){ // vores bestil form's submit funktion
+       e.preventDefault(); // sørger for at vores submit ikke laver et postback, det vil sige refresher vores side.
 
-       var form = $(this);
+       var form = $(this); // sætter en variabel som indeholder vores form
 
-        $.ajax({
-            url: './' + form.attr('action'),
-            type: form.attr('method'),
-            data: form.serialize(),
-            success: function (response){
-                $
-                $('#ajaxtest').html("this comes from the servlet :" + JSON.stringify(response));
-                $('#confirmModal').modal('show');
+        $.ajax({ // ajax er til for at vi kan fange et server response fra en servlet uden at skulle request.getDispatcher til en eller anden jsp side
+            url: './' + form.attr('action'), // sætter urlen på requesten til at være vores forms action hvilket i dette tilfælde er TestServlet
+            type: form.attr('method'), // sætter vores metode/method til vores forms metode/method som i dette tilfælde er post
+            data: form.serialize(), // sætter den data vi gerne vil have med ind i TestServlet
+            dataType: 'json', // vores data type for vores response, som vil være json, så vi kan få fat i de værdier vi nu vil sende tilbage til siden
+            success: function (response){ // funktion for hvis ajax kaldet lykkedes, det parameter den får er vores response fra TestServlet
+                $('#ajaxtest').html("this comes from the servlet : Bruger med email: " + response.user.email + " har bestil en carport med mål: " + response.lenght + "X" + response.width); // sætter htmlen i et test tag jeg har lavet til vores data fra response
+                $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
             }
         });
 
