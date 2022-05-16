@@ -23,4 +23,10 @@ public class SQLStatements {
     public static String createPerson = "INSERT INTO `carport`.`person` (`email`, `address`, `name`, `phonenumber`, `zipcode`) VALUES  (?,?,?,?,?)";
     public static String createOrder = "INSERT INTO carport.order (user_id) VALUES (?);";
     public static String insertUser = "insert into user (email, password, role) values (?,?,?);";
+
+    //Create
+    public static String createCarportRequest = "insert into carport.carport_request (length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email) values (?,?,?,?,?,?,?);";
+
+
+
 }
