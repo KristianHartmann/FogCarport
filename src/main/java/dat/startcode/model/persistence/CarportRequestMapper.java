@@ -2,6 +2,7 @@ package dat.startcode.model.persistence;
 
 import dat.startcode.model.entities.CarportRequest;
 import dat.startcode.model.entities.User;
+import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,5 +47,29 @@ public class CarportRequestMapper extends SuperMapper {
             }
         }
         return null;
+    }
+
+    public void createCarportrequest(CarportRequest request) throws SQLException, DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        CarportRequest carportRequest;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.createCarportRequest)) {
+                ps.setInt(2, request.getLength());
+                ps.setInt(3, request.getWidth());
+                ps.setString(4, request.getRooftype());
+                ps.setInt(5, request.getRoofpitch());
+                ps.setInt(6, request.getToolbox_length());
+                ps.setInt(7, request.getToolbox_width());
+                ps.setString(8, request.getUser().getEmail());
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 1) {
+                        throw new SQLException("Failed");
+                } else {
+                    throw new DatabaseException("Could not find a person with this email.");
+                }
+            }
+        } catch (SQLException | DatabaseException ex) {
+            throw new DatabaseException(ex, "Failed");
+        }
     }
 }
