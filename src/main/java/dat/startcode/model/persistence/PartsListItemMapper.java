@@ -10,11 +10,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PartsListItemMapper {
-    ConnectionPool connectionPool;
+public class PartsListItemMapper extends SuperMapper {
+
 
     public PartsListItemMapper(ConnectionPool connectionPool) {
-        this.connectionPool = connectionPool;
+        super(connectionPool);
     }
 
     public void createPartsListItem(PartsListItem partsListItem, int partslist_id) throws DatabaseException, SQLException {
