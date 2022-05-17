@@ -16,7 +16,8 @@ public class SQLStatements {
     public static String selectAllOrder = "select * from carport.order";
     public static String selectMaxOrder = "SELECT MAX(order_id) FROM carport.order;";
     public static String selectAllParts = "SELECT * FROM parts";
-    public static String SelectUserFromEmailAndPassword = "SELECT * FROM user WHERE email = ? AND password = ?";
+    public static String selectUserFromEmailAndPassword = "SELECT * FROM user WHERE email = ? AND password = ?";
+    public static String selectAllUserFromUserID= "select * from carport.user where user_id = ?";
 
 
     // insert
@@ -27,6 +28,7 @@ public class SQLStatements {
     //Create
     public static String createCarportRequest = "insert into carport.carport_request (length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email) values (?,?,?,?,?,?,?);";
 
-
+    // update
+    public static String  updateUserPasswordById= "UPDATE carport.user SET password = '?' WHERE carport.user.id = '?'";
 
 }
