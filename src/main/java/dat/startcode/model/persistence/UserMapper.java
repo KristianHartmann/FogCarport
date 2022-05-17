@@ -1,11 +1,9 @@
 package dat.startcode.model.persistence;
 
-import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,17 +20,17 @@ public class UserMapper extends SuperMapper implements IUserMapper {
 
         User user = null;
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.SelectUserFromEmailAndPassword)) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectUserFromEmailAndPassword)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
+                if (!rs.next()) {
+                    throw new DatabaseException("Wrong email or password");
+                } else {
                     int user_id = rs.getInt("user_id");
                     String role = rs.getString("role");
                     int balance = rs.getInt("balance");
                     user = new User(user_id, role, balance, password, email);
-                } else {
-                    throw new DatabaseException("Wrong email or password");
                 }
             }
         } catch (SQLException ex) {
@@ -52,7 +50,9 @@ public class UserMapper extends SuperMapper implements IUserMapper {
                 if (rowsAffected == 1) {
                         try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.insertUser)){
                             ResultSet rs = ps.executeQuery();
-                            if (rs.next()) {
+                            if (!rs.next()) {
+                                return null;
+                            } else {
                                 ps2.setString(1, rs.getString("email"));
                                 ps2.setString(2, password);
                                 ps2.setString(3, role);
@@ -78,23 +78,39 @@ public class UserMapper extends SuperMapper implements IUserMapper {
     public User getUserInfoById (int user_id) throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user = null;
-        String sql = "select * from carport.user where user_id = ?";
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectAllUserFromUserID)) {
+                ps.setInt(1, user_id);
                 ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    int id = rs.getInt("user_id");
-                    String email = rs.getString("user_email");
-                    String role = rs.getString("role");
-                    int balance = rs.getInt("balance");
-                    String password = rs.getString("password");
-                    user = new User(id, role,  balance,  password,  email);
+                if (!rs.next()) {
+                    return null;
                 }
+                int id = rs.getInt("user_id");
+                String email = rs.getString("user_email");
+                String role = rs.getString("role");
+                int balance = rs.getInt("balance");
+                String password = rs.getString("password");
+                user = new User(id, role,  balance,  password,  email);
                 return user;
             }
 
         }
     }
+
+    public void changePassword (String password, int userId) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.updateUserPasswordById)) {
+                ps.setString(1, password);
+                ps.setInt(2, userId);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected != 1) {
+                   throw new SQLException("Failed");
+                }
+            }
+        }
+    }
+
 
 
 }
