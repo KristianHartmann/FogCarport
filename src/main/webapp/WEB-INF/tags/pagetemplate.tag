@@ -67,10 +67,16 @@
                 </form>
 
                 <div class="text-end">
+                    <c:if test="${empty sessionScope.user}">
                         <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
                                 data-bs-target="#loginModal">Login
                         </button>
                         <button type="button" class="btn btn-primary">Sign-up</button>
+                    </c:if>
+                    <c:otherwise>
+                        <a href="Logout" class="btn btn-light text-dark me-2">Logout
+                        </a>
+                    </c:otherwise>
                 </div>
             </div>
         </div>
