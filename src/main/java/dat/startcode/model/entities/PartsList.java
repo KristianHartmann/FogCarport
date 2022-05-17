@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 @Getter @Setter
 public class PartsList {
+
+    private int partslist_id;
+
     ArrayList<PartsListItem> partsListItemArrayList;
 
     public PartsList() {

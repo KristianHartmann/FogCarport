@@ -7,6 +7,7 @@ import dat.startcode.model.entities.PartsListItem;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.CarportRequestMapper;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.MapperFacade;
 import dat.startcode.model.persistence.SuperMapper;
 import dat.startcode.model.services.PartslistGenerator;
 
@@ -33,11 +34,12 @@ public class PartslistController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = request.getServletContext();
-        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        MapperFacade facade = new MapperFacade(connectionPool);
         PartslistGenerator generator = new PartslistGenerator(connectionPool);
+
         CarportRequest carportRequest = null;
         try {
-            carportRequest = carportRequestMapper.getCarportRequestById(1); //skal IKKE HARDCODES
+            carportRequest = facade.getCarportRequestMapper().getCarportRequestById(1); //skal IKKE HARDCODES
             PartsList partsList = generator.generateFlatroofPartsList(carportRequest);
             context.setAttribute("partsList", partsList.getPartsListItemArrayList());
         } catch (SQLException e) {

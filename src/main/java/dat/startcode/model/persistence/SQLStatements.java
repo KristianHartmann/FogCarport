@@ -18,17 +18,30 @@ public class SQLStatements {
     public static String selectAllParts = "SELECT * FROM parts";
     public static String selectUserFromEmailAndPassword = "SELECT * FROM user WHERE email = ? AND password = ?";
     public static String selectAllUserFromUserID= "select * from carport.user where user_id = ?";
+    public static String selectUserIDFromEmail= "select user_id from carport.user where user_email = ?";
+    public static String selectAllFromPersonByEmail= "select p.email, p.address, p.`name`, p.phonenumber, p.zipcode, z.city\n" +
+            "FROM person p\n" +
+            "INNER JOIN zipcode z on p.zipcode = z.zipcode\n" +
+            "where p.email = '?'";
+    public static String selectPartsListItemsFromID= "SELECT DISTINCT pli.amount, pli.`description`, p.`name`, p.`description`, p.length, p.unit, p.price\n" +
+            "FROM partslistitem pli\n" +
+            "INNER JOIN parts p ON pli.parts_id = p.parts_id\n" +
+            "WHERE pli.partslistitem_id = ?";
 
 
     // insert
-    public static String createPerson = "INSERT INTO `carport`.`person` (`email`, `address`, `name`, `phonenumber`, `zipcode`) VALUES  (?,?,?,?,?)";
-    public static String createOrder = "INSERT INTO carport.order (user_id) VALUES (?);";
-    public static String insertUser = "insert into user (email, password, role) values (?,?,?);";
-
-    //Create
-    public static String createCarportRequest = "insert into carport.carport_request (length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email) values (?,?,?,?,?,?,?);";
+    public static String insertPerson = "INSERT INTO `carport`.`person` (`email`, `address`, `name`, `phonenumber`, `zipcode`) VALUES  (?,?,?,?,?)";
+    public static String insertOrder = "INSERT INTO carport.order (user_id) VALUES (?);";
+    public static String insertUser = "insert into `user` (email, password, role) values (?,?,?);";
+    public static String insertCarportRequest = "insert into carport.carport_request (length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email) values (?,?,?,?,?,?,?);";
+    public static String insertPartsList = "insert into carport.partslist(carport_request_id) values (?)";
+    public static String insertPartsListItem = "INSERT INTO partslistitem (amount, description, partslist_id, parts_id) VALUES (?, ?, ?, ?);";
+    public static String insertOrderItem = "INSERT INTO `carport`.`orderitem` (`partslist_id`, `price`, `order_id`) VALUES ('?', '?', '?');";
 
     // update
     public static String  updateUserPasswordById= "UPDATE carport.user SET password = '?' WHERE carport.user.id = '?'";
+    public static String  removeUserBalance = "UPDATE `carport`.`user` SET balance = balance - ? WHERE user_id = ?;";
+    public static String  addUserBalanace = "UPDATE `carport`.`user` SET balance = balance + ? WHERE user_id = ?;";
+
 
 }

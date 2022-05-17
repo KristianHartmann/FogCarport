@@ -1,7 +1,6 @@
 package dat.startcode.model.persistence;
 
-import dat.startcode.model.entities.Order;
-import dat.startcode.model.entities.User;
+import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.Connection;
@@ -22,11 +21,12 @@ public class OrderMapper extends SuperMapper implements IOrderMapper {
     }
 
 
+
     @Override
     public void createOrder(User user) throws DatabaseException, SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement( SQLStatements.createOrder)) {
+            try (PreparedStatement ps = connection.prepareStatement( SQLStatements.insertOrder)) {
                 ps.setInt(1, user.getUser_id());
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
@@ -36,6 +36,25 @@ public class OrderMapper extends SuperMapper implements IOrderMapper {
                 }
             }
         }
+    }
+
+
+    @Override
+    public void createFullOrder(User user, CarportRequest request, PartsList list, Orderitem orderitem) throws SQLException, DatabaseException {
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        PartsListMapper partsListMapper = new PartsListMapper(connectionPool);
+        PartsListItemMapper partsListItemMapper = new PartsListItemMapper(connectionPool);
+        OrderItemMapper orderItemMapper = new OrderItemMapper(connectionPool);
+
+        createOrder(user);
+        carportRequestMapper.createCarportrequest(request);
+        partsListMapper.createPartsList(request);
+        for (PartsListItem item : list.getPartsListItemArrayList()) {
+            partsListItemMapper.createPartsListItem(item, list.getPartslist_id());
+        }
+        Order order = new Order(getNewestOrderID(), user);
+        orderitem.setOrder(order);
+        orderItemMapper.createOrderItem(list.getPartslist_id(), orderitem);
     }
 
 

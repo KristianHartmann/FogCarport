@@ -48,22 +48,22 @@ public class UserMapper extends SuperMapper implements IUserMapper {
             try (PreparedStatement ps = connection.prepareStatement(getEmailFromPerson)) {
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
-                        try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.insertUser)){
-                            ResultSet rs = ps.executeQuery();
-                            if (!rs.next()) {
-                                return null;
-                            } else {
-                                ps2.setString(1, rs.getString("email"));
-                                ps2.setString(2, password);
-                                ps2.setString(3, role);
-                            }
-                            int rowsAffected2 = ps2.executeUpdate();
-                            if (rowsAffected2 == 1) {
-                                user = new User(email, password, role);
-                            } else {
-                                throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
-                            }
+                    try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.insertUser)) {
+                        ResultSet rs = ps.executeQuery();
+                        if (!rs.next()) {
+                            return null;
+                        } else {
+                            ps2.setString(1, rs.getString("email"));
+                            ps2.setString(2, password);
+                            ps2.setString(3, role);
                         }
+                        int rowsAffected2 = ps2.executeUpdate();
+                        if (rowsAffected2 == 1) {
+                            user = new User(email, password, role);
+                        } else {
+                            throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
+                        }
+                    }
                 } else {
                     throw new DatabaseException("Could not find a person with this email.");
                 }
@@ -75,7 +75,7 @@ public class UserMapper extends SuperMapper implements IUserMapper {
 
     }
 
-    public User getUserInfoById (int user_id) throws SQLException {
+    public User getUserInfoById(int user_id) throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user = null;
         try (Connection connection = connectionPool.getConnection()) {
@@ -86,18 +86,17 @@ public class UserMapper extends SuperMapper implements IUserMapper {
                     return null;
                 }
                 int id = rs.getInt("user_id");
-                String email = rs.getString("user_email");
+                String email = rs.getString("email");
                 String role = rs.getString("role");
                 int balance = rs.getInt("balance");
                 String password = rs.getString("password");
-                user = new User(id, role,  balance,  password,  email);
+                user = new User(id, role, balance, password, email);
                 return user;
             }
-
         }
     }
 
-    public void changePassword (String password, int userId) throws SQLException {
+    public void changePassword(String password, int userId) throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.updateUserPasswordById)) {
@@ -105,10 +104,55 @@ public class UserMapper extends SuperMapper implements IUserMapper {
                 ps.setInt(2, userId);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected != 1) {
-                   throw new SQLException("Failed");
+                    throw new SQLException("Failed");
                 }
             }
         }
+    }
+
+    @Override
+    public void addUserBalance(int balance, User user) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.addUserBalanace)) {
+                ps.setInt(1, balance);
+                ps.setInt(2, user.getUser_id());
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected != 1) {
+                    throw new SQLException("Failed");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void removeUserBalance(int balance, User user) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.removeUserBalance)) {
+                ps.setInt(1, balance);
+                ps.setInt(2, user.getUser_id());
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected != 1) {
+                    throw new SQLException("Failed");
+                }
+            }
+        }
+    }
+
+    @Override
+    public int getUserIDFromEmail(User user) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectUserIDFromEmail)) {
+                ps.setString(1, user.getEmail());
+                ResultSet rs =  ps.executeQuery();
+                if(rs.next()){
+                    return rs.getInt("user_id");
+                }
+            }
+        }
+        return Integer.parseInt(null);
     }
 
 

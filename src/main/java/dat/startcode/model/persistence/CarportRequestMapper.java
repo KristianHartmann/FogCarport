@@ -53,7 +53,7 @@ public class CarportRequestMapper extends SuperMapper {
         Logger.getLogger("web").log(Level.INFO, "");
         CarportRequest carportRequest;
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.createCarportRequest)) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.insertCarportRequest)) {
                 ps.setInt(2, request.getLength());
                 ps.setInt(3, request.getWidth());
                 ps.setString(4, request.getRooftype());

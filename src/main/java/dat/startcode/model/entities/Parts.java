@@ -15,7 +15,7 @@ public class Parts {
 
 
 
-    public Parts(int parts_id, String name, String description, double length, String unit, int price) {
+    public Parts(Integer parts_id, String name, String description, double length, String unit, int price) {
         this.parts_id = parts_id;
         this.name = name;
         this.description = description;

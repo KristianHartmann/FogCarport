@@ -6,6 +6,7 @@ import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,31 +14,51 @@ import java.util.logging.Logger;
 public class PersonMapper extends SuperMapper implements IPersonMapper{
 
 
-        public PersonMapper(ConnectionPool connectionPool) {
+    public PersonMapper(ConnectionPool connectionPool) {
         super(connectionPool);
     }
 
-    public Person createPerson(String email, String address, String name, String phonenumber, int zipcode) throws DatabaseException {
+    public void createPerson(String email, String address, String name, String phonenumber, int zipcode) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         Person person;
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.createPerson)) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.insertPerson)) {
                 ps.setString(1, email);
                 ps.setString(2, address);
                 ps.setString(3, name);
                 ps.setString(4, phonenumber);
                 ps.setInt(5, zipcode);
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1) {
-                    person = new Person(email, address, name, phonenumber, zipcode);
-                } else {
+                if (rowsAffected != 1) {
                     throw new DatabaseException("The person with email = " + email + " could not be inserted into the database");
                 }
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex, "Could not insert person into database");
         }
-        return person;
     }
+
+    public Person selectAllFromPersonByEmail (User user) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        Person person = null;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectAllFromPersonByEmail)) {
+                ps.setString(1, user.getEmail());
+                ResultSet rs = ps.executeQuery();
+                if (!rs.next()) {
+                    return null;
+                }
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String name = rs.getString("name");
+                String phoneNumber = rs.getString("phonenumber");
+                int zipCode = rs.getInt("zipcode");
+                String city = rs.getString("city");
+                person = new Person(email, address, name, phoneNumber, city ,zipCode);
+                return person;
+            }
+        }
+    }
+
 
 }
