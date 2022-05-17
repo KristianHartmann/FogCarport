@@ -48,9 +48,9 @@
                                     </a>
                                 </li>
                             </c:when>
-                            <c:when test="${sessionScope.user.role.equals('user')}">
+                            <c:when test="${sessionScope.user.role.equals('customer')}">
                                 <li>
-                                    <a href="#" class="nav-link text-white">
+                                    <a href="${pageContext.request.contextPath}/profile.jsp" class="nav-link text-white">
                                         Profile
                                     </a>
                                 </li>
@@ -67,16 +67,26 @@
                 </form>
 
                 <div class="text-end">
-                    <c:if test="${empty sessionScope.user}">
-                        <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">Login
-                        </button>
-                        <button type="button" class="btn btn-primary">Sign-up</button>
-                    </c:if>
-                    <c:otherwise>
-                        <a href="Logout" class="btn btn-light text-dark me-2">Logout
-                        </a>
-                    </c:otherwise>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.user}">
+                            <a href="Logout" class="btn btn-light text-dark me-2">Logout
+                            </a>
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownBalanceMenu"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                   Balance: ${sessionScope.user.balance}kr,-
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownBalanceMenu">
+                                <li><a class="dropdown-item" href="#">Tilføj penge</a></li>
+                                <li><a class="dropdown-item" href="#">Fjern penge</a></li>
+                            </ul>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">Login
+                            </button>
+                            <button type="button" class="btn btn-primary">Sign-up</button>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
