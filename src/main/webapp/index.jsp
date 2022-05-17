@@ -24,8 +24,7 @@
             <p>You are not logged in yet. You can do it here: <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
         </c:if>
 
-            <form action="fc/PartslistController" method="get">
-            <input type="hidden" name="command" value="partslist"/>
+            <form action="PartslistController" method="get">
             <input type="submit" name="command" value="partslist"/>
         </form>
 

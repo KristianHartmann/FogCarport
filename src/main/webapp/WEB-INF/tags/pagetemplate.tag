@@ -103,8 +103,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="text-align: center">
-                <form action="fc/login" method="post">
-                    <input type="hidden" name="command" value="login"/>
+                <form action="Login" method="post">
                     <img class="mb-4" src="<%=request.getContextPath()%>/images/logo.png" alt="logo" width="75">
                     <h1 class="h3 mb-3 fw-normal">Please Login</h1>
 
