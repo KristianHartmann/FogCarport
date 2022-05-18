@@ -43,7 +43,7 @@
 
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownProfileMenu">
-                    <li><button class="dropdown-item" type="button" id="dropdownOrderMenu">Se ordre</button></li>
+                    <li><button class="dropdown-item" type="button">Se ordre</button></li>
                     <li><button class="dropdown-item" type="button">Se styklister</button></li>
                     <li><button class="dropdown-item" type="button">Se tegninger</button></li>
                 </ul>
