@@ -62,8 +62,17 @@ public class SideView {
 
     private void shedCalc(){
         int toolStart = cpLength - airBack - toolLength;
-        svgSvSb.append("<rect x=\"0\" y=\"0\" height=\"210\" width=\"").append(toolLength).append("\"\n" +
-                "fill-opacity=\"1\" fill=\"white\" stroke=\"black\" transform=\"rotate(1.28)\"></rect>");
+        System.out.println("toolstart: " + toolStart);
+        int claddingWidth = 10;
+        int toolCladdings = toolLength/(claddingWidth+5);
+        int lastCladding = toolStart + 15;
+        System.out.println("firs cladding: " + lastCladding);
+        svgSvSb.append("<rect x=\"").append(toolStart).append("\" y=\"20\" height=\"210\" width=\"").append(toolLength).append("\"\n" +
+                "fill-opacity=\"1\" fill=\"white\" stroke=\"black\"></rect>");
+        for (int i = 0; i < toolCladdings; i++) {
+            svgSvSb.append("<line x1=\"").append(lastCladding).append("\" y1=\"20\" x2=\"").append(lastCladding).append("\" y2=\"230\" stroke=\"black\" fill-opacity=\"0\" stroke-width=\"2\" />");
+            lastCladding = lastCladding + 15;
+        }
     }
 
 
@@ -71,14 +80,14 @@ public class SideView {
 
         svgSvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 ").append(cpLength).append(" 230\" preserveAspectRatio=\"xMidYMid meet\">");
         calcBeams();
+        svgSvSb.append("<rect x=\"0\" y=\"0\" height=\"30\" width=\"").append(cpLength).append("\"\n" +
+                "fill-opacity=\"1\" fill=\"white\" stroke=\"black\" transform=\"rotate(1)\"></rect>");
+        svgSvSb.append("<line x1=\"0\" y1=\"15\" x2=\"").append(cpLength).append("\" y2=\"15\" stroke=\"black\" transform=\"rotate(1)\" />");
         if(isShed){
             if(toolLength > 0){
                 shedCalc();
             }
         }
-        svgSvSb.append("<rect x=\"0\" y=\"0\" height=\"30\" width=\"").append(cpLength).append("\"\n" +
-                "fill-opacity=\"1\" fill=\"white\" stroke=\"black\" transform=\"rotate(1.28)\"></rect>");
-        svgSvSb.append("<line x1=\"0\" y1=\"15\" x2=\"").append(cpLength).append("\" y2=\"15\" stroke=\"black\" transform=\"rotate(1.28)\" />");
         svgSvSb.append("</svg>");
         System.out.println(isShed);
         return svgSvSb;
