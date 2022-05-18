@@ -24,6 +24,7 @@ public class TestServlet extends HttpServlet {
 
     public TestServlet() {
         this.connectionPool = ApplicationStart.getConnectionPool();
+
     }
 
     @Override
@@ -34,6 +35,10 @@ public class TestServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0); // Proxies.
+
 
         StringBuilder svgTvSb = new StringBuilder();
         JSONObject jsonObject = new JSONObject();
@@ -41,15 +46,16 @@ public class TestServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         PartslistGenerator generator = new PartslistGenerator(connectionPool);
 
-//        int cplength = Integer.parseInt(request.getParameter("cplength"));
-//        int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
-//        int toolLength = Integer.parseInt(request.getParameter("x"));
-//        int toolWidth = Integer.parseInt(request.getParameter("x"));
+        int cplength = Integer.parseInt(request.getParameter("cplength"));
+        int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
+        int toolLength = Integer.parseInt(request.getParameter("cpshedlength"));
+        int toolWidth = Integer.parseInt(request.getParameter("cpshedwidth"));
+
 //        int roofPitch = Integer.parseInt(request.getParameter("x"));
 //        String roofType = request.getParameter("x");
-//        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);
-//        PartsList list = generator.generateFlatroofPartsList(carportRequest);
-        SideView sideView = new SideView(null, 0, 0);
+        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, "flat", 0, toolLength, toolWidth, user);
+        PartsList list = generator.generateFlatroofPartsList(carportRequest);
+        SideView sideView = new SideView(list, cplength, cpwidth);
         StringBuilder svgSvSb = sideView.svgSideGen();
 
         // -------- Side View StringBuilder append-------
