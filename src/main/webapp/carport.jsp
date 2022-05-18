@@ -91,7 +91,7 @@
                                     NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet*</p>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
-                                           id="cpshed">
+                                           id="cpshed" name="isShed">
                                     <label class="form-check-label" for="cpshed">Tilføj redskabskur</label>
                                 </div>
                                 <div class="form-group" id="cpshedwidthdiv" style="display: none">

@@ -21,7 +21,7 @@ $(document).ready(function() {
             dataType: 'json', // vores data type for vores response, som vil være json, så vi kan få fat i de værdier vi nu vil sende tilbage til siden
             success: function (response){ // funktion for hvis ajax kaldet lykkedes, det parameter den får er vores response fra TestServlet
                 $('#svgSideViewPreview').html(response.sideview);
-                $('#svgTopViewPreview').html(response.topview);
+                // $('#svgTopViewPreview').html(response.topview);
 
                 $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
             }
