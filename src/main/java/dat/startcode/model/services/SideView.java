@@ -20,38 +20,43 @@ public class SideView {
 
     private void calcBeams() {
 
-        int lastbeam = cpLength - 45;
-        System.out.println("last beam " + lastbeam);
+        int lastbeam = cpLength - 40;
 
-        int beamsToDisplay = (list.getPartsListItemArrayList().get(9).getAmount()) / 2;
-        System.out.println("beams to display" + beamsToDisplay);
 
-        int distanceBetweenBeams = (cpLength - 145) / beamsToDisplay;
-        int increment = distanceBetweenBeams;
-        int firstDynamicBeam = distanceBetweenBeams + 100;
-        int lastDynamicBeam = distanceBetweenBeams - 45;
-        System.out.println("distance between beams "+distanceBetweenBeams);
+        System.out.println("beams from database: " + list.getPartsListItemArrayList().get(9).getAmount() );
+        int beamsToPrint = ((list.getPartsListItemArrayList().get(9).getAmount()-1) / 2)-2;
+        System.out.println("dynamic beams to print" + beamsToPrint);
+
+        int distanceBetweenBeams = (cpLength - 140) / 3;
+        int dynamicFirstBeam = 100 + distanceBetweenBeams;
+        System.out.println("distance between beams " + distanceBetweenBeams);
 
         svgSvSb.append("<rect x=\"100\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
                 "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        if(beamsToPrint > 1){
+            for (int i = 0; i < beamsToPrint; i++) {
+                if(i==0){
+                    svgSvSb.append("<rect x= \"" + dynamicFirstBeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
+                            "fill-opacity=\"0\" stroke=\"black\"></rect>");
+                    System.out.println("firstbeam placed at " + dynamicFirstBeam);
+                    distanceBetweenBeams = distanceBetweenBeams + dynamicFirstBeam;
 
-        for (int i = 0; i < beamsToDisplay; i++) {
-            System.out.println(distanceBetweenBeams);
-            if(i==0){
-                svgSvSb.append("<rect x= \"" + firstDynamicBeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                        "fill-opacity=\"0\" stroke=\"black\"></rect>");
-            } else if(i == beamsToDisplay - 1){
-                svgSvSb.append("<rect x= \"" + lastDynamicBeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                        "fill-opacity=\"0\" stroke=\"black\"></rect>");
-            } else {
-                svgSvSb.append("<rect x= \"" + distanceBetweenBeams + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                        "fill-opacity=\"0\" stroke=\"black\"></rect>");
+                } else if (i>0){
+                    svgSvSb.append("<rect x= \"" + distanceBetweenBeams + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
+                            "fill-opacity=\"0\" stroke=\"black\"></rect>");
+                    System.out.println("beam placed at " + distanceBetweenBeams);
+                }
+                System.out.println("distance between beams" + distanceBetweenBeams);
             }
-
-            distanceBetweenBeams = distanceBetweenBeams + increment;
+        } else {
+            int beamplacement = (cpLength - 140) / 2;
+            System.out.println("beam placed at " + beamplacement);
+            svgSvSb.append("<rect x= \"" + beamplacement + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
+                    "fill-opacity=\"0\" stroke=\"black\"></rect>");
         }
 
-        svgSvSb.append("<rect x=\""+ lastbeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
+
+        svgSvSb.append("<rect x=\"" + lastbeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
                 "stroke=\"black\" fill-opacity=\"0\"></rect>");
     }
 
