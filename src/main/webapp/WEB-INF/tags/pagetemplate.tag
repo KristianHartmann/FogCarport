@@ -71,8 +71,10 @@
                 <div class="text-end">
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
-                            <a href="Logout" class="btn btn-light text-dark me-2">Logout
-                            </a>
+                            <form action="Logout" method="post"  class="btn btn-light text-dark" >
+                                <label></label>
+                                <input type="submit"value="Logout" class="btn btn-light text-dark" >
+                            </form>
                             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownBalanceMenu"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                 Balance: ${sessionScope.user.balance}kr,-
