@@ -1,5 +1,14 @@
 package dat.startcode.control;
 
+import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.CarportRequest;
+import dat.startcode.model.entities.PartsList;
+import dat.startcode.model.entities.User;
+import dat.startcode.model.exceptions.DatabaseException;
+import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.services.PartslistGenerator;
+import dat.startcode.model.services.SideView;
+import lombok.SneakyThrows;
 import org.json.JSONObject;
 
 import javax.servlet.*;
@@ -10,37 +19,41 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "TestServlet", value = "/TestServlet")
 public class TestServlet extends HttpServlet {
+
+    private ConnectionPool connectionPool;
+
+    public TestServlet() {
+        this.connectionPool = ApplicationStart.getConnectionPool();
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
+    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StringBuilder svgSvSb = new StringBuilder();
+
         StringBuilder svgTvSb = new StringBuilder();
         JSONObject jsonObject = new JSONObject();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        PartslistGenerator generator = new PartslistGenerator(connectionPool);
 
-        String cplength = request.getParameter("cplength");
-        String cpwidth = request.getParameter("cpwidth");
+//        int cplength = Integer.parseInt(request.getParameter("cplength"));
+//        int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
+//        int toolLength = Integer.parseInt(request.getParameter("x"));
+//        int toolWidth = Integer.parseInt(request.getParameter("x"));
+//        int roofPitch = Integer.parseInt(request.getParameter("x"));
+//        String roofType = request.getParameter("x");
+//        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);
+//        PartsList list = generator.generateFlatroofPartsList(carportRequest);
+        SideView sideView = new SideView(null, 0, 0);
+        StringBuilder svgSvSb = sideView.svgSideGen();
+
         // -------- Side View StringBuilder append-------
-        svgSvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 230\"\n" +
-                "preserveAspectRatio=\"xMidYMid meet\">");
-        svgSvSb.append("<rect x=\"100\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgSvSb.append("<rect x=\"313.333\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgSvSb.append("<rect x=\"526.666\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgSvSb.append("<rect x=\"750\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                "stroke=\"black\" fill-opacity=\"0\"></rect>");
-        svgSvSb.append("<rect x=\"0\" y=\"0\" height=\"30\" width=\"780\" stroke=\"black\"\n" +
-                "transform=\"rotate(1.28)\" stroke-width=\"1\" fill-opacity=\"1\"\n" +
-                "fill=\"white\"></rect>");
-        svgSvSb.append("<rect x=\"0\" y=\"15\" height=\"1\" width=\"780\" fill-opacity=\"0\"\n" +
-                "stroke-width=\"0.3\" stroke=\"black\"\n" +
-                "transform=\"rotate(1.28)\"></rect>");
-        svgSvSb.append("</svg>");
+
         // -------- Top View StringBuilder append-------
         svgTvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600\"\n" +
                 "preserveAspectRatio=\"xMidYMid meet\">");
