@@ -10,7 +10,6 @@ public class FlatRoofCalc implements ICalculator {
     private int carportLength;
     private int shedWidth;
     private int shedLength;
-    private int shedBeams;
     private int maxShedWidth = carportWidth - 70;
     private double maxHalfShedWidth = maxShedWidth * 0.5;
 
@@ -20,7 +19,6 @@ public class FlatRoofCalc implements ICalculator {
         this.carportLength = carportLength;
         this.shedWidth = shedWidth;
         this.shedLength = shedLength;
-        this.shedBeams = extraShedBeams();
     }
 
     @Override
@@ -99,16 +97,7 @@ public class FlatRoofCalc implements ICalculator {
 
     }
 
-    @Override
-    public int extraShedBeams() { // Denne regner ud hvor mange stolper der skal lægges til MED skur
-        if (shedWidth <= 0 && shedLength <= 0) {
-            return 0;
-        } else if (shedWidth <= 310) {
-            return 1;
-        } else {
-            return 2;
-        }
-    }
+
 
     @Override
     public int underStern360Calc() {
@@ -276,12 +265,13 @@ public class FlatRoofCalc implements ICalculator {
         } else if (carportLength > 750 && carportLength <= 780) {
             first = 8;
         }
-        if (carportLength > 380) {
+        if (carportWidth > 380) {
             second = 1;
         }
-        if ((((carportLength - 130) - shedLength) / 310) < 1) {
+        if (shedWidth > 0 && shedLength > 0) {
             third = 2;
         }
+
         if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth) {
             if (shedLength <= 310) {
                 fourth = 2;
@@ -289,7 +279,7 @@ public class FlatRoofCalc implements ICalculator {
                 fourth = 3;
             }
         }
-        return first + second + shedBeams + third + fourth;
+        return first + second + third + fourth;
     }
 
     @Override
