@@ -64,14 +64,14 @@ public class SideView {
         int toolStart = cpLength - airBack - toolLength;
         System.out.println("toolstart: " + toolStart);
         int claddingWidth = 10;
-        int toolCladdings = toolLength/(claddingWidth+5);
-        int lastCladding = toolStart + 15;
+        int toolCladdings = toolLength/(claddingWidth);
+        int lastCladding = toolStart + claddingWidth;
         System.out.println("firs cladding: " + lastCladding);
         svgSvSb.append("<rect x=\"").append(toolStart).append("\" y=\"20\" height=\"210\" width=\"").append(toolLength).append("\"\n" +
                 "fill-opacity=\"1\" fill=\"white\" stroke=\"black\"></rect>");
         for (int i = 0; i < toolCladdings; i++) {
             svgSvSb.append("<line x1=\"").append(lastCladding).append("\" y1=\"20\" x2=\"").append(lastCladding).append("\" y2=\"230\" stroke=\"black\" fill-opacity=\"0\" stroke-width=\"2\" />");
-            lastCladding = lastCladding + 15;
+            lastCladding = lastCladding + claddingWidth;
         }
     }
 
