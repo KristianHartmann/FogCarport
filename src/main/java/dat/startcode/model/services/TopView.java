@@ -85,12 +85,34 @@ public class TopView {
 
         String viewbox = "<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 "+ cpLength+ " " + cpWidth+  "  \"\n" +
                 "preserveAspectRatio=\"xMidYMid meet\">";
-        //stringBuilder.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 ").append(cpLength).append(" ").append(cpWidth).append("\"\n").append("preserveAspectRatio=\"xMidYMid meet\">");
         // stringBuilder.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
             //    "preserveAspectRatio=\"xMidYMid meet\">");
 
         stringBuilder.append(viewbox);
 
+        stringBuilder.append("<rect x=\"0\" y=\"0\" height=\"600\" width=\"780\" stroke-width=\"1\" fill-opacity=\"0\"\n" +
+                "stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"100\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"313.333\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"526.666\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"750\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "stroke=\"black\" fill-opacity=\"0\"></rect>");
+        stringBuilder.append("<rect x=\"100\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"313.333\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"526.666\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"750\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
+                "stroke=\"black\" fill-opacity=\"0\"></rect>");
+        stringBuilder.append("<rect x=\"0\" y=\"35\" height=\"9\" width=\"780\" stroke=\"black\" stroke-width=\"1\"\n" +
+                "fill-opacity=\"0\"></rect>");
+        stringBuilder.append("<rect x=\"0\" y=\"565\" height=\"9\" width=\"780\" stroke=\"black\" stroke-width=\"1\"\n" +
+                "fill-opacity=\"0\"></rect>");
+        stringBuilder.append("</svg>");
 
 
         return stringBuilder;

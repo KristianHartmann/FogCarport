@@ -8,6 +8,7 @@ import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.services.PartslistGenerator;
 import dat.startcode.model.services.SideView;
+import dat.startcode.model.services.TopView;
 import lombok.SneakyThrows;
 import org.json.JSONObject;
 
@@ -40,7 +41,6 @@ public class TestServlet extends HttpServlet {
         response.setDateHeader("Expires", 0); // Proxies.
 
 
-        StringBuilder svgTvSb = new StringBuilder();
         JSONObject jsonObject = new JSONObject();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -56,36 +56,10 @@ public class TestServlet extends HttpServlet {
         CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, "flat", 0, toolLength, toolWidth, user);
         PartsList list = generator.generateFlatroofPartsList(carportRequest);
         SideView sideView = new SideView(list, cplength, cpwidth);
+        TopView topview = new TopView(cplength, cpwidth, toolLength, toolWidth, list);
         StringBuilder svgSvSb = sideView.svgSideGen();
+        StringBuilder svgTvSb = topview.svgTopViewGen();
 
-        // -------- Side View StringBuilder append-------
-
-        // -------- Top View StringBuilder append-------
-        svgTvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600\"\n" +
-                "preserveAspectRatio=\"xMidYMid meet\">");
-        svgTvSb.append("<rect x=\"0\" y=\"0\" height=\"600\" width=\"780\" stroke-width=\"1\" fill-opacity=\"0\"\n" +
-                "stroke=\"black\"></rect>");
-        svgTvSb.append("<rect x=\"100\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgTvSb.append("<rect x=\"313.333\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgTvSb.append("<rect x=\"526.666\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgTvSb.append("<rect x=\"750\" y=\"35\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "stroke=\"black\" fill-opacity=\"0\"></rect>");
-        svgTvSb.append("<rect x=\"100\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgTvSb.append("<rect x=\"313.333\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgTvSb.append("<rect x=\"526.666\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-        svgTvSb.append("<rect x=\"750\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-                "stroke=\"black\" fill-opacity=\"0\"></rect>");
-        svgTvSb.append("<rect x=\"0\" y=\"35\" height=\"9\" width=\"780\" stroke=\"black\" stroke-width=\"1\"\n" +
-                "fill-opacity=\"0\"></rect>");
-        svgTvSb.append("<rect x=\"0\" y=\"565\" height=\"9\" width=\"780\" stroke=\"black\" stroke-width=\"1\"\n" +
-                "fill-opacity=\"0\"></rect>");
-        svgTvSb.append("</svg>");
 
         jsonObject.put("sideview", svgSvSb);
         jsonObject.put("topview", svgTvSb);
