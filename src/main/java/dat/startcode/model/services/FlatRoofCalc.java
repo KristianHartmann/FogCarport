@@ -91,6 +91,8 @@ public class FlatRoofCalc implements ICalculator {
             case 32:
                 return holePlate();
             case 33:
+                return raftersCalc();
+            case 34:
             default:
                 return 0;
         }

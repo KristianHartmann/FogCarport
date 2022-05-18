@@ -4,6 +4,22 @@ import dat.startcode.model.entities.PartsList;
 
 public class SideView {
 
+    int SvBeamheight = 210;
+    int SvBeamWidth = 10;
+    int SvBeamLength = 10;
+    int CpHeight = 230;
+    int ShedLength = 0;
+    int SvCpLength = 0;
+    int SvAirback = 30;
+    int xb1 = SvCpLength-100;
+    int xb2 = xb1-SvBeamWidth-SvAirback;
+    int b1Tob2 = xb1-xb2;
+  //  int restbeam = ((partsListAmount-1)/2)-2;
+  // int placement = xb1-xb2/(restbeam+1);
+    int SvRoofHeight = 30;
+    int SvRoofDevider = SvRoofHeight/2;
+
+
     int cpLength;
     int cpWidth;
     int toolLength;
@@ -18,44 +34,17 @@ public class SideView {
         this.list = list;
     }
 
-    private void calcBeams() {
-
-        int lastbeam = cpLength - 45;
-        System.out.println("last beam " + lastbeam);
-
-        int beamsToDisplay = (list.getPartsListItemArrayList().get(9).getAmount()) / 2;
-        System.out.println("beams to display" + beamsToDisplay);
-
-        int distanceBetweenBeams = (cpLength - 145) / beamsToDisplay;
-        int increment = distanceBetweenBeams;
-        int firstDynamicBeam = distanceBetweenBeams + 100;
-        int lastDynamicBeam = distanceBetweenBeams - 45;
-        System.out.println("distance between beams "+distanceBetweenBeams);
-
+    private void calcBeams(){
         svgSvSb.append("<rect x=\"100\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
                 "fill-opacity=\"0\" stroke=\"black\"></rect>");
-
-        for (int i = 0; i < beamsToDisplay; i++) {
-            System.out.println(distanceBetweenBeams);
-            if(i==0){
-                svgSvSb.append("<rect x= \"" + firstDynamicBeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                        "fill-opacity=\"0\" stroke=\"black\"></rect>");
-            } else if(i == beamsToDisplay - 1){
-                svgSvSb.append("<rect x= \"" + lastDynamicBeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                        "fill-opacity=\"0\" stroke=\"black\"></rect>");
-            } else {
-                svgSvSb.append("<rect x= \"" + distanceBetweenBeams + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
-                        "fill-opacity=\"0\" stroke=\"black\"></rect>");
-            }
-
-            distanceBetweenBeams = distanceBetweenBeams + increment;
-        }
-
-        svgSvSb.append("<rect x=\""+ lastbeam + "\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
+        svgSvSb.append("<rect x=\"313.333\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        svgSvSb.append("<rect x=\"52x6\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
+                "fill-opacity=\"0\" stroke=\"black\"></rect>");
+        svgSvSb.append("<rect x=\"750\" y=\"20\" height=\"210\" width=\"10\" stroke-width=\"1\"\n" +
                 "stroke=\"black\" fill-opacity=\"0\"></rect>");
     }
-
-    public StringBuilder svgSideGen() {
+    public StringBuilder svgSideGen(){
         svgSvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 230\"\n" +
                 "preserveAspectRatio=\"xMidYMid meet\">");
 
