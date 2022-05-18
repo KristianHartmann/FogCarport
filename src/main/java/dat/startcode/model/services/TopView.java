@@ -4,9 +4,10 @@ import dat.startcode.model.entities.PartsList;
 
 public class TopView {
 
+    boolean hasShed = false;
     int cpLength;
     int cpWidth;
-    int shedLength; // Bliver udregnet STOLPE INKLUSIV
+    int shedLength;
     int shedWidth;
     PartsList partsList;
     StringBuilder stringBuilder = new StringBuilder();
@@ -22,16 +23,25 @@ public class TopView {
     int xb2;// Vores sidste stolpe står ALTID 30cm inde fra bag.
 
     int topBeamsY = 35;
+    int bottomHoleBandY;
+
     int bottomBeamsY;
     int backEndMiddleBeamY = (bottomBeamsY - topBeamsY) / 2; // Hvis CP er over 310cm
 
     int remX = 0;
     int topRemY = 35;
-    float buttomRemY = cpWidth - 35 - remsWidth;
+    float bottomRemY;
     int remsLength = cpLength;
+
+    int endBeam; // Stolpen der placeres i midten for enden
 
 
 //_________________________________
+
+    int xShedPos = cpLength - airback - shedLength; // HVIS skur.
+    int NSxb1Ltoxb2L; // Hvis IKKE SKUR
+    int WSxb1toxb2 = xShedPos - xb1; // Hvis MED SKUR
+    int beamPlacement; // Gælder kun hvis afstand er over 310 - Det vi dividere med er lufthuller ikke stolper.
 
     public TopView(int cpLength, int cpWidth, int shedLength, int shedWidth, PartsList partsList) {
         this.cpLength = cpLength;
@@ -39,17 +49,16 @@ public class TopView {
         this.shedLength = shedLength;
         this.shedWidth = shedWidth;
         this.partsList = partsList;
-        bottomBeamsY  = cpWidth - 35 - beamWidth;
+        bottomBeamsY  = cpWidth - 35;
         xb2 = cpLength - airback - beamWidth;
         NSxb1Ltoxb2L = xb2 - xb1;
         beamPlacement = xb1 + (WSxb1toxb2 / 2);
+        bottomRemY = cpWidth - 35 + remsWidth;
+        endBeam = cpWidth/2+5;
+        bottomHoleBandY = cpWidth - 35;
     }
 
 
-    int xShedPos = cpLength - airback - shedLength; // HVIS skur.
-    int NSxb1Ltoxb2L; // Hvis IKKE SKUR
-    int WSxb1toxb2 = xShedPos - xb1; // Hvis MED SKUR
-    int beamPlacement; // Gælder kun hvis afstand er over 310 - Det vi dividere med er lufthuller ikke stolper.
 
 
     //rem
@@ -64,88 +73,95 @@ public class TopView {
                 "stroke=\"black\"></rect>");
     }
 
-   public void drawBeams() {
-       int amount = partsList.getPartsListItemArrayList().get(32).getAmount();
-       int remainingBeams = amount-4;
+    public void drawBeams() { // Der er pt en fejl ved 240x240 carport. Måske en fejl i calcbeams metode.
+        int amount = partsList.getPartsListItemArrayList().get(9).getAmount();
+        int remainingBeams = amount - 4;
+        int midBeamX = (NSxb1Ltoxb2L / 2) + 100; // x positionen hvis der kun er 1 midterstolpe
+        int midBeam1X = NSxb1Ltoxb2L / 3 + 100; // første stolpes x ved 2 midterstolper
+        int midBeam2X = ((NSxb1Ltoxb2L / 3) * 2) + 100; // anden stolpes x ved 2 midterstolper
 
         // ØVERSTE STOLPER FAST
-       stringBuilder.append("<rect x=\""+xb1+"\" y=\""+topBeamsY+"\" height=\""+beamWidth+"\" width=\""+beamLength+"\" stroke-width=\"1.5\"\n" +
+        stringBuilder.append("<rect x=\"" + xb1 + "\" y=\"" + topBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
                 "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Første stolpe øverst
-       stringBuilder.append("<rect x=\""+xb2+"\" y=\""+topBeamsY+"\" height=\""+beamWidth+"\" width=\"10\" stroke-width=\"1.5\"\n" +
-               "stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe øverst
+        stringBuilder.append("<rect x=\"" + xb2 + "\" y=\"" + topBeamsY + "\" height=\"" + beamWidth + "\" width=\"10\" stroke-width=\"2\"\n" +
+                "stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe øverst
 
-       // NEDERSTE STOLPER FAST
-       stringBuilder.append("<rect x=\""+xb1+"\" y=\""+bottomBeamsY+"\" height=\""+beamWidth+"\" width=\""+beamLength+"\" stroke-width=\"1.5\"\n" +
+        // NEDERSTE STOLPER FAST
+        stringBuilder.append("<rect x=\"" + xb1 + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
                 "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Første stolpe nederst
-       stringBuilder.append("<rect x=\""+xb2+"\" y=\""+bottomBeamsY+"\" height=\""+beamWidth+"\" width=\"10\" stroke-width=\"1.5\"\n" +
-               "stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe nederst
+        stringBuilder.append("<rect x=\"" + xb2 + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"10\" stroke-width=\"2\"\n" +
+                "stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe nederst
 
-       if(cpWidth > 380) {
-           remainingBeams = remainingBeams-1;
-       }
+        if (cpWidth > 380) {
+            remainingBeams = remainingBeams - 1;
+            stringBuilder.append("<rect x=\"" + xb2 + "\" y=\"" + endBeam + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Tegner midterste stolpe
 
-       if(remainingBeams ==  2) {
-           stringBuilder.append("<rect x=\""+beamPlacement+"\" y=\"35\" height=\""+beamWidth+"\" width=\""+beamLength+"\" stroke=\"black\" stroke-width=\"1.5\"\n" +
-                "fill-opacity=\"0\"stroke=\"black\"></rect>");
-       }
+        }
 
+        if (remainingBeams == 2) {
+            stringBuilder.append("<rect x=\"" + midBeamX + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Øverste midterstolpe
+            stringBuilder.append("<rect x=\"" + midBeamX + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Nederste midterstolpe
+        } else if (remainingBeams == 4) {
+            stringBuilder.append("<rect x=\"" + midBeam1X + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Øverste 2. stolpe
+            stringBuilder.append("<rect x=\"" + midBeam2X + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Øverste 3. stolpe
+            stringBuilder.append("<rect x=\"" + midBeam1X + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Nederste 2. stolpe
+            stringBuilder.append("<rect x=\"" + midBeam2X + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Nederste 3. stolpe
 
-
-
-       // ØVERSTE STOLPER DYNAMISK
-
-       //        stringBuilder.append("<rect x=\"0\" y=\"35\" height=\"9\" width=\"780\" stroke=\"black\" stroke-width=\"1\"\n" +
-//                "fill-opacity=\"0\"></rect>");
-//        stringBuilder.append("<rect x=\"0\" y=\"565\" height=\"9\" width=\"780\" stroke=\"black\" stroke-width=\"1\"\n" +
-//                "fill-opacity=\"0\"></rect>");
-//        stringBuilder.append("</svg>");
-
-       // NEDERSTE STOLPER DYNAMISK
-//        stringBuilder.append("<rect x=\"313.333\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-//                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-//        stringBuilder.append("<rect x=\"526.666\" y=\"565\" height=\"10\" width=\"10\" stroke-width=\"1.5\"\n" +
-//                "fill-opacity=\"0\" stroke=\"black\"></rect>");
-
-   }
-
-    public void addRect(float x1, float y1, float length, float width) {
-
+        }
     }
-
-    public void drawRafters() {
-        int amount = partsList.getPartsListItemArrayList().get(32).getAmount();
-        for (int x = 0; x < amount; x++) {
-            addRect(0, raftersSpacing() * x, cpWidth, raftersWidth);
+        public void drawRems() {
+            stringBuilder.append("<rect x=\"0\" y=\"35\" height=\""+remsWidth+"\" width=\""+cpLength+"\" stroke=\"black\" stroke-width=\"1\"\n" +
+                    "fill-opacity=\"0\"></rect>");
+            stringBuilder.append("<rect x=\"0\" y=\""+ bottomRemY +"\" height=\""+remsWidth+"\" width=\""+cpLength+"\" stroke=\"black\" stroke-width=\"1\"\n" +
+                    "fill-opacity=\"0\"></rect>");
         }
 
 
-    }
-
-    public float raftersSpacing() {
-//PartslistGenerator generator = new PartslistGenerator();
+    public void drawRafters() {
         int amount = partsList.getPartsListItemArrayList().get(32).getAmount();
-
-        return (float) (cpLength / (amount - 1));
+        float spacing = 0;
+        float spacingAdded = (float) ((cpLength-4.5) / (amount - 1));
+        for (int i = 0; i < amount; i++) {
+            stringBuilder.append("<rect x=\""+spacing+"\" y=\"0\" height=\""+cpWidth+"\" width=\"4.5\" stroke=\"black\" stroke-width=\"1\"\n" +
+               "fill-opacity=\"0\"></rect>");
+            spacing += spacingAdded;
+        }
     }
+    public void drawHoleBand() {
+        float startX = (float) ((cpLength-4.5) / (partsList.getPartsListItemArrayList().get(32).getAmount() - 1));
+        float endX = startX*(partsList.getPartsListItemArrayList().get(32).getAmount() - 2);
+
+        stringBuilder.append("<line x1=\""+startX+"\" y1=\""+topBeamsY+"\" x2=\""+endX+"\" y2=\""+bottomHoleBandY+"\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+        stringBuilder.append("<line x1=\""+startX+"\" y1=\""+bottomHoleBandY+"\" x2=\""+endX+"\" y2=\""+topBeamsY+"\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+    }
+
+
 
     public StringBuilder svgTopViewGen() {
-        float x = raftersSpacing();
 
         String viewbox = "<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 "+ cpLength+ " " + cpWidth+  "  \"\n" +
                 "preserveAspectRatio=\"xMidYMid meet\">";
         String udenViewbox = "<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
-                 "preserveAspectRatio=\"xMidYMid meet\">";
+                "preserveAspectRatio=\"xMidYMid meet\">";
 
-         //stringBuilder.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
+        //stringBuilder.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
         //     "preserveAspectRatio=\"xMidYMid meet\">");
 
-          stringBuilder.append(udenViewbox);
-          carportOutline();
-          drawBeams();
+        stringBuilder.append(udenViewbox);
+        carportOutline();
+        drawRems();
+        drawRafters();
+        drawBeams();
+        drawHoleBand();
 
-
-
-
+        stringBuilder.append("</svg>");
 
         return stringBuilder;
     }
