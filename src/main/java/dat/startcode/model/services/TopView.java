@@ -4,7 +4,7 @@ import dat.startcode.model.entities.PartsList;
 
 public class TopView {
 
-    boolean hasShed = false;
+    boolean isShed;
     int cpLength;
     int cpWidth;
     int shedLength;
@@ -43,12 +43,13 @@ public class TopView {
     int WSxb1toxb2 = xShedPos - xb1; // Hvis MED SKUR
     int beamPlacement; // Gælder kun hvis afstand er over 310 - Det vi dividere med er lufthuller ikke stolper.
 
-    public TopView(int cpLength, int cpWidth, int shedLength, int shedWidth, PartsList partsList) {
+    public TopView(int cpLength, int cpWidth, boolean isShed, int shedLength, int shedWidth, PartsList partsList) {
         this.cpLength = cpLength;
         this.cpWidth = cpWidth;
         this.shedLength = shedLength;
         this.shedWidth = shedWidth;
         this.partsList = partsList;
+        this.isShed = isShed;
         bottomBeamsY  = cpWidth - 35;
         xb2 = cpLength - airback - beamWidth;
         NSxb1Ltoxb2L = xb2 - xb1;
@@ -154,7 +155,7 @@ public class TopView {
         //stringBuilder.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
         //     "preserveAspectRatio=\"xMidYMid meet\">");
 
-        stringBuilder.append(udenViewbox);
+        stringBuilder.append(viewbox);
         carportOutline();
         drawRems();
         drawRafters();

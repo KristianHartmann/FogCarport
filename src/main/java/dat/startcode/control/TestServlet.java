@@ -56,7 +56,7 @@ public class TestServlet extends HttpServlet {
         CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);
         PartsList list = generator.generateFlatroofPartsList(carportRequest);
         SideView sideView = new SideView(list, cplength, toolLength, isShed);
-        TopView topview = new TopView(cplength, cpwidth, toolLength, toolWidth, list);
+        TopView topview = new TopView(cplength, cpwidth, isShed, toolLength, toolWidth, list);
 
 
         jsonObject.put("sideview", sideView.svgSideGen());
