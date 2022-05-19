@@ -41,7 +41,7 @@ public class SideView {
             restbeam = 1;
             b1Tob2 = (cpLength - airBack - toolLength) - xb1;
         } else {
-            restbeam = ((list.getPartsListItemArrayList().get(9).getAmount() - 1) / 2) - 2;
+            restbeam = ((list.getPartsListItemArrayList().get(9).getAmount()) / 2)-2;
             b1Tob2 = xb2 - xb1;
         }
         System.out.println("beams to place: " + restbeam);
