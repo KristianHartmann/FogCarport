@@ -14,7 +14,6 @@ public class TopView {
 
     //Statiske ----------------------
     int beamWidth = 10;
-    int beamLength = 10;
     float raftersWidth = 4.5f;
     float remsWidth = 4.5f;
     int airback = 30; // Der skal altid være 30 cm bag.
@@ -32,6 +31,7 @@ public class TopView {
     int topRemY = 35;
     float bottomRemY;
     int remsLength = cpLength;
+    int shedStartX;
 
     int endBeam; // Stolpen der placeres i midten for enden
 
@@ -55,8 +55,9 @@ public class TopView {
         NSxb1Ltoxb2L = xb2 - xb1;
         beamPlacement = xb1 + (WSxb1toxb2 / 2);
         bottomRemY = cpWidth - 35 + remsWidth;
-        endBeam = cpWidth/2+5;
+        endBeam = cpWidth/2;
         bottomHoleBandY = cpWidth - 35;
+        shedStartX = cpLength-30-shedLength;
     }
 
 
@@ -76,43 +77,74 @@ public class TopView {
 
     public void drawBeams() { // Der er pt en fejl ved 240x240 carport. Måske en fejl i calcbeams metode.
         int amount = partsList.getPartsListItemArrayList().get(9).getAmount();
-        int remainingBeams = amount - 4;
+        int remainingBeams = amount -1; // Fjerner en stolpe fordi vi ikke tegner døren
         int midBeamX = (NSxb1Ltoxb2L / 2) + 100; // x positionen hvis der kun er 1 midterstolpe
         int midBeam1X = NSxb1Ltoxb2L / 3 + 100; // første stolpes x ved 2 midterstolper
         int midBeam2X = ((NSxb1Ltoxb2L / 3) * 2) + 100; // anden stolpes x ved 2 midterstolper
+        int shedStartX = cpLength-30-shedLength; // Start position for skur
+        int doorPosY = shedWidth-60; // position for dørens beam
+        int endBeamShedY = shedWidth+topBeamsY-beamWidth; // position for slut stolpen.
+        int LongShedMidLengthBeamX = cpLength - airback - (shedLength/2); // X position til stolperne hvis skur er over 310 langt
 
         // ØVERSTE STOLPER FAST
-        stringBuilder.append("<rect x=\"" + xb1 + "\" y=\"" + topBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
+        stringBuilder.append("<rect x=\"" + xb1 + "\" y=\"" + topBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke-width=\"2\"\n" +
                 "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Første stolpe øverst
+        remainingBeams =- 1;
         stringBuilder.append("<rect x=\"" + xb2 + "\" y=\"" + topBeamsY + "\" height=\"" + beamWidth + "\" width=\"10\" stroke-width=\"2\"\n" +
                 "stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe øverst
+        remainingBeams =- 1;
 
         // NEDERSTE STOLPER FAST
-        stringBuilder.append("<rect x=\"" + xb1 + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
+        stringBuilder.append("<rect x=\"" + xb1 + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke-width=\"2\"\n" +
                 "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Første stolpe nederst
+        remainingBeams =- 1;
         stringBuilder.append("<rect x=\"" + xb2 + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"10\" stroke-width=\"2\"\n" +
                 "stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe nederst
+        remainingBeams =- 1;
 
         if (cpWidth > 380) {
-            remainingBeams = remainingBeams - 1;
-            stringBuilder.append("<rect x=\"" + xb2 + "\" y=\"" + endBeam + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
+            stringBuilder.append("<rect x=\"" + xb2 + "\" y=\"" + endBeam + "\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke-width=\"2\"\n" +
                     "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Tegner midterste stolpe
+            remainingBeams =- 1;
+        }
+
+        if (isShed) {
+            stringBuilder.append("<rect x=\"" + shedStartX + "\" y=\""+endBeamShedY+"\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\"stroke=\"black\"></rect>"); // tegner skurets ende stolpe
+            remainingBeams =- 1;
+            stringBuilder.append("<rect x=\"" + shedStartX + "\" y=\""+topBeamsY+"\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                    "fill-opacity=\"0\"stroke=\"black\"></rect>"); // tegner skurets første stolpe
+            remainingBeams =- 1;
+            if(shedLength > 310) {
+                stringBuilder.append("<rect x=\"" +LongShedMidLengthBeamX+"\" y=\""+topBeamsY+"\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                        "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner øverste midterstolpe på skur, hvis over 310 langt
+                remainingBeams =- 1;
+                stringBuilder.append("<rect x=\"" + LongShedMidLengthBeamX + "\" y=\""+endBeamShedY+"\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                        "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner nederste midterstolpe på skur, hvis over 310 langt
+                remainingBeams =- 1;
+            }
+            if (shedWidth > 310) {
+                stringBuilder.append("<rect x=\"" + shedStartX + "\" y=\""+endBeam+"\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+                        "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner endnu en midterstolpe, hvis skuret er over 310 bredt.
+            }
+
+
 
         }
 
         if (remainingBeams == 2) {
-            stringBuilder.append("<rect x=\"" + midBeamX + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+            stringBuilder.append("<rect x=\"" + midBeamX + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
                     "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Øverste midterstolpe
-            stringBuilder.append("<rect x=\"" + midBeamX + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke-width=\"2\"\n" +
+            stringBuilder.append("<rect x=\"" + midBeamX + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke-width=\"2\"\n" +
                     "fill-opacity=\"0\" stroke=\"black\"></rect>"); // Nederste midterstolpe
         } else if (remainingBeams == 4) {
-            stringBuilder.append("<rect x=\"" + midBeam1X + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+            stringBuilder.append("<rect x=\"" + midBeam1X + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
                     "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Øverste 2. stolpe
-            stringBuilder.append("<rect x=\"" + midBeam2X + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+            stringBuilder.append("<rect x=\"" + midBeam2X + "\" y=\"35\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
                     "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Øverste 3. stolpe
-            stringBuilder.append("<rect x=\"" + midBeam1X + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+            stringBuilder.append("<rect x=\"" + midBeam1X + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
                     "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Nederste 2. stolpe
-            stringBuilder.append("<rect x=\"" + midBeam2X + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamLength + "\" stroke=\"black\" stroke-width=\"2\"\n" +
+            stringBuilder.append("<rect x=\"" + midBeam2X + "\" y=\"" + bottomBeamsY + "\" height=\"" + beamWidth + "\" width=\"" + beamWidth + "\" stroke=\"black\" stroke-width=\"2\"\n" +
                     "fill-opacity=\"0\"stroke=\"black\"></rect>"); // Nederste 3. stolpe
 
         }
@@ -136,11 +168,26 @@ public class TopView {
         }
     }
     public void drawHoleBand() {
-        float startX = (float) ((cpLength-4.5) / (partsList.getPartsListItemArrayList().get(32).getAmount() - 1));
-        float endX = startX*(partsList.getPartsListItemArrayList().get(32).getAmount() - 2);
+        float startX = (float) ((cpLength - 4.5) / (partsList.getPartsListItemArrayList().get(32).getAmount() - 1));
+        float endX = startX * (partsList.getPartsListItemArrayList().get(32).getAmount() - 2);
+        float endXShed = cpLength - shedLength - airback;
 
-        stringBuilder.append("<line x1=\""+startX+"\" y1=\""+topBeamsY+"\" x2=\""+endX+"\" y2=\""+bottomHoleBandY+"\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
-        stringBuilder.append("<line x1=\""+startX+"\" y1=\""+bottomHoleBandY+"\" x2=\""+endX+"\" y2=\""+topBeamsY+"\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+        if (isShed) {
+            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + topBeamsY + "\" x2=\"" + endXShed + "\" y2=\"" + bottomHoleBandY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + bottomHoleBandY + "\" x2=\"" + endXShed + "\" y2=\"" + topBeamsY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+
+        } else {
+            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + topBeamsY + "\" x2=\"" + endX + "\" y2=\"" + bottomHoleBandY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + bottomHoleBandY + "\" x2=\"" + endX + "\" y2=\"" + topBeamsY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+        }
+    }
+
+    public void drawShed(){
+        if(isShed) {
+            stringBuilder.append("<rect x=\""+shedStartX+"\" y=\""+topBeamsY+"\" height=\""+shedWidth+"\" width=\""+shedLength+"\" stroke-dasharray=\"5.5\" stroke=\"black\" stroke-width=\"3\"\n" +
+                    "fill-opacity=\"0\"></rect>");
+        }
+
     }
 
 
@@ -161,6 +208,7 @@ public class TopView {
         drawRafters();
         drawBeams();
         drawHoleBand();
+        drawShed();
 
         stringBuilder.append("</svg>");
 
