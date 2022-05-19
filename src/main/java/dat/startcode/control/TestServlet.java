@@ -47,9 +47,9 @@ public class TestServlet extends HttpServlet {
 
         int cplength = Integer.parseInt(request.getParameter("cplength"));
         int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
-        int toolLength = Integer.parseInt(request.getParameter("cpshedlength"));
-        int toolWidth = Integer.parseInt(request.getParameter("cpshedwidth"));
         boolean isShed = request.getParameterMap().containsKey("isShed");
+        int toolLength = ((isShed) ? Integer.parseInt(request.getParameter("cpshedlength")) : 0);
+        int toolWidth = Integer.parseInt(request.getParameter("cpshedwidth"));
         int roofPitch = 0;
         String roofType = "plast";
         CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);

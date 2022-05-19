@@ -31,21 +31,22 @@ public class SideView {
         this.toolLength = toolLength;
         this.list = list;
         this.xb2 = cpLength - beamDimens - airBack;
-        this.b1Tob2 = xb2 - xb1;
-        this.roofDeviderY = roofHeight/2;
+        this.roofDeviderY = roofHeight / 2;
         this.isShed = isShed;
     }
 
     private void calcBeams() {
         int restbeam;
-        if (isShed){
+        if (isShed) {
             restbeam = 1;
-        }else{
-            restbeam = ((list.getPartsListItemArrayList().get(9).getAmount()-1)/2)-2;
+            b1Tob2 = (cpLength - airBack - toolLength) - xb1;
+        } else {
+            restbeam = ((list.getPartsListItemArrayList().get(9).getAmount() - 1) / 2) - 2;
+            b1Tob2 = xb2 - xb1;
         }
         System.out.println("beams to place: " + restbeam);
         System.out.println("restair: " + b1Tob2);
-        int placement = b1Tob2/(restbeam+1);
+        int placement = b1Tob2 / (restbeam + 1);
         System.out.println("Where to place next: " + placement);
         int nextBeamPos = 100 + placement;
         System.out.println("Next beam pos: " + nextBeamPos);
@@ -60,11 +61,11 @@ public class SideView {
                 "fill-opacity=\"0\" stroke=\"black\"></rect>");
     }
 
-    private void shedCalc(){
+    private void shedCalc() {
         int toolStart = cpLength - airBack - toolLength;
         System.out.println("toolstart: " + toolStart);
         int claddingWidth = 10;
-        int toolCladdings = toolLength/(claddingWidth);
+        int toolCladdings = toolLength / (claddingWidth);
         int lastCladding = toolStart + claddingWidth;
         System.out.println("firs cladding: " + lastCladding);
         svgSvSb.append("<rect x=\"").append(toolStart).append("\" y=\"20\" height=\"210\" width=\"").append(toolLength).append("\"\n" +
@@ -82,11 +83,9 @@ public class SideView {
         calcBeams();
         svgSvSb.append("<rect x=\"0\" y=\"0\" height=\"30\" width=\"").append(cpLength).append("\"\n" +
                 "fill-opacity=\"1\" fill=\"white\" stroke=\"black\" transform=\"rotate(1)\"></rect>");
-        svgSvSb.append("<line x1=\"0\" y1=\"15\" x2=\"").append(cpLength).append("\" y2=\"15\" stroke=\"black\" transform=\"rotate(1)\" />");
-        if(isShed){
-            if(toolLength > 0){
-                shedCalc();
-            }
+        svgSvSb.append("<line x1=\"0\" y1=\"10\" x2=\"").append(cpLength).append("\" y2=\"10\" stroke=\"black\" transform=\"rotate(1)\" />");
+        if (isShed) {
+            shedCalc();
         }
         svgSvSb.append("</svg>");
         System.out.println(isShed);
