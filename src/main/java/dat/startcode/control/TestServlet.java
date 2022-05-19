@@ -25,7 +25,6 @@ public class TestServlet extends HttpServlet {
 
     public TestServlet() {
         this.connectionPool = ApplicationStart.getConnectionPool();
-
     }
 
     @Override
@@ -36,10 +35,11 @@ public class TestServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // no caching
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         response.setDateHeader("Expires", 0); // Proxies.
-
 
         JSONObject jsonObject = new JSONObject();
         HttpSession session = request.getSession();
@@ -48,21 +48,19 @@ public class TestServlet extends HttpServlet {
 
         int cplength = Integer.parseInt(request.getParameter("cplength"));
         int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
-        int toolLength = Integer.parseInt(request.getParameter("cpshedlength"));
+        boolean isShed = request.getParameterMap().containsKey("isShed");
+        int toolLength = ((isShed) ? Integer.parseInt(request.getParameter("cpshedlength")) : 0);
         int toolWidth = Integer.parseInt(request.getParameter("cpshedwidth"));
-
-//        int roofPitch = Integer.parseInt(request.getParameter("x"));
-//        String roofType = request.getParameter("x");
-        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, "flat", 0, toolLength, toolWidth, user);
+        int roofPitch = 0;
+        String roofType = "plast";
+        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);
         PartsList list = generator.generateFlatroofPartsList(carportRequest);
-        SideView sideView = new SideView(list, cplength, cpwidth);
+        SideView sideView = new SideView(list, cplength, toolLength, isShed);
         TopView topview = new TopView(cplength, cpwidth, toolLength, toolWidth, list);
-        StringBuilder svgSvSb = sideView.svgSideGen();
-        StringBuilder svgTvSb = topview.svgTopViewGen();
 
 
-        jsonObject.put("sideview", svgSvSb);
-        jsonObject.put("topview", svgTvSb);
+        jsonObject.put("sideview", sideView.svgSideGen());
+        jsonObject.put("topview", topview.svgTopViewGen());
 
         PrintWriter out = response.getWriter(); // vi får fat i en writer så vi kan skrive til vores response
         response.setContentType("application/json"); // vi sørger her for at vores response kan tage og håndtere json
