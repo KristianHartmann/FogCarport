@@ -152,15 +152,54 @@ public class TopView {
     public void drawShed(){ // Tegner skurets outline
         if(isShed) {
             stringBuilder.append("<rect x=\"").append(shedStartX).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(shedWidth).append("\" width=\"").append(shedLength).append("\" stroke-dasharray=\"5.5\" stroke=\"black\" stroke-width=\"3\"\n").append("fill-opacity=\"0\"></rect>");
+
         }
+
+    }
+
+    public void drawUpperAndLowerMeasurement() {
+        float lineLengthX = cpLength-4.5f;
+        //Tegner vandret øverste streg
+        stringBuilder.append("<line x1=\"").append(0).append("\" y1=\"").append(-20).append("\" x2=\"").append(lineLengthX).append("\" y2=\"").append(-20).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+
+        int amount = (partsList.getPartsListItemArrayList().get(32).getAmount());
+        float spacing = 0;
+        float spacingAdded = ((float) ((cpLength-4.5) / (amount -1)));
+        int spacingAddedToText =  cpLength / (amount-1);
+        float textSpacing = spacing + (spacingAdded/2);
+        System.out.println("antal" + amount);
+        for (int i = 0; i < amount; i++) {
+            if (i< amount-1) {
+                // skriver længde i cm
+                stringBuilder.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(textSpacing).append(",-25) rotate(0)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(spacingAddedToText).append(" cm</text>");
+            }
+            // Tegner en lodret streg for hvert spær
+            stringBuilder.append("<line x1=\"").append(spacing).append("\" y1=\"").append(-25).append("\" x2=\"").append(spacing).append("\" y2=\"").append(-15).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+            spacing += spacingAdded;
+            textSpacing = textSpacing + spacingAdded;
+
+        }
+        // tegner den vandrette linje i bunden
+        stringBuilder.append("<line x1=\"").append(1).append("\" y1=\"").append(cpWidth+30).append("\" x2=\"").append(cpLength-1).append("\" y2=\"").append(cpWidth+30).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        // skriver teksten i bunden
+        stringBuilder.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(cpLength/2).append(",").append(cpWidth+25).append(") rotate(0)\" fill=\" black \" font-size=\"small\" font-weight=\"bold\">").append(cpLength).append(" cm</text>");
+        // tegner de to endestreger
+        stringBuilder.append("<line x1=\"").append(0).append("\" y1=\"").append(cpWidth+25).append("\" x2=\"").append(0).append("\" y2=\"").append(cpWidth+35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        stringBuilder.append("<line x1=\"").append(cpLength).append("\" y1=\"").append(cpWidth+25).append("\" x2=\"").append(cpLength).append("\" y2=\"").append(cpWidth+35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+
+    }
+
+    public void drawSideMeasurement() {
 
     }
 
 
 
     public StringBuilder svgTopViewGen() {
+        int cplengthviewbox = cpLength+80;
+        int cpwidthviewbox = cpWidth+80;
 
-        String viewbox = "<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 "+ cpLength+ " " + cpWidth+  "  \"\n" +
+        String viewbox = "<svg width=\"100%\" height=\"100%\" viewBox=\"-80 -40 "+ cplengthviewbox+ " " + cpwidthviewbox+  "  \"\n" +
                 "preserveAspectRatio=\"xMidYMid meet\">";
         String udenViewbox = "<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
                 "preserveAspectRatio=\"xMidYMid meet\">";
@@ -173,6 +212,7 @@ public class TopView {
         drawBeams();
         drawHoleBand();
         drawShed();
+        drawUpperAndLowerMeasurement();
 
         stringBuilder.append("</svg>");
 

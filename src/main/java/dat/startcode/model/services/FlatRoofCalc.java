@@ -248,7 +248,18 @@ public class FlatRoofCalc implements ICalculator {
 
     @Override
     public int raftersCalc() { // Denne regner hvor mange spær, der skal bruges på tværs af carporten
-        return (int) Math.ceil((double) carportLength / 55);
+
+        int amount = carportLength/55;
+
+        float distance = carportLength/amount;
+
+        if (distance> 55) {
+            amount = amount+2;
+
+        } else {
+            amount = amount+1;
+        }
+        return amount;
     }
 
     @Override
@@ -468,5 +479,24 @@ public class FlatRoofCalc implements ICalculator {
     @Override
     public int holePlate() { // beslag der bruges til de skrå spær i raised roof
         return 0;
+    }
+
+    public static void main(String[] args) {
+
+
+        int a = 780;
+        int b = 55;
+
+        int amount = a/55;
+
+        float distance = a/amount;
+
+        if (distance> 55) {
+            amount = amount+2;
+
+        } else {
+            amount = amount+1;
+        }
+        System.out.println("Du får den her mængte spær: " +amount);
     }
 }
