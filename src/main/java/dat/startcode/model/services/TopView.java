@@ -13,30 +13,17 @@ public class TopView {
     int fullShedWidth;
     PartsList partsList;
     StringBuilder stringBuilder = new StringBuilder();
-
-    //Statiske ----------------------
     int beamWidth = 10;
-    float raftersWidth = 4.5f;
     float remsWidth = 4.5f;
     int airback = 30; // Der skal altid være 30 cm bag.
-
     int xb1 = 100; // Vores første stolpe skal altid stå 100cm inde.
     int xb2;// Vores sidste stolpe står ALTID 30cm inde fra bag.
-
     int topBeamsY = 35;
     int bottomHoleBandY;
-
     int bottomBeamsY;
-
     float bottomRemY;
-
     int shedStartX;
-
     int endBeam; // Stolpen der placeres i midten for enden
-
-
-//_________________________________
-
     int xShedPos = cpLength - airback - shedLength; // HVIS skur.
     int NSxb1Ltoxb2L; // Hvis IKKE SKUR
     int WSxb1toxb2 = xShedPos - xb1; // Hvis MED SKUR
@@ -62,33 +49,18 @@ public class TopView {
     }
 
 
-
-
-    //rem
-    //spær
-
-
-    //hulbånd
-    //skur
-
     public void carportOutline() {
-        stringBuilder.append("<rect x=\"0\" y=\"0\" height=\""+cpWidth+"\" width=\""+cpLength+"\" stroke-width=\"1\" fill-opacity=\"0\"\n" +
-                "stroke=\"black\"></rect>");
+        stringBuilder.append("<rect x=\"0\" y=\"0\" height=\"").append(cpWidth).append("\" width=\"").append(cpLength).append("\" stroke-width=\"1\" fill-opacity=\"0\"\n").append("stroke=\"black\"></rect>");
     }
 
     public void drawBeams() { // Der er pt en fejl ved 240x240 carport. Måske en fejl i calcbeams metode.
-        int amount = partsList.getPartsListItemArrayList().get(9).getAmount();
-        int remainingBeams = amount; // Fjerner en stolpe fordi vi ikke tegner døren
-        int midBeamX = (NSxb1Ltoxb2L / 2) + 100; // x positionen hvis der kun er 1 midterstolpe
-        int midBeam1X = NSxb1Ltoxb2L / 3 + 100; // første stolpes x ved 2 midterstolper
-        int midBeam2X = ((NSxb1Ltoxb2L / 3) * 2) + 100; // anden stolpes x ved 2 midterstolper
+        int remainingBeams = partsList.getPartsListItemArrayList().get(9).getAmount(); // Fjerner en stolpe fordi vi ikke tegner døren
         int shedStartX = cpLength-30-shedLength; // Start position for skur
         int endBeamShedY = shedWidth+topBeamsY-beamWidth; // position for slut stolpen.
-        int lowerEndBeamShedY = shedWidth+25;
+        int lowerEndBeamShedY = shedWidth+25; // Y position for beams
         int LongShedMidLengthBeamX = cpLength - airback - (shedLength/2); // X position til stolperne hvis skur er over 310 langt
         int remainingSpaceForBeams = cpLength-130-shedLength;
 
-        System.out.println("remainingbeams = " + remainingBeams);
         // ØVERSTE STOLPER FAST
         stringBuilder.append("<rect x=\"").append(xb1).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke-width=\"2\"\n").append("fill-opacity=\"0\" stroke=\"black\"></rect>"); // Første stolpe øverst
         stringBuilder.append("<rect x=\"").append(xb2).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"10\" stroke-width=\"2\"\n").append("stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe øverst
@@ -97,9 +69,9 @@ public class TopView {
         stringBuilder.append("<rect x=\"").append(xb1).append("\" y=\"").append(bottomBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke-width=\"2\"\n").append("fill-opacity=\"0\" stroke=\"black\"></rect>"); // Første stolpe nederst
         stringBuilder.append("<rect x=\"").append(xb2).append("\" y=\"").append(bottomBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"10\" stroke-width=\"2\"\n").append("stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe nederst
         remainingBeams = remainingBeams - 4;
-        System.out.println("remainingbeams = " + remainingBeams);
 
-        if (cpWidth > 380) { // Tester om der skal ekstra midterstolpe
+
+        if (cpWidth > 380) { // Tjekker om der skal ekstra midterstolpe bagerst
             StringBuilder append = stringBuilder.append("<rect x=\"").append(xb2).append("\" y=\"").append(endBeam).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke-width=\"2\"\n").append("fill-opacity=\"0\" stroke=\"black\"></rect>");// Tegner midterste stolpe
             remainingBeams = remainingBeams- 1;
         }
@@ -112,7 +84,7 @@ public class TopView {
                 stringBuilder.append("<rect x=\"").append(LongShedMidLengthBeamX).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke=\"black\" stroke-width=\"2\"\n").append("fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner øverste midterstolpe på skur, hvis over 310 langt
                 stringBuilder.append("<rect x=\"").append(LongShedMidLengthBeamX).append("\" y=\"").append(endBeamShedY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke=\"black\" stroke-width=\"2\"\n").append("fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner nederste midterstolpe på skur, hvis over 310 langt
                 remainingBeams = remainingBeams- 2;
-                System.out.println("remainingbeams = " + remainingBeams);
+
             }
             if (shedWidth > 310) { // Tjekker om der skal tegnes en midterstolpe på skuret modsatte side af midterstolpen for enden af carporten
                 stringBuilder.append("<rect x=\"").append(shedStartX).append("\" y=\"").append(endBeam).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke=\"black\" stroke-width=\"2\"\n").append("fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner endnu en midterstolpe, hvis skuret er over 310 bredt.
@@ -122,12 +94,12 @@ public class TopView {
             if(shedWidth+70 < cpWidth) { // Hvis det ikke er fuldt skur, skal der tegnes stolpe på modsatte side
                 stringBuilder.append("<rect x=\"").append(shedStartX).append("\" y=\"").append(bottomBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke=\"black\" stroke-width=\"2\"\n").append("fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner stolpen på modsatte side af skuret, hvis det IKKE er fuldt skur
                 remainingBeams = remainingBeams-1;
-                System.out.println("remainingbeams = " + remainingBeams);
+
 
                 if(shedLength>310) { // Hvis skuret er længere end 310, skal stolpe på nederste del af carport, placeres med en X pos der er midt i skuret.
                     stringBuilder.append("<rect x=\"").append(LongShedMidLengthBeamX).append("\" y=\"").append(bottomBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke=\"black\" stroke-width=\"2\"\n").append("fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner midterste stolpe på modsatte side af skuret, hvis det IKKE er fuldt skur, men det er længere end 310
                     remainingBeams = remainingBeams-1;
-                    System.out.println("remainingbeams = " + remainingBeams);
+
                 }
             }
             if(shedWidth != halfShedWidth && shedWidth != fullShedWidth) { // Hvis det ikke er helt eller halvt skur, skal der tegnes en stolpe nederste højre hjørne
@@ -137,7 +109,6 @@ public class TopView {
         }
 
         int remainingBeamsToPlace = remainingBeams/2; // Hver beam her skal placeres både i top og i bund
-        System.out.println("remainingbeams = " + remainingBeams);
         int placementX = remainingSpaceForBeams/(remainingBeamsToPlace+1);
         int nextBeamPos = 100 + placementX;
 
@@ -148,43 +119,39 @@ public class TopView {
         }
 
     }
-        public void drawRems() {
-            stringBuilder.append("<rect x=\"0\" y=\"35\" height=\""+remsWidth+"\" width=\""+cpLength+"\" stroke=\"black\" stroke-width=\"1\"\n" +
-                    "fill-opacity=\"0\"></rect>");
-            stringBuilder.append("<rect x=\"0\" y=\""+ bottomRemY +"\" height=\""+remsWidth+"\" width=\""+cpLength+"\" stroke=\"black\" stroke-width=\"1\"\n" +
-                    "fill-opacity=\"0\"></rect>");
+        public void drawRems() { // Tegner rem for carporten
+            stringBuilder.append("<rect x=\"0\" y=\"35\" height=\"").append(remsWidth).append("\" width=\"").append(cpLength).append("\" stroke=\"black\" stroke-width=\"1\"\n").append("fill-opacity=\"0\"></rect>");
+            stringBuilder.append("<rect x=\"0\" y=\"").append(bottomRemY).append("\" height=\"").append(remsWidth).append("\" width=\"").append(cpLength).append("\" stroke=\"black\" stroke-width=\"1\"\n").append("fill-opacity=\"0\"></rect>");
         }
 
 
-    public void drawRafters() {
+    public void drawRafters() { // Tegner alle spær der skal placeres
         int amount = partsList.getPartsListItemArrayList().get(32).getAmount();
         float spacing = 0;
         float spacingAdded = (float) ((cpLength-4.5) / (amount - 1));
         for (int i = 0; i < amount; i++) {
-            stringBuilder.append("<rect x=\""+spacing+"\" y=\"0\" height=\""+cpWidth+"\" width=\"4.5\" stroke=\"black\" stroke-width=\"1\"\n" +
-               "fill-opacity=\"0\"></rect>");
+            stringBuilder.append("<rect x=\"").append(spacing).append("\" y=\"0\" height=\"").append(cpWidth).append("\" width=\"4.5\" stroke=\"black\" stroke-width=\"1\"\n").append("fill-opacity=\"0\"></rect>");
             spacing += spacingAdded;
         }
     }
-    public void drawHoleBand() {
+    public void drawHoleBand() { // Tegner hulbånd
         float startX = (float) ((cpLength - 4.5) / (partsList.getPartsListItemArrayList().get(32).getAmount() - 1));
         float endX = startX * (partsList.getPartsListItemArrayList().get(32).getAmount() - 2);
         float endXShed = cpLength - shedLength - airback;
 
         if (isShed) {
-            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + topBeamsY + "\" x2=\"" + endXShed + "\" y2=\"" + bottomHoleBandY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
-            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + bottomHoleBandY + "\" x2=\"" + endXShed + "\" y2=\"" + topBeamsY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+            stringBuilder.append("<line x1=\"").append(startX).append("\" y1=\"").append(topBeamsY).append("\" x2=\"").append(endXShed).append("\" y2=\"").append(bottomHoleBandY).append("\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+            stringBuilder.append("<line x1=\"").append(startX).append("\" y1=\"").append(bottomHoleBandY).append("\" x2=\"").append(endXShed).append("\" y2=\"").append(topBeamsY).append("\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
 
         } else {
-            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + topBeamsY + "\" x2=\"" + endX + "\" y2=\"" + bottomHoleBandY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
-            stringBuilder.append("<line x1=\"" + startX + "\" y1=\"" + bottomHoleBandY + "\" x2=\"" + endX + "\" y2=\"" + topBeamsY + "\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+            stringBuilder.append("<line x1=\"").append(startX).append("\" y1=\"").append(topBeamsY).append("\" x2=\"").append(endX).append("\" y2=\"").append(bottomHoleBandY).append("\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
+            stringBuilder.append("<line x1=\"").append(startX).append("\" y1=\"").append(bottomHoleBandY).append("\" x2=\"").append(endX).append("\" y2=\"").append(topBeamsY).append("\" stroke=\"black\" stroke-dasharray=\"5.5\" stroke-width=\"1.5\" />");
         }
     }
 
-    public void drawShed(){
+    public void drawShed(){ // Tegner skurets outline
         if(isShed) {
-            stringBuilder.append("<rect x=\""+shedStartX+"\" y=\""+topBeamsY+"\" height=\""+shedWidth+"\" width=\""+shedLength+"\" stroke-dasharray=\"5.5\" stroke=\"black\" stroke-width=\"3\"\n" +
-                    "fill-opacity=\"0\"></rect>");
+            stringBuilder.append("<rect x=\"").append(shedStartX).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(shedWidth).append("\" width=\"").append(shedLength).append("\" stroke-dasharray=\"5.5\" stroke=\"black\" stroke-width=\"3\"\n").append("fill-opacity=\"0\"></rect>");
         }
 
     }
@@ -198,8 +165,6 @@ public class TopView {
         String udenViewbox = "<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
                 "preserveAspectRatio=\"xMidYMid meet\">";
 
-        //stringBuilder.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 780 600 \"\n" +
-        //     "preserveAspectRatio=\"xMidYMid meet\">");
 
         stringBuilder.append(viewbox);
         carportOutline();
