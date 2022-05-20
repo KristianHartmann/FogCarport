@@ -64,50 +64,57 @@
                                 skitsetegning på en carport indenfor vores standardprogram.
 
                                 Tilbud og skitsetegning fremsendes med post hurtigst muligt.
-                                Standardbyggevejledning medfølger ved bestilling.</p>
-                            <p><strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
+                                Standardbyggevejledning medfølger ved bestilling.<br>
+                                <strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
                                 Felter markeret * SKAL udfyldes!</p>
                             <p>Ønsket carport mål:</p>
-                            <form action="TestServlet" id="confirmOrderForm" method="post">
-                                <div class="form-group">
+                            <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation" style="width: 50%;">
+                                <div class="form-group mb-3">
                                     <label for="cpwidth">Carport bredde:</label>
-                                    <select class="form-control" id="cpwidth" name="cpwidth">
+                                    <select class="form-control" id="cpwidth" name="cpwidth" onchange="checkShed()">
                                         <option value="0" selected hidden>Vælg bredde</option>
                                         <c:forEach begin="240" end="600" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-3">
                                     <label for="cplength">Carport længde:</label>
-                                    <select class="form-control" id="cplength" name="cplength">
+                                    <select class="form-control" id="cplength" name="cplength" onchange="checkShed()">
                                         <option value="0" selected hidden>Vælg længde</option>
                                         <c:forEach begin="240" end="780" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <p><strong>Redskabsrum:</strong><br>
-                                    NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet*</p>
-                                <div class="form-check form-switch">
+                                <div class="form-check mb-3 form-switch">
                                     <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
-                                           id="cpshed" name="isShed">
-                                    <label class="form-check-label" for="cpshed">Tilføj redskabskur</label>
+                                           id="isShed" name="isShed" disabled>
+                                    <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj redskabskur (vælg længde og bredde først!)</label>
                                 </div>
-                                <div class="form-group" id="cpshedwidthdiv" style="display: none">
-                                    <label for="cpshedwidth">Redskabsrum bredde:</label>
-                                    <select class="form-control" id="cpshedwidth" name="cpshedwidth">
-                                        <option value="0" selected hidden>Vælg bredde</option>
-                                        <c:forEach begin="240" end="530" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
-                                        </c:forEach>
-                                    </select>
+                                <div class="form-group mb-3" id="cpshedwidthdiv" style="display: none">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">1/4 Skur</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">2/4 Skur</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio3" value="option3">
+                                        <label class="form-check-label" for="inlineRadio3">3/4 Skur</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio4" value="option3">
+                                        <label class="form-check-label" for="inlineRadio3">4/4 Skur</label>
+                                    </div>
                                 </div>
-                                <div class="form-group" id="cpshedlengthdiv" style="display: none">
+                                <div class="form-group mb-3" id="cpshedlengthdiv" style="display: none">
                                     <label for="cpshedlength">Redskabsrum længde:</label>
                                     <select class="form-control" id="cpshedlength" name="cpshedlength">
                                         <option value="0" selected hidden>Vælg længde</option>
-                                        <c:forEach begin="150" end="390" var="i" step="30">
+                                        <c:forEach begin="90" end="390" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
@@ -115,8 +122,6 @@
                                 <button type="submit"
                                         class="btn btn-primary">Bestil
                                 </button>
-                                <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet
-                                    maksimalt måle <strong>210x330 cm.</strong></p>
                             </form>
                         </div>
                     </div>
@@ -394,31 +399,33 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Navn</th>
+                                    <th scope="col">Længde</th>
+                                    <th scope="col">Antal</th>
+                                    <th scope="col">Enhed</th>
+                                    <th scope="col">Beskrivelse</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
+                                <c:forEach items="${cookie.get(sessionScope.partsList.partsListItemArrayList)}" var="listItem" varStatus="vs">
+                                    <tr>
+                                    <th scope="row">${vs}</th>
                                     <td>Mark</td>
                                     <td>Otto</td>
                                     <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                    <td>@mdi</td>
+                                    <td>@mdc</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th scope="row">Total</th>
+                                    <td>Genstande</td>
+                                    <td>amount</td>
+                                    <td>Pris</td>
+                                </tr>
+                                </tfoot>
                             </table>
                         </div>
                         <p id="ajaxtest"></p>

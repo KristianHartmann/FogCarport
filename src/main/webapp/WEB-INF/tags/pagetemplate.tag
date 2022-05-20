@@ -36,7 +36,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/carport.jsp" class="nav-link text-white">
+                            <a href="${pageContext.request.contextPath}/quickbyg.jsp" class="nav-link text-white">
                                 Quick-byg
                             </a>
                         </li>
