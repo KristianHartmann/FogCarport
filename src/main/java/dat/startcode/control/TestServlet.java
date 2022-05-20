@@ -49,14 +49,14 @@ public class TestServlet extends HttpServlet {
         int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
         boolean isShed = request.getParameterMap().containsKey("isShed");
         int toolLength = ((isShed) ? Integer.parseInt(request.getParameter("cpshedlength")) : 0);
-        int toolWidth = Integer.parseInt(request.getParameter("cpshedwidth"));
+        int toolWidth = ((isShed) ? Integer.parseInt(request.getParameter("cpshedwidth")) : 0);
         int roofPitch = 0;
         String roofType = "plast";
         CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);
         PartsList list = generator.generateFlatroofPartsList(carportRequest);
         SideView sideView = new SideView(list, cplength, toolLength, isShed);
-
         jsonObject.put("sideview", sideView.svgSideGen());
+        session.setAttribute("partsList", list);
 //        jsonObject.put("topview", svgTvSb);
 
         PrintWriter out = response.getWriter(); // vi får fat i en writer så vi kan skrive til vores response

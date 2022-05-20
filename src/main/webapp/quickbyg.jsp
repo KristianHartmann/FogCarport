@@ -114,7 +114,7 @@
                                     <label for="cpshedlength">Redskabsrum længde:</label>
                                     <select class="form-control" id="cpshedlength" name="cpshedlength">
                                         <option value="0" selected hidden>Vælg længde</option>
-                                        <c:forEach begin="150" end="390" var="i" step="30">
+                                        <c:forEach begin="90" end="390" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
@@ -399,31 +399,33 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Navn</th>
+                                    <th scope="col">Længde</th>
+                                    <th scope="col">Antal</th>
+                                    <th scope="col">Enhed</th>
+                                    <th scope="col">Beskrivelse</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
+                                <c:forEach items="${cookie.get(sessionScope.partsList.partsListItemArrayList)}" var="listItem" varStatus="vs">
+                                    <tr>
+                                    <th scope="row">${vs}</th>
                                     <td>Mark</td>
                                     <td>Otto</td>
                                     <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                    <td>@mdi</td>
+                                    <td>@mdc</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th scope="row">Total</th>
+                                    <td>Genstande</td>
+                                    <td>amount</td>
+                                    <td>Pris</td>
+                                </tr>
+                                </tfoot>
                             </table>
                         </div>
                         <p id="ajaxtest"></p>

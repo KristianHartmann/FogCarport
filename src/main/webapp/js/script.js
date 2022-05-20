@@ -9,7 +9,7 @@ function showShed() {
 }
 
 function checkShed() {
-    var minLengthForShed = 460;
+    var minLengthForShed = 480;
     var carportWidth = document.getElementById("cpwidth").value;
     var carportLength = document.getElementById("cplength").value;
     var shedLabel = document.getElementById("isShedLabel");
@@ -17,8 +17,8 @@ function checkShed() {
     var offValue = 0.25;
     for (let i = 1; i < 5; i++) {
         var radio = document.getElementById("inlineRadio" + i)
-        radio.value = carportWidth*offValue;
-        if (radio.value < 200){
+        radio.value = (carportWidth-70)*offValue;
+        if (radio.value < 150){
             radio.disabled = true;
         }else{
             radio.disabled = false;
@@ -57,9 +57,9 @@ $(document).ready(function () {
             data: form.serialize(), // sætter den data vi gerne vil have med ind i TestServlet
             dataType: 'json', // vores data type for vores response, som vil være json, så vi kan få fat i de værdier vi nu vil sende tilbage til siden
             success: function (response) { // funktion for hvis ajax kaldet lykkedes, det parameter den får er vores response fra TestServlet
+
                 $('#svgSideViewPreview').html(response.sideview);
                 // $('#svgTopViewPreview').html(response.topview);
-
                 $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
             }
         });
