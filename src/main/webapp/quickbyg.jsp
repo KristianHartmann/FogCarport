@@ -391,44 +391,6 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <a class="btn btn-info dropdown-toggle" data-bs-toggle="collapse" href="#table-container"
-                           role="button" aria-expanded="false" aria-controls="collapseExample">Vis stykliste</a>
-                        <div id="table-container" class="collapse">
-                            <table class="table caption-top">
-                                <caption>StykListe</caption>
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Navn</th>
-                                    <th scope="col">Længde</th>
-                                    <th scope="col">Antal</th>
-                                    <th scope="col">Enhed</th>
-                                    <th scope="col">Beskrivelse</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${cookie.get(sessionScope.partsList.partsListItemArrayList)}" var="listItem" varStatus="vs">
-                                    <tr>
-                                    <th scope="row">${vs}</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>@mdi</td>
-                                    <td>@mdc</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <th scope="row">Total</th>
-                                    <td>Genstande</td>
-                                    <td>amount</td>
-                                    <td>Pris</td>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <p id="ajaxtest"></p>
                         <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
                     </div>
                     <div class="modal-footer">

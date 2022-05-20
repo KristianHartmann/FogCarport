@@ -22,6 +22,7 @@ public class SideView {
     int roofHeight = 30;
     int roofDeviderY;
     boolean isShed;
+    int restbeam;
     StringBuilder svgSvSb = new StringBuilder();
 
     PartsList list;
@@ -36,13 +37,20 @@ public class SideView {
     }
 
     private void calcBeams() {
-        int restbeam;
         if (isShed) {
             restbeam = 1;
             b1Tob2 = (cpLength - airBack - toolLength) - xb1;
         } else {
-            restbeam = ((list.getPartsListItemArrayList().get(9).getAmount()) / 2)-2;
             b1Tob2 = xb2 - xb1;
+            if (b1Tob2 <= 310){
+                restbeam = 0;
+            }else{
+                if (cpLength < 750) {
+                    restbeam = 1;
+                } else {
+                    restbeam = 2;
+                }
+            }
         }
         System.out.println("beams to place: " + restbeam);
         System.out.println("restair: " + b1Tob2);
@@ -76,10 +84,44 @@ public class SideView {
         }
     }
 
+    private void drawLowerMeasurments() {
+        svgSvSb.append("<line x1=\"0\" y1=\"").append(37).append("\" x2=\"").append(0).append("\" y2=\"").append(cpHeight + 40).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(50).append(",").append(cpHeight + 30).append(") rotate(0)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(100).append(" cm</text>");
+        svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"13\" y1=\"").append(cpHeight + 35).append("\" x2=\"").append(100 - 13).append("\" y2=\"").append(cpHeight + 35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line x1=\"100\" y1=\"").append(cpHeight + 20).append("\" x2=\"").append(100).append("\" y2=\"").append(cpHeight + 40).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        int lastbeamPos = 100;
+        int placement = b1Tob2 / (restbeam + 1);
+        for (int i = 0; i < restbeam+1; i++) {
+            svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"").append(lastbeamPos+13).append("\" y1=\"").append(cpHeight + 35).append("\" x2=\"").append(lastbeamPos+placement-13).append("\" y2=\"").append(cpHeight + 35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+            svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(((lastbeamPos+(placement*(i+1)))/2)).append(",").append(cpHeight + 30).append(") rotate(0)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(placement).append(" cm</text>");
+            svgSvSb.append("<line x1=\"").append(lastbeamPos+placement).append("\" y1=\"").append(cpHeight + 20).append("\" x2=\"").append(lastbeamPos+placement).append("\" y2=\"").append(cpHeight + 40).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+            lastbeamPos = lastbeamPos + placement;
+        }
+
+    }
+
+    private void drawFirstSideLastSideMeasurments() {
+        svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"-20\" y1=\"").append(20 + 13).append("\" x2=\"").append(-20).append("\" y2=\"").append(cpHeight - 13).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(-25).append(",").append(cpHeight / 2).append(") rotate(-90)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(beamheight).append(" cm</text>");
+        svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"-50\" y1=\"").append(13).append("\" x2=\"").append(-50).append("\" y2=\"").append(cpHeight - 13).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(-55).append(",").append(cpHeight / 2).append(") rotate(-90)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(cpHeight).append(" cm</text>");
+        svgSvSb.append("<line x1=\"-55\" y1=\"").append(cpHeight).append("\" x2=\"").append(-15).append("\" y2=\"").append(cpHeight).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line x1=\"-25\" y1=\"").append(20).append("\" x2=\"").append(-15).append("\" y2=\"").append(20).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line x1=\"-55\" y1=\"").append(0).append("\" x2=\"").append(-15).append("\" y2=\"").append(0).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+    }
+
 
     public StringBuilder svgSideGen() {
+        int cplengthviewbox = cpLength + 100;
+        int cpHeightviewbox = 230 + 40;
 
-        svgSvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 ").append(cpLength).append(" 230\" preserveAspectRatio=\"xMidYMid meet\">");
+        svgSvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"-70 0 ").append(cplengthviewbox).append(" ").append(cpHeightviewbox).append("\" preserveAspectRatio=\"xMidYMid meet\">");
+        svgSvSb.append("<defs>\n" +
+                "<marker id=\"markerArrow\" markerWidth=\"13\" markerHeight=\"13\" refX=\"2\" refY=\"6\"\n" +
+                "orient=\"auto-start-reverse\">\n" +
+                "<path d=\"M2,2 L2,11 L10,6 L2,2\" style=\"fill: #000000;\" />\n" +
+                "</marker>\n" +
+                "</defs>");
         calcBeams();
         svgSvSb.append("<rect x=\"0\" y=\"0\" height=\"30\" width=\"").append(cpLength).append("\"\n" +
                 "fill-opacity=\"1\" fill=\"white\" stroke=\"black\" transform=\"rotate(1)\"></rect>");
@@ -87,6 +129,8 @@ public class SideView {
         if (isShed) {
             shedCalc();
         }
+        drawFirstSideLastSideMeasurments();
+        drawLowerMeasurments();
         svgSvSb.append("</svg>");
         System.out.println(isShed);
         return svgSvSb;

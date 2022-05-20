@@ -9,14 +9,14 @@ function showShed() {
 }
 
 function checkShed() {
-    var minLengthForShed = 480;
-    var carportWidth = document.getElementById("cpwidth").value;
-    var carportLength = document.getElementById("cplength").value;
-    var shedLabel = document.getElementById("isShedLabel");
-    var shedButton = document.getElementById("isShed");
-    var offValue = 0.25;
+    let minLengthForShed = 480;
+    let carportWidth = document.getElementById('cpwidth').value;
+    let carportLength = document.getElementById('cplength').value;
+    let shedLabel = document.getElementById('isShedLabel');
+    let shedButton = document.getElementById('isShed');
+    let offValue = 0.25;
     for (let i = 1; i < 5; i++) {
-        var radio = document.getElementById("inlineRadio" + i)
+        let radio = document.getElementById('inlineRadio' + i);
         radio.value = (carportWidth-70)*offValue;
         if (radio.value < 150){
             radio.disabled = true;
@@ -59,7 +59,7 @@ $(document).ready(function () {
             success: function (response) { // funktion for hvis ajax kaldet lykkedes, det parameter den får er vores response fra TestServlet
 
                 $('#svgSideViewPreview').html(response.sideview);
-                // $('#svgTopViewPreview').html(response.topview);
+                $('#svgTopViewPreview').html(response.topview);
                 $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
             }
         });
