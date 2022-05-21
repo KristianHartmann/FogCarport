@@ -68,7 +68,8 @@
                                 <strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
                                 Felter markeret * SKAL udfyldes!</p>
                             <p>Ønsket carport mål:</p>
-                            <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation" style="width: 50%;">
+                            <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation"
+                                  style="width: 50%;">
                                 <div class="form-group mb-3">
                                     <label for="cpwidth">Carport bredde:</label>
                                     <select class="form-control" id="cpwidth" name="cpwidth" onchange="checkShed()">
@@ -90,23 +91,28 @@
                                 <div class="form-check mb-3 form-switch">
                                     <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
                                            id="isShed" name="isShed" disabled>
-                                    <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj redskabskur (vælg længde og bredde først!)</label>
+                                    <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj redskabskur
+                                        (vælg længde og bredde først!)</label>
                                 </div>
                                 <div class="form-group mb-3" id="cpshedwidthdiv" style="display: none">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio1" value="option1">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio1" value="option1">
                                         <label class="form-check-label" for="inlineRadio1">1/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio2" value="option2">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio2" value="option2">
                                         <label class="form-check-label" for="inlineRadio2">2/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio3" value="option3">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio3" value="option3">
                                         <label class="form-check-label" for="inlineRadio3">3/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth" id="inlineRadio4" value="option3">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio4" value="option3">
                                         <label class="form-check-label" for="inlineRadio3">4/4 Skur</label>
                                     </div>
                                 </div>
@@ -119,9 +125,23 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <button type="submit"
-                                        class="btn btn-primary">Bestil
-                                </button>
+                                <c:choose>
+                                    <c:when test="${sessionScope.containsKey('user')}">
+                                        <button type="submit"
+                                                class="btn btn-primary">Bestil
+                                        </button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                              data-bs-trigger="hover focus" data-bs-content="Log ind for at bestille direkte">
+                                            <button type="button"
+                                                    class="btn btn-secondary" disabled>Bestil
+                                            </button>
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
+                                <a href="#" class="btn btn-primary">Forspørg</a>
+                                <p id="textForBtns" class="mt-3">Bestil direkte eller send forspørgelse til Fog</p>
                             </form>
                         </div>
                     </div>
@@ -195,7 +215,7 @@
                                             de mål du ønsker.
                                             Tilbud og skitsetegning fremsendes med post hurtigst muligt.</p>
                                     </div>
-                                 </div>
+                                </div>
                                 <h4 id="scrollspyHeading2">Dobbelt Carport</h4>
                                 <hr class="mt-0">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique, ligula
@@ -208,7 +228,9 @@
                                     vulputate tortor.
 
                                     Proin ullamcorper vestibulum sem, ut commodo ante malesuada a. Quisque ac magna non
-                                    neque sagittis luctus. Sed tempor tellus ligula, non <pharetr></pharetr>a urna auctor in.
+                                    neque sagittis luctus. Sed tempor tellus ligula, non
+                                    <pharetr></pharetr>
+                                    a urna auctor in.
                                     Vestibulum suscipit fermentum arcu, at bibendum libero egestas in. Pellentesque
                                     imperdiet, mi et euismod porttitor, metus ante ultrices erat, ac maximus tortor
                                     lacus a ligula. Fusce efficitur magna molestie sapien suscipit, sed dignissim mi
@@ -240,7 +262,8 @@
                                     eu dignissim diam. Sed et venenatis magna. Etiam aliquam massa id sem ultrices
                                     lacinia. Donec tincidunt, urna eu rhoncus pulvinar, felis nisl vulputate neque,
                                     vitae pellentesque urna est ac eros. Praesent felis dui, tincidunt non consectetur
-                                    ac, dapibus sit amet arcu.</p>
+                                    ac, dapibus sit amet arcu.
+                                </p>
                                 <h4 id="scrollspyHeading3">Third heading</h4>
                                 <hr>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique, ligula
@@ -391,8 +414,26 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
+                        <div style="font-size: 10px; text-align: start">
+                            <p>* Mål udvendig på stolper<br>
+                                ** Afstand fra stern ved H = 250cm<br>
+                                *** Mål overkant rem</p>
+                            <p>Stolpe 100x100 Trikimprægneret<br>
+                                Rem 45x195 Spærtræ<br>
+                                Spær 45x195 Reglar<br>
+                                Tag Plasttrapez<br>
+                                Stern 25x100 Trykimprægneret<br>
+                                Beklædning 16x100 Trykimprægneret<br>
+                                Ekstra stolpe til brug for valgfri placering af dør i udehus medfølger Incl. Søm, skruer
+                                og
+                                beslag</p>
+                        </div>
                         <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+                        <button type="button" style="width: 50%" data-bs-dismiss="modal"
+                                class="btn btn-secondary mt-2 py-2">Annuller
+                        </button>
                     </div>
+
                     <div class="modal-footer">
                         <p class="text-muted">&copy; Johannes Fog A/S</p>
                     </div>

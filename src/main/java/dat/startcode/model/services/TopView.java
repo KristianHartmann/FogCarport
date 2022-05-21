@@ -197,7 +197,7 @@ public class TopView {
         stringBuilder.append("<line x1=\"").append(-20).append("\" y1=\"").append(35+1.5).append("\" x2=\"").append(-20).append("\" y2=\"").append(cpWidth-35-1.5).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
         stringBuilder.append("<line x1=\"").append(-15).append("\" y1=\"").append(35).append("\" x2=\"").append(-25).append("\" y2=\"").append(35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
         stringBuilder.append("<line x1=\"").append(-15).append("\" y1=\"").append(cpWidth-35).append("\" x2=\"").append(-25).append("\" y2=\"").append(cpWidth-35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
-        stringBuilder.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(-25).append(",").append(cpWidth/2).append(") rotate(-90)\" fill=\" black \" font-size=\"small\" font-weight=\"bold\">").append(cpWidth-70).append(" cm</text>");
+        stringBuilder.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(-25).append(",").append(cpWidth/2).append(") rotate(-90)\" fill=\" black \" font-size=\"small\" font-weight=\"bold\">").append(cpWidth-70).append("* cm</text>");
 
         // ydre sidelinje med mål
         stringBuilder.append("<line x1=\"").append(-45).append("\" y1=\"").append(1.5).append("\" x2=\"").append(-45).append("\" y2=\"").append(cpWidth-1.5).append("\" stroke=\"black\" stroke-width=\"1.5\" />");

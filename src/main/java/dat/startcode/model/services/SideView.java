@@ -93,26 +93,43 @@ public class SideView {
         int placement = b1Tob2 / (restbeam + 1);
         for (int i = 0; i < restbeam+1; i++) {
             svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"").append(lastbeamPos+13).append("\" y1=\"").append(cpHeight + 35).append("\" x2=\"").append(lastbeamPos+placement-13).append("\" y2=\"").append(cpHeight + 35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
-            svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(((lastbeamPos+(placement*(i+1)))/2)).append(",").append(cpHeight + 30).append(") rotate(0)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(placement).append(" cm</text>");
+            svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append((lastbeamPos/2)+((placement/2)*(i+1))).append(",").append(cpHeight + 30).append(") rotate(0)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(placement).append(" cm</text>");
             svgSvSb.append("<line x1=\"").append(lastbeamPos+placement).append("\" y1=\"").append(cpHeight + 20).append("\" x2=\"").append(lastbeamPos+placement).append("\" y2=\"").append(cpHeight + 40).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
             lastbeamPos = lastbeamPos + placement;
         }
-
+        if (isShed){
+            svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"").append(lastbeamPos+13).append("\" y1=\"").append(cpHeight + 35).append("\" x2=\"").append(cpLength-airBack-13).append("\" y2=\"").append(cpHeight + 35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+            svgSvSb.append("<line x1=\"").append(cpLength-airBack).append("\" y1=\"").append(cpHeight + 20).append("\" x2=\"").append(cpLength-airBack).append("\" y2=\"").append(cpHeight + 40).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+            svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(cpLength-(toolLength/2)-airBack).append(",").append(cpHeight + 30).append(") rotate(0)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(toolLength).append("* cm</text>");
+        }
     }
 
     private void drawFirstSideLastSideMeasurments() {
+        int fallInCm = (int) Math.round(1.28 * cpLength / 100);
+        int backMeasurment = cpHeight - fallInCm;
+        System.out.println("Fall in cm: "+fallInCm);
+        System.out.println("Measurment at back: "+backMeasurment);
         svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"-20\" y1=\"").append(20 + 13).append("\" x2=\"").append(-20).append("\" y2=\"").append(cpHeight - 13).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
-        svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(-25).append(",").append(cpHeight / 2).append(") rotate(-90)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(beamheight).append(" cm</text>");
+        svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(-25).append(",").append(cpHeight / 2).append(") rotate(-90)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(beamheight).append("*** cm</text>");
         svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"-50\" y1=\"").append(13).append("\" x2=\"").append(-50).append("\" y2=\"").append(cpHeight - 13).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
         svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(-55).append(",").append(cpHeight / 2).append(") rotate(-90)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(cpHeight).append(" cm</text>");
         svgSvSb.append("<line x1=\"-55\" y1=\"").append(cpHeight).append("\" x2=\"").append(-15).append("\" y2=\"").append(cpHeight).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
         svgSvSb.append("<line x1=\"-25\" y1=\"").append(20).append("\" x2=\"").append(-15).append("\" y2=\"").append(20).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
         svgSvSb.append("<line x1=\"-55\" y1=\"").append(0).append("\" x2=\"").append(-15).append("\" y2=\"").append(0).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line marker-start=\"url(#markerArrow)\" marker-end=\"url(#markerArrow)\" x1=\"").append(cpLength+30).append("\" y1=\"").append(fallInCm+13+fallInCm).append("\" x2=\"").append(cpLength+30).append("\" y2=\"").append(cpHeight-13).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line x1=\"").append(cpLength+15).append("\" y1=\"").append(fallInCm*2).append("\" x2=\"").append(cpLength+35).append("\" y2=\"").append(fallInCm*2).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line x1=\"").append(cpLength+15).append("\" y1=\"").append(cpHeight).append("\" x2=\"").append(cpLength+35).append("\" y2=\"").append(cpHeight).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(cpLength+25).append(",").append(cpHeight/2+(fallInCm*2)).append(") rotate(-90)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(cpHeight-fallInCm).append(" cm</text>");
+        svgSvSb.append("<line x1=\"").append(10).append("\" y1=\"").append(cpHeight).append("\" x2=\"").append(cpLength+10).append("\" y2=\"").append(cpHeight).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line x1=\"").append(cpLength).append("\" y1=\"").append(30+(fallInCm*2)).append("\" x2=\"").append(cpLength).append("\" y2=\"").append(cpHeight+40).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<line marker-start=\"url(#markerArrow)\" x1=\"").append(cpLength+13).append("\" y1=\"").append(cpHeight+35).append("\" x2=\"").append(cpLength+35).append("\" y2=\"").append(cpHeight+35).append("\" stroke=\"black\" stroke-width=\"1.5\" />");
+        svgSvSb.append("<text style=\" text-anchor: middle \" transform=\" translate(").append(cpLength+17.5).append(",").append(cpHeight+30).append(") rotate(0)\" fill=\" black \" font-size=\"smaller\" font-weight=\"bold\">").append(30).append(" cm</text>");
+
     }
 
 
     public StringBuilder svgSideGen() {
-        int cplengthviewbox = cpLength + 100;
+        int cplengthviewbox = cpLength + 120;
         int cpHeightviewbox = 230 + 40;
 
         svgSvSb.append("<svg width=\"100%\" height=\"100%\" viewBox=\"-70 0 ").append(cplengthviewbox).append(" ").append(cpHeightviewbox).append("\" preserveAspectRatio=\"xMidYMid meet\">");
@@ -124,8 +141,8 @@ public class SideView {
                 "</defs>");
         calcBeams();
         svgSvSb.append("<rect x=\"0\" y=\"0\" height=\"30\" width=\"").append(cpLength).append("\"\n" +
-                "fill-opacity=\"1\" fill=\"white\" stroke=\"black\" transform=\"rotate(1)\"></rect>");
-        svgSvSb.append("<line x1=\"0\" y1=\"10\" x2=\"").append(cpLength).append("\" y2=\"10\" stroke=\"black\" transform=\"rotate(1)\" />");
+                "fill-opacity=\"1\" fill=\"white\" stroke=\"black\" transform=\"rotate(1.28)\"></rect>");
+        svgSvSb.append("<line x1=\"0\" y1=\"10\" x2=\"").append(cpLength).append("\" y2=\"10\" stroke=\"black\" transform=\"rotate(1.28)\" />");
         if (isShed) {
             shedCalc();
         }
