@@ -4,8 +4,8 @@ import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.MapperFacade;
-import dat.startcode.model.services.UserFacade;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.services.UserFacade;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

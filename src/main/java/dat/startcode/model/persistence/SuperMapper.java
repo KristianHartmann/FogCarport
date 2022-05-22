@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import static dat.startcode.model.persistence.SQLStatements.*;
 
 public abstract class SuperMapper {
-    ConnectionPool connectionPool;
+    public ConnectionPool connectionPool;
 
     public SuperMapper(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;

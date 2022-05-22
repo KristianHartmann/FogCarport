@@ -43,9 +43,8 @@
                         <c:choose>
                             <c:when test="${sessionScope.user.role.equals('admin')}">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/dashboard.jsp"
-                                       class="nav-link text-white">
-                                        Dashboard
+                                    <a href="${pageContext.request.contextPath}/Dashboard" class="nav-link text-white">
+                                       Dashboard
                                     </a>
                                 </li>
                             </c:when>

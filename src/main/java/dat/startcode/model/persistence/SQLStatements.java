@@ -11,14 +11,18 @@ public class SQLStatements {
 
     // select
     public static String selectCarportRequestByID = "select * from carport.carport_request where carport_request_id = ?";
+    public static String selectAllCarportRequest = "SELECT * FROM carport.carport_request;";
     public static String selectAllUser = "select * from carport.user";
+    public static String selectAllPerson = "select p.email, p.address, p.`name`, p.phonenumber, p.zipcode, z.city\n" +
+            "            FROM person p\n" +
+            "            INNER JOIN zipcode z on p.zipcode = z.zipcode";
     public static String selectAllOrderFromUserId = "select * from carport.order where user_id = ?";
     public static String selectAllOrder = "select * from carport.order";
     public static String selectMaxOrder = "SELECT MAX(order_id) FROM carport.order;";
     public static String selectAllParts = "SELECT * FROM parts";
     public static String selectUserFromEmailAndPassword = "SELECT * FROM user WHERE email = ? AND password = ?";
     public static String selectAllUserFromUserID= "select * from carport.user where user_id = ?";
-    public static String selectUserIDFromEmail= "select user_id from carport.user where user_email = ?";
+    public static String selectUserIDFromEmail= "select user_id from carport.user where email = ?";
     public static String selectAllFromPersonByEmail= "select p.email, p.address, p.`name`, p.phonenumber, p.zipcode, z.city\n" +
             "FROM person p\n" +
             "INNER JOIN zipcode z on p.zipcode = z.zipcode\n" +

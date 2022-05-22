@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,22 +55,46 @@ public class CarportRequestMapper extends SuperMapper {
         CarportRequest carportRequest;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.insertCarportRequest)) {
-                ps.setInt(2, request.getLength());
-                ps.setInt(3, request.getWidth());
-                ps.setString(4, request.getRooftype());
-                ps.setInt(5, request.getRoofpitch());
-                ps.setInt(6, request.getToolbox_length());
-                ps.setInt(7, request.getToolbox_width());
-                ps.setString(8, request.getUser().getEmail());
-                int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1) {
+                try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.selectAllUser)) {
+                    ps.setInt(2, request.getLength());
+                    ps.setInt(3, request.getWidth());
+                    ps.setString(4, request.getRooftype());
+                    ps.setInt(5, request.getRoofpitch());
+                    ps.setInt(6, request.getToolbox_length());
+                    ps.setInt(7, request.getToolbox_width());
+                    ps.setString(8, request.getUser().getEmail());
+                    int rowsAffected = ps.executeUpdate();
+                    if (rowsAffected == 1) {
                         throw new SQLException("Failed");
-                } else {
-                    throw new DatabaseException("Could not find a person with this email.");
+                    } else {
+                        throw new DatabaseException("Could not find a person with this email.");
+                    }
                 }
             }
         } catch (SQLException | DatabaseException ex) {
             throw new DatabaseException(ex, "Failed");
         }
+    }
+
+    public ArrayList<CarportRequest> getAllCarportRequest() throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        ArrayList<CarportRequest> carportRequestArrayList = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectAllCarportRequest)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int carport_request_id = rs.getInt(1);
+                    int length = rs.getInt(2);
+                    int width = rs.getInt(3);
+                    String rooftype = rs.getString(4);
+                    int roofPitch = rs.getInt(5);
+                    int toolbox_length = rs.getInt(6);
+                    int toolbox_width = rs.getInt(7);
+                    String email = rs.getString(8);
+                    carportRequestArrayList.add(new CarportRequest(carport_request_id, length, width, rooftype, roofPitch, toolbox_length, toolbox_width, email));
+                }
+            }
+        }
+        return carportRequestArrayList;
     }
 }
