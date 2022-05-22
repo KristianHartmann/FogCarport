@@ -21,10 +21,10 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="customers-tab" data-bs-toggle="tab"
-                                        data-bs-target="#customers-tab-pane" type="button" role="tab"
-                                        aria-controls="profile-tab-pane" aria-selected="false">Kunder
-                                </button>
+                                    <button class="nav-link" id="customers-tab" data-bs-toggle="tab"
+                                            data-bs-target="#customers-tab-pane" type="button" role="tab"
+                                            aria-controls="profile-tab-pane" aria-selected="false">Kunder
+                                    </button>
                             </li>
                         </ul>
                     </div>
@@ -40,58 +40,52 @@
                                     <th scope="col">First</th>
                                     <th scope="col">Last</th>
                                     <th scope="col">Handle</th>
+                                    <th scope="col">Handle</th>
+                                    <th scope="col">Handle</th>
+                                    <th scope="col">Handle</th>
+                                    <th scope="col">Handle</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+                                <c:forEach items="${applicationScope.carportRequestArrayList}" var="request"
+                                           varStatus="loop">
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <th scope="row">${loop.index+1}</th>
+                                    <td>${request.length}</td>
+                                    <td>${request.width}</td>
+                                    <td>${request.rooftype}</td>
+                                    <td>${request.roofpitch}</td>
+                                    <td>${request.toolbox_length}</td>
+                                    <td>${request.toolbox_width}</td>
+                                    <td>${request.email}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                         <div class="tab-pane fade" id="customers-tab-pane" role="tabpanel"
                              aria-labelledby="profile-tab" tabindex="0">
+
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Number</th>
+                                    <th scope="col">Email</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <c:forEach items="${applicationScope.personArrayList}" var="person"
+                                               varStatus="loop">
+                                    <th scope="row">${loop.index+1}</th>
+                                    <td>${person.name}</td>
+                                    <td>${person.phonenumber}</td>
+                                    <td>${person.email}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
@@ -114,21 +108,28 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">length</th>
+                                    <th scope="col">width</th>
+                                    <th scope="col">rooftype</th>
+                                    <th scope="col">roofpitch</th>
+                                    <th scope="col">toolbox_length</th>
+                                    <th scope="col">toolbox_width</th>
+                                    <th scope="col">email</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+                                <c:forEach items="${applicationScope.carportRequestArrayList}" var="request">
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td><button class="btn btn-sm btn-success">Godkend</button>
-                                        <button class="btn btn-sm btn-danger">Annuller</button>
-                                        <button class="btn btn-sm btn-secondary">Rediger</button>
-                                    </td>
+                                    <th scope="row">${request.carport_request_id}</th>
+                                    <td>${request.length}</td>
+                                    <td>${request.width}</td>
+                                    <td>${request.rooftype}</td>
+                                    <td>${request.roofpitch}</td>
+                                    <td>${request.toolbox_length}</td>
+                                    <td>${request.toolbox_width}</td>
+                                    <td>${request.email}</td>
                                 </tr>
+                                </c:forEach>
                                 <tr>
                                     <th scope="row">2</th>
                                     <td>Jacob</td>

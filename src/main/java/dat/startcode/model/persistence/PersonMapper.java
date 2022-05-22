@@ -8,10 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PersonMapper extends SuperMapper implements IPersonMapper{
+public class PersonMapper extends SuperMapper implements IPersonMapper {
 
 
     public PersonMapper(ConnectionPool connectionPool) {
@@ -38,7 +39,7 @@ public class PersonMapper extends SuperMapper implements IPersonMapper{
         }
     }
 
-    public Person selectAllFromPersonByEmail (User user) throws SQLException {
+    public Person selectAllFromPersonByEmail(User user) throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
         Person person = null;
         try (Connection connection = connectionPool.getConnection()) {
@@ -54,11 +55,31 @@ public class PersonMapper extends SuperMapper implements IPersonMapper{
                 String phoneNumber = rs.getString("phonenumber");
                 int zipCode = rs.getInt("zipcode");
                 String city = rs.getString("city");
-                person = new Person(email, address, name, phoneNumber, city ,zipCode);
+                person = new Person(email, address, name, phoneNumber, city, zipCode);
                 return person;
             }
         }
     }
 
+    @Override
+    public ArrayList<Person> getAllPersons() throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        ArrayList<Person> personArrayList = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectAllPerson)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String email = rs.getString(1);
+                    String address = rs.getString(2);
+                    String name = rs.getString(3);
+                    String phoneNumber = rs.getString(4);
+                    int zipcode = rs.getInt(5);
+                    String city = rs.getString(6);
+                    personArrayList.add(new Person(email, address, name, phoneNumber, city, zipcode));
+                }
+            }
+        }
+        return personArrayList;
+    }
 
 }

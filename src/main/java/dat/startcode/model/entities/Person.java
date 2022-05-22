@@ -12,7 +12,7 @@ public class Person {
     private String city;
     private int zipcode;
 
-    public Person(String email, String address, String name, String phonenumber,String city, int zipcode) {
+    public Person(String email, String address, String name, String phonenumber, String city, int zipcode) {
         this.email = email;
         this.address = address;
         this.name = name;

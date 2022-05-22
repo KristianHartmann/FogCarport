@@ -4,6 +4,7 @@ import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,7 +19,7 @@ public class UserMapper extends SuperMapper implements IUserMapper {
     public User login(String email, String password) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
-        User user = null;
+        User user;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectUserFromEmailAndPassword)) {
                 ps.setString(1, email);
@@ -77,7 +78,7 @@ public class UserMapper extends SuperMapper implements IUserMapper {
 
     public User getUserInfoById(int user_id) throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
-        User user = null;
+        User user;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectAllUserFromUserID)) {
                 ps.setInt(1, user_id);
@@ -146,8 +147,8 @@ public class UserMapper extends SuperMapper implements IUserMapper {
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectUserIDFromEmail)) {
                 ps.setString(1, user.getEmail());
-                ResultSet rs =  ps.executeQuery();
-                if(rs.next()){
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
                     return rs.getInt("user_id");
                 }
             }
@@ -155,6 +156,25 @@ public class UserMapper extends SuperMapper implements IUserMapper {
         return Integer.parseInt(null);
     }
 
+    @Override
+    public ArrayList<User> getAllUsers() throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        ArrayList<User> userArrayList = new ArrayList<>();
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectAllUser)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int user_id = rs.getInt(1);
+                    String role = rs.getString(2);
+                    int balance = rs.getInt(3);
+                    String password = rs.getString(4);
+                    String email = rs.getString(5);
+                    userArrayList.add(new User(user_id, role, balance, password, email));
+                }
+            }
+        }
+        return userArrayList;
+    }
 
 
 }

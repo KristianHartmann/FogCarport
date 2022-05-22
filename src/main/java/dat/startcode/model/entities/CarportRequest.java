@@ -8,6 +8,7 @@ public class CarportRequest {
     private int roofpitch;
     private int toolbox_length;
     private int toolbox_width;
+    private String email;
     private User user;
 
     public CarportRequest(int length, int width, String rooftype, int roofpitch, int toolbox_length, int toolbox_width, User user) {
@@ -18,6 +19,16 @@ public class CarportRequest {
         this.toolbox_length = toolbox_length;
         this.toolbox_width = toolbox_width;
         this.user = user;
+    }
+        public CarportRequest(int carport_request_id, int length, int width, String rooftype, int roofpitch, int toolbox_length, int toolbox_width, String email) {
+        this.carport_request_id = carport_request_id;
+        this.length = length;
+        this.width = width;
+        this.rooftype = rooftype;
+        this.roofpitch = roofpitch;
+        this.toolbox_length = toolbox_length;
+        this.toolbox_width = toolbox_width;
+        this.email = email;
     }
     public int getCarport_request_id() {
         return carport_request_id;
@@ -33,6 +44,13 @@ public class CarportRequest {
 
     public void setLength(int length) {
         this.length = length;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public int getWidth() {

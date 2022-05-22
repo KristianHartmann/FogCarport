@@ -4,11 +4,11 @@ import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.UserMapper;
+import lombok.SneakyThrows;
 
-import javax.xml.crypto.Data;
+import java.util.ArrayList;
 
-public class UserFacade
-{
+public class UserFacade {
     public static User login(String username, String password, ConnectionPool connectionPool) throws DatabaseException
     {
         UserMapper userMapper = new UserMapper(connectionPool);
@@ -18,7 +18,13 @@ public class UserFacade
     public static User createUser(String username, String password, String role, ConnectionPool connectionPool) throws DatabaseException
     {
         UserMapper userMapper = new UserMapper(connectionPool);
-
         return userMapper.createUser(username, password, role);
+    }
+
+    @SneakyThrows
+    public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) {
+        UserMapper userMapper = new UserMapper(connectionPool);
+        return userMapper.getAllUsers();
+
     }
 }
