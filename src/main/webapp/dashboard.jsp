@@ -35,30 +35,16 @@
                              aria-labelledby="home-tab" tabindex="0">
                             <table class="table table-hover">
                                 <thead>
-                                carportRequestArrayList
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Order id</th>
+                                    <th scope="col">User email</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                <c:forEach items="${applicationScope.carportRequestArrayList}" var="request"
-                                           varStatus="loop">
+                                <c:forEach items="${applicationScope.orderArrayList}" var="order">
                                 <tr>
-                                    <th scope="row">${loop.index+1}</th>
-                                    <td>${request.length}</td>
-                                    <td>${request.width}</td>
-                                    <td>${request.rooftype}</td>
-                                    <td>${request.roofpitch}</td>
-                                    <td>${request.toolbox_length}</td>
-                                    <td>${request.toolbox_width}</td>
-                                    <td>${request.email}</td>
+                                    <th scope="row">${order.order_id}</th>
+                                    <td>${order.user.email}</td>
                                 </tr>
                                 </c:forEach>
                                 </tbody>
@@ -98,7 +84,7 @@
                     <div class="col-auto">
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Forspørgsler
+                            Forespørgsler
                         </button>
                     </div>
                 </div>

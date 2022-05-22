@@ -74,7 +74,7 @@
                                     <select class="form-control" id="cpwidth" name="cpwidth">
                                         <option value="0" selected hidden>Vælg bredde</option>
                                         <c:forEach begin="240" end="600" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
+                                            <option value="${i}" name="carportWidth">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -83,7 +83,7 @@
                                     <select class="form-control" id="cplength" name="cplength">
                                         <option value="0" selected hidden>Vælg længde</option>
                                         <c:forEach begin="240" end="780" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
+                                            <option value="${i}" name="carportLength">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -99,7 +99,7 @@
                                     <select class="form-control" id="cpshedwidth" name="cpshedwidth">
                                         <option value="0" selected hidden>Vælg bredde</option>
                                         <c:forEach begin="240" end="530" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
+                                            <option value="${i}" name="toolbox_Width">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -108,12 +108,13 @@
                                     <select class="form-control" id="cpshedlength" name="cpshedlength">
                                         <option value="0" selected hidden>Vælg længde</option>
                                         <c:forEach begin="150" end="390" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
+                                            <option value="${i}" name="toolbox_length">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <button type="submit"
-                                        class="btn btn-primary">Bestil
+                                        class="btn btn-primary">
+                                    Bestil
                                 </button>
                                 <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet
                                     maksimalt måle <strong>210x330 cm.</strong></p>
@@ -190,7 +191,7 @@
                                             de mål du ønsker.
                                             Tilbud og skitsetegning fremsendes med post hurtigst muligt.</p>
                                     </div>
-                                 </div>
+                                </div>
                                 <h4 id="scrollspyHeading2">Dobbelt Carport</h4>
                                 <hr class="mt-0">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique, ligula
@@ -203,7 +204,9 @@
                                     vulputate tortor.
 
                                     Proin ullamcorper vestibulum sem, ut commodo ante malesuada a. Quisque ac magna non
-                                    neque sagittis luctus. Sed tempor tellus ligula, non <pharetr></pharetr>a urna auctor in.
+                                    neque sagittis luctus. Sed tempor tellus ligula, non
+                                    <pharetr></pharetr>
+                                    a urna auctor in.
                                     Vestibulum suscipit fermentum arcu, at bibendum libero egestas in. Pellentesque
                                     imperdiet, mi et euismod porttitor, metus ante ultrices erat, ac maximus tortor
                                     lacus a ligula. Fusce efficitur magna molestie sapien suscipit, sed dignissim mi
@@ -235,7 +238,8 @@
                                     eu dignissim diam. Sed et venenatis magna. Etiam aliquam massa id sem ultrices
                                     lacinia. Donec tincidunt, urna eu rhoncus pulvinar, felis nisl vulputate neque,
                                     vitae pellentesque urna est ac eros. Praesent felis dui, tincidunt non consectetur
-                                    ac, dapibus sit amet arcu.</p>
+                                    ac, dapibus sit amet arcu.
+                                </p>
                                 <h4 id="scrollspyHeading3">Third heading</h4>
                                 <hr>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique, ligula
@@ -393,36 +397,31 @@
                                 <caption>StykListe</caption>
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Length</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Unit</th>
+                                    <th scope="col">Description</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <c:forEach items="${applicationScope.partsList}" var="item">
+                                    <td>${item.parts.name}</td>
+                                    <td>${item.parts.length}</td>
+                                    <td>${item.amount}</td>
+                                    <td>${item.parts.unit}</td>
+                                    <td>${item.description}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
                         <p id="ajaxtest"></p>
-                        <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+                        <form action="PartslistController" method="post">
+                            <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <p class="text-muted">&copy; Johannes Fog A/S</p>

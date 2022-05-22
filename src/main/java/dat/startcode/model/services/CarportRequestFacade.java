@@ -16,7 +16,4 @@ public class CarportRequestFacade {
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         return carportRequestMapper.getAllCarportRequest();
     }
-
-
-
 }

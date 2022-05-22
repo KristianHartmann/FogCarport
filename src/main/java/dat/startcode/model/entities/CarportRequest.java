@@ -20,6 +20,12 @@ public class CarportRequest {
         this.toolbox_width = toolbox_width;
         this.user = user;
     }
+    public CarportRequest(int length, int width, int toolbox_length, int toolbox_width) {
+        this.length = length;
+        this.width = width;
+        this.toolbox_length = toolbox_length;
+        this.toolbox_width = toolbox_width;
+    }
         public CarportRequest(int carport_request_id, int length, int width, String rooftype, int roofpitch, int toolbox_length, int toolbox_width, String email) {
         this.carport_request_id = carport_request_id;
         this.length = length;

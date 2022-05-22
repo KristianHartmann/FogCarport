@@ -2,9 +2,11 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.CarportRequest;
+import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.Person;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.services.CarportRequestFacade;
+import dat.startcode.model.services.OrderFacade;
 import dat.startcode.model.services.PersonFacade;
 import lombok.SneakyThrows;
 
@@ -26,12 +28,12 @@ public class DashboardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = request.getServletContext();
-        ArrayList<Person> personArrayList;
-        ArrayList<CarportRequest> carportRequestArrayList;
-        personArrayList = PersonFacade.getAllPersons(connectionPool);
+        ArrayList<Person> personArrayList = PersonFacade.getAllPersons(connectionPool);
+        ArrayList<CarportRequest> carportRequestArrayList = CarportRequestFacade.getAllCarportRequests(connectionPool);
+        ArrayList<Order> orderArrayList = OrderFacade.getAllOrder(connectionPool);
         context.setAttribute("personArrayList", personArrayList);
-        carportRequestArrayList = CarportRequestFacade.getAllCarportRequests(connectionPool);
         context.setAttribute("carportRequestArrayList", carportRequestArrayList);
+        context.setAttribute("orderArrayList", orderArrayList);
         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
     }
 
