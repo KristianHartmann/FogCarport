@@ -10,7 +10,7 @@ public class PartsListItem {
 
     private int partslistitem_id;
     private Parts parts;
-    private int amount;
+        private int amount;
     private String description;
 
     public PartsListItem(Parts parts, int amount, String description) {

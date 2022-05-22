@@ -139,7 +139,7 @@
                                     <select class="form-control" id="cpshedlength" name="cpshedlength">
                                         <option value="0" selected hidden>Vælg længde</option>
                                         <c:forEach begin="90" end="390" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
+                                            <option value="${i}" >${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -444,12 +444,15 @@
                                 og
                                 beslag</p>
                         </div>
+                        <p id="ajaxtest"></p>
+                        <form action="PartslistController" method="post">
+                            <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+                        </form>
                         <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
                         <button type="button" style="width: 50%" data-bs-dismiss="modal"
                                 class="btn btn-secondary mt-2 py-2">Annuller
                         </button>
                     </div>
-
                     <div class="modal-footer">
                         <p class="text-muted">&copy; Johannes Fog A/S</p>
                     </div>
