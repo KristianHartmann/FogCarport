@@ -8,6 +8,22 @@ function showShed() {
     }
 }
 
+function showRaised() {
+    if (!(document.getElementById('isRaised').checked)) {
+        document.getElementById('raisedRoofdiv').style.display = "none";
+    } else {
+        document.getElementById('raisedRoofdiv').style.display = "block";
+    }
+}
+
+function showRequestUserPass() {
+    if (!(document.getElementById('requestCreateUserCheck').checked)) {
+        document.getElementById('requestCreateUserPassword').style.display = "none";
+    } else {
+        document.getElementById('requestCreateUserPassword').style.display = "block";
+    }
+}
+
 function checkShed() {
     let minLengthForShed = 480;
     let carportWidth = document.getElementById('cpwidth').value;

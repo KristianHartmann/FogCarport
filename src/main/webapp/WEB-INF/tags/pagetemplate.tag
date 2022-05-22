@@ -100,7 +100,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="container-fluid p-0" style="position: fixed; bottom: 0;">
+    <div class="container-fluid p-0">
         <footer>
             <ul class="nav justify-content-center border-bottom pb-1 mb-1">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>

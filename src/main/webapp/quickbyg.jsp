@@ -22,9 +22,7 @@
                     <a class="list-group-item list-group-item-action active" id="list-qb-list" data-bs-toggle="list"
                        href="#list-qb" role="tab" aria-controls="list-qb">QUICKBYG</a>
                     <a class="list-group-item list-group-item-action" id="list-cpur-list" data-bs-toggle="list"
-                       href="#list-cpur" role="tab" aria-controls="list-cpur">CARPORT MED FLADT TAG</a>
-                    <a class="list-group-item list-group-item-action" id="list-cpmr-list" data-bs-toggle="list"
-                       href="#list-cpmr" role="tab" aria-controls="list-cpmr">CARPORT MED REJSNING</a>
+                       href="#list-cpur" role="tab" aria-controls="list-cpur">CARPORT MED EGNE MÅL</a>
                     <a class="list-group-item list-group-item-action" id="list-stcp-list" data-bs-toggle="list"
                        href="#list-stcp" role="tab" aria-controls="list-stcp">STANDARD CARPORTE</a>
                 </div>
@@ -59,7 +57,7 @@
                     </div>
                     <div class="tab-pane fade" id="list-cpur" role="tabpanel" aria-labelledby="list-cpur-list">
                         <div class="row">
-                            <h3>QUICK-BYG TILBUD - CARPORT MED FLADT TAG</h3>
+                            <h3>QUICK-BYG TILBUD - CARPORT MED EGNE MÅL</h3>
                             <p>Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en
                                 skitsetegning på en carport indenfor vores standardprogram.
 
@@ -70,7 +68,7 @@
                             <p>Ønsket carport mål:</p>
                             <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation"
                                   style="width: 50%;">
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-2">
                                     <label for="cpwidth">Carport bredde:</label>
                                     <select class="form-control" id="cpwidth" name="cpwidth" onchange="checkShed()">
                                         <option value="0" selected hidden>Vælg bredde</option>
@@ -79,7 +77,7 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-2">
                                     <label for="cplength">Carport længde:</label>
                                     <select class="form-control" id="cplength" name="cplength" onchange="checkShed()">
                                         <option value="0" selected hidden>Vælg længde</option>
@@ -88,13 +86,33 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-check mb-3 form-switch">
+                                <div class="form-check mb-2 form-switch">
+                                    <input class="form-check-input" onchange="showRaised()" type="checkbox"
+                                           role="switch"
+                                           id="isRaised" name="isRaised">
+                                    <label class="form-check-label" for="isRaised" id="isRaisedLabel">Med
+                                        rejsning</label>
+                                </div>
+                                <div class="form-group mb-2" id="raisedRoofdiv" style="display: none">
+                                    <label for="rooftype">Tag:</label>
+                                    <select class="form-control" id="rooftype" name="rooftype">
+                                        <option value=" " selected hidden>Vælg tagtype</option>
+                                    </select>
+                                    <label for="roofangle">Taghældning</label>
+                                    <select class="form-control" id="roofangle" name="roofangle">
+                                        <option value="0" selected hidden>Vælg hældning</option>
+                                        <c:forEach begin="15" end="45" step="5" var="i">
+                                            <option value="${i}">${i} grader</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-check mb-2 form-switch">
                                     <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
                                            id="isShed" name="isShed" disabled>
                                     <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj redskabskur
                                         (vælg længde og bredde først!)</label>
                                 </div>
-                                <div class="form-group mb-3" id="cpshedwidthdiv" style="display: none">
+                                <div class="form-group mb-2" id="cpshedwidthdiv" style="display: none">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="cpshedwidth"
                                                id="inlineRadio1" value="option1">
@@ -116,7 +134,7 @@
                                         <label class="form-check-label" for="inlineRadio3">4/4 Skur</label>
                                     </div>
                                 </div>
-                                <div class="form-group mb-3" id="cpshedlengthdiv" style="display: none">
+                                <div class="form-group mb-2" id="cpshedlengthdiv" style="display: none">
                                     <label for="cpshedlength">Redskabsrum længde:</label>
                                     <select class="form-control" id="cpshedlength" name="cpshedlength">
                                         <option value="0" selected hidden>Vælg længde</option>
@@ -133,20 +151,18 @@
                                     </c:when>
                                     <c:otherwise>
                                         <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                              data-bs-trigger="hover focus" data-bs-content="Log ind for at bestille direkte">
+                                              data-bs-trigger="hover focus"
+                                              data-bs-content="Log ind for at bestille direkte">
                                             <button type="button"
                                                     class="btn btn-secondary" disabled>Bestil
                                             </button>
                                         </span>
                                     </c:otherwise>
                                 </c:choose>
-                                <a href="#" class="btn btn-primary">Forspørg</a>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal" class="btn btn-primary">Forspørg</button>
                                 <p id="textForBtns" class="mt-3">Bestil direkte eller send forspørgelse til Fog</p>
                             </form>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="list-cpmr" role="tabpanel" aria-labelledby="list-cpmr-list">
-                        <h1>under construction</h1>
                     </div>
                     <div class="tab-pane fade" id="list-stcp" role="tabpanel" aria-labelledby="list-stcp-list">
                         <div class="row">
@@ -379,7 +395,7 @@
             </div>
         </div>
 
-        <%-- Modals --%>
+        <%-- BestilModal --%>
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -434,6 +450,64 @@
                         </button>
                     </div>
 
+                    <div class="modal-footer">
+                        <p class="text-muted">&copy; Johannes Fog A/S</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%--    ForspørgelsesModal    --%>
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="requestModalLabel">Kontakt info</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="row g-3">
+                                <div class="col-md-12">
+                                    <label for="inputEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="inputEmail">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputCity" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="inputCity">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="inputState" class="form-label">State</label>
+                                    <select id="inputState" class="form-select">
+                                        <option selected>Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="inputZip" class="form-label">Zip</label>
+                                    <input type="text" class="form-control" id="inputZip">
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()" id="requestCreateUserCheck">
+                                        <label class="form-check-label" for="requestCreateUserCheck">
+                                            Lav en bruger med disse oplysninger
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="requestCreateUserPassword" style="display: none;">
+                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Godkend</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <p class="text-muted">&copy; Johannes Fog A/S</p>
                     </div>
