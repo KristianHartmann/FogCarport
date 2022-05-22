@@ -21,13 +21,27 @@
         </c:if>
 
         <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+            <p>You are not logged in yet. You can do it here:
+            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login
+            </button>
         </c:if>
 
-            <form action="PartslistController" method="get">
-            <input type="submit" name="command" value="partslist"/>
-        </form>
+        <%--            <form action="PartslistController" method="get">--%>
+        <%--            <input type="submit" name="command" value="partslist"/>--%>
+        <%--        </form>--%>
+        <div>
+            <form action="Login" method="post" class="mt-3">
+                <input name="username" hidden value="b@b.com">
+                <input name="password" hidden value="customer">
+                <button class="btn btn-primary" type="submit">Login som bruger</button>
+            </form>
 
+            <form action="Login" method="post" class="mt-3">
+                <input name="username" hidden value="a@a.com">
+                <input name="password" hidden value="admin">
+                <button class="btn btn-primary" type="submit">Login som admin</button>
+            </form>
+        </div>
     </jsp:body>
 
 </t:pagetemplate>
