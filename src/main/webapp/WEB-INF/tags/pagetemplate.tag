@@ -95,12 +95,12 @@
         </div>
     </header>
 
-    <div id="body" class="container-fluid" style="height: calc(100vh - calc(146.27px + 81.08px + 1rem));">
+    <div id="body" class="container-fluid">
         <jsp:doBody/>
     </div>
 
     <!-- Footer -->
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0" style="position: fixed; bottom: 0;">
         <footer>
             <ul class="nav justify-content-center border-bottom pb-1 mb-1">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
