@@ -78,8 +78,8 @@
                                 Balance: ${sessionScope.user.balance}kr,-
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownBalanceMenu">
-                                <li><a class="dropdown-item" href="#">Tilføj penge</a></li>
-                                <li><a class="dropdown-item" href="#">Fjern penge</a></li>
+                                <li><button type="button" class="dropdown-item">Tilføj penge</button></li>
+                                <li><button type="button" class="dropdown-item">Fjern penge</button></li>
                             </ul>
                             </form>
                         </c:when>
@@ -157,5 +157,6 @@
 <script type="text/javascript" src="./webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="./webjars/jquery.ajax/1.2.0/src/jquery.ajaxs.js"></script>
 <script type="text/javascript" rel="script" src="${pageContext.request.contextPath}/js/script.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>
