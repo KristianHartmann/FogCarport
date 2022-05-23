@@ -30,6 +30,13 @@ function checkShed() {
     let carportLength = document.getElementById('cplength').value;
     let shedLabel = document.getElementById('isShedLabel');
     let shedButton = document.getElementById('isShed');
+    let shedMaxLength = carportLength-390-30;
+    $('#cpshedlength > option').each(function (){
+        if($(this).val() > shedMaxLength){
+            this.disabled = true;
+        }
+    });
+
     let offValue = 0.25;
     for (let i = 1; i < 5; i++) {
         let radio = document.getElementById('inlineRadio' + i);
