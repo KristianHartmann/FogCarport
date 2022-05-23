@@ -473,22 +473,15 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="Jensjensensvej 9" name="contactaddress">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <label for="inputCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="inputCity">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="inputState" class="form-label">State</label>
-                                    <select id="inputState" class="form-select">
-                                        <option selected>Choose...</option>
-                                        <option>...</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="inputCity" name="contactcity">
                                 </div>
                                 <div class="col-md-2">
                                     <label for="inputZip" class="form-label">Zip</label>
-                                    <input type="text" class="form-control" id="inputZip">
+                                    <input type="text" class="form-control" id="inputZip" name="contactzip">
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">

@@ -71,14 +71,16 @@
                 <div class="text-end">
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
-                            <form method="post">
+                            <form method="post" style="display: inline-block">
                                 <button type="submit" formaction="Logout" class="btn btn-light text-dark">Logout</button>
+                            </form>
+                            <form method="post" style="display: inline-block" id="balanceForm">
                             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownBalanceMenu"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                 Balance: ${sessionScope.user.balance}kr,-
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownBalanceMenu">
-                                <li><button type="button" class="dropdown-item">Tilføj penge</button></li>
+                                <li><button type="button" onclick="addMoney()" class="dropdown-item">Tilføj penge</button></li>
                                 <li><button type="button" class="dropdown-item">Fjern penge</button></li>
                             </ul>
                             </form>
@@ -157,6 +159,5 @@
 <script type="text/javascript" src="./webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="./webjars/jquery.ajax/1.2.0/src/jquery.ajaxs.js"></script>
 <script type="text/javascript" rel="script" src="${pageContext.request.contextPath}/js/script.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

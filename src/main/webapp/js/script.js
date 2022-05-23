@@ -1,5 +1,3 @@
-import swal from 'sweetalert';
-
 function showShed() {
     if (!(document.getElementById('isShed').checked)) {
         document.getElementById('cpshedlengthdiv').style.display = "none";
