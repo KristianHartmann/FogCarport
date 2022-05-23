@@ -62,6 +62,10 @@ function checkShed() {
 }
 
 $(document).ready(function () {
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+
     $('#confirmOrderForm').submit(function (e) { // vores bestil form's submit funktion
         e.preventDefault(); // sørger for at vores submit ikke laver et postback, det vil sige refresher vores side.
 
