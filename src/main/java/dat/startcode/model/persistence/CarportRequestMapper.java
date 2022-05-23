@@ -97,4 +97,19 @@ public class CarportRequestMapper extends SuperMapper {
         }
         return carportRequestArrayList;
     }
+
+    public void deleteCarportRequest(int ID) throws SQLException{
+        Logger.getLogger("web").log(Level.INFO, "");
+              try(Connection connection = connectionPool.getConnection()){
+            try(PreparedStatement ps = connection.prepareStatement(SQLStatements.deleteCarportRequest)){
+                ps.setInt(1, ID);
+                int rowsAffected = ps.executeUpdate();
+                if(rowsAffected == 1){
+                    System.out.println("Succes");
+                }else{
+                    throw new SQLException();
+                }
+            }
+        }
+    }
 }

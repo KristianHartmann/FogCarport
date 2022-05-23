@@ -21,10 +21,10 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="customers-tab" data-bs-toggle="tab"
-                                            data-bs-target="#customers-tab-pane" type="button" role="tab"
-                                            aria-controls="profile-tab-pane" aria-selected="false">Kunder
-                                    </button>
+                                <button class="nav-link" id="customers-tab" data-bs-toggle="tab"
+                                        data-bs-target="#customers-tab-pane" type="button" role="tab"
+                                        aria-controls="profile-tab-pane" aria-selected="false">Kunder
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -42,10 +42,10 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <c:forEach items="${applicationScope.orderArrayList}" var="order">
-                                <tr>
-                                    <th scope="row">${order.order_id}</th>
-                                    <td>${order.user.email}</td>
-                                </tr>
+                                    <tr>
+                                        <th scope="row">${order.order_id}</th>
+                                        <td>${order.user.email}</td>
+                                    </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
@@ -106,20 +106,24 @@
                                 </thead>
                                 <tbody class="table-group-divider">
                                 <c:forEach items="${applicationScope.carportRequestArrayList}" var="request">
-                                <tr>
-                                    <th scope="row">${request.carport_request_id}</th>
-                                    <td>${request.length}</td>
-                                    <td>${request.width}</td>
-                                    <td>${request.rooftype}</td>
-                                    <td>${request.roofpitch}</td>
-                                    <td>${request.toolbox_length}</td>
-                                    <td>${request.toolbox_width}</td>
-                                    <td>${request.email}</td>
-                                    <td><button class="btn btn-sm btn-success">Godkend</button>
-                                        <button class="btn btn-sm btn-danger">Annuller</button>
-                                        <button class="btn btn-sm btn-secondary">Rediger</button>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <th scope="row">${request.carport_request_id}</th>
+                                        <td>${request.length}</td>
+                                        <td>${request.width}</td>
+                                        <td>${request.rooftype}</td>
+                                        <td>${request.roofpitch}</td>
+                                        <td>${request.toolbox_length}</td>
+                                        <td>${request.toolbox_width}</td>
+                                        <td>${request.email}</td>
+                                        <td>
+                                            <form method="post" action="Dashboard">
+                                                <input name="orderID" hidden value="${request.carport_request_id}">
+                                                <button name="Handle" value="Godkend" class="btn btn-sm btn-success">Godkend</button>
+                                                <button name="Handle" value="Annuller" class="btn btn-sm btn-danger">Annuller</button>
+                                                <button name="Handle" value="Rediger" class="btn btn-sm btn-secondary">Rediger</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
