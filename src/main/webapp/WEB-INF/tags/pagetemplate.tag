@@ -80,7 +80,7 @@
                                 Balance: ${sessionScope.user.balance}kr,-
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownBalanceMenu">
-                                <li><button type="button" onclick="addMoney()" class="dropdown-item">Tilføj penge</button></li>
+                                <li><button type="button" class="dropdown-item">Tilføj penge</button></li>
                                 <li><button type="button" class="dropdown-item">Fjern penge</button></li>
                             </ul>
                             </form>
@@ -158,6 +158,7 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="./webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="./webjars/jquery.ajax/1.2.0/src/jquery.ajaxs.js"></script>
+<script src="./webjars/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script type="text/javascript" rel="script" src="${pageContext.request.contextPath}/js/script.js"></script>
 </body>
 </html>

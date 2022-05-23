@@ -34,7 +34,7 @@ function checkShed() {
     for (let i = 1; i < 5; i++) {
         let radio = document.getElementById('inlineRadio' + i);
         radio.value = (carportWidth-70)*offValue;
-        if (radio.value < 150){
+        if (radio.value < 100){
             radio.disabled = true;
         }else{
             radio.disabled = false;
