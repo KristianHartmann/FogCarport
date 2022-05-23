@@ -50,7 +50,7 @@ public class TestServlet extends HttpServlet {
         int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
         boolean isShed = request.getParameterMap().containsKey("isShed");
         int toolLength = ((isShed) ? Integer.parseInt(request.getParameter("cpshedlength")) : 0);
-        int toolWidth = ((isShed) ? Integer.parseInt(request.getParameter("cpshedwidth")) : 0);
+        int toolWidth = ((isShed) ? (int) Float.parseFloat(request.getParameter("cpshedwidth")) : 0);
         int roofPitch = 0;
         String roofType = "plast";
         CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);
