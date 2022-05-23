@@ -445,10 +445,9 @@
                                 beslag</p>
                         </div>
                         <p id="ajaxtest"></p>
-                        <form action="PartslistController" method="post">
+<%--                        <form action="PartslistController" method="post">--%>
                             <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
-                        </form>
-                        <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+<%--                        </form>--%>
                         <button type="button" style="width: 50%" data-bs-dismiss="modal"
                                 class="btn btn-secondary mt-2 py-2">Annuller
                         </button>
@@ -470,9 +469,17 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <form class="row g-3">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="inputEmail">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputName" class="form-label">Navn</label>
+                                    <input type="text" class="form-control" id="inputName">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
+                                    <input type="number" class="form-control" id="inputPhonenumber">
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAddress" class="form-label">Address</label>

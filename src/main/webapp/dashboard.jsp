@@ -10,7 +10,7 @@
 
     <jsp:body>
         <div class="row">
-            <div class="col">
+            <div class="col-4">
                 <div class="row justify-content-center">
                     <div class="col-auto">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-8">
                 <div class="row justify-content-center">
                     <div class="col-auto">
                         <button class="btn btn-primary btn-lg" type="button" data-bs-toggle="collapse"
@@ -115,25 +115,12 @@
                                     <td>${request.toolbox_length}</td>
                                     <td>${request.toolbox_width}</td>
                                     <td>${request.email}</td>
+                                    <td><button class="btn btn-sm btn-success">Godkend</button>
+                                        <button class="btn btn-sm btn-danger">Annuller</button>
+                                        <button class="btn btn-sm btn-secondary">Rediger</button>
+                                    </td>
                                 </tr>
                                 </c:forEach>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td><button class="btn btn-sm btn-success">Godkend</button>
-                                        <button class="btn btn-sm btn-danger">Annuller</button>
-                                        <button class="btn btn-sm btn-secondary">Rediger</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td><button class="btn btn-sm btn-success">Godkend</button>
-                                        <button class="btn btn-sm btn-danger">Annuller</button>
-                                        <button class="btn btn-sm btn-secondary">Rediger</button>
-                                    </td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
