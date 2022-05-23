@@ -17,10 +17,10 @@ public class UserFacade {
         return userMapper.login(username, password);
     }
 
-    public static User createUser(String username, String password, String role, ConnectionPool connectionPool) throws DatabaseException
+    public static User createUser(String email, String password, String role, ConnectionPool connectionPool) throws DatabaseException
     {
         UserMapper userMapper = new UserMapper(connectionPool);
-        return userMapper.createUser(username, password, role);
+        return userMapper.createUser(email, password, role);
     }
 
     @SneakyThrows

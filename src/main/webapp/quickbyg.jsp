@@ -471,31 +471,31 @@
                             <form class="row g-3">
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail">
+                                    <input type="email" class="form-control" id="inputEmail" name="inputEmail">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputName" class="form-label">Navn</label>
-                                    <input type="text" class="form-control" id="inputName">
+                                    <input type="text" class="form-control" id="inputName" name="inputName">
                                 </div>
                                 <div class="col-md-12">
                                     <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
-                                    <input type="number" class="form-control" id="inputPhonenumber">
+                                    <input type="number" class="form-control" id="inputPhonenumber" name="inputPhonenumber">
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Jensjensensvej 9" name="contactaddress">
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="Jensjensensvej 9" name="inputAddress">
                                 </div>
                                 <div class="col-md-10">
                                     <label for="inputCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="inputCity" name="contactcity">
+                                    <input type="text" class="form-control" id="inputCity" name="inputCity">
                                 </div>
                                 <div class="col-md-2">
                                     <label for="inputZip" class="form-label">Zip</label>
-                                    <input type="text" class="form-control" id="inputZip" name="contactzip">
+                                    <input type="text" class="form-control" id="inputZip" name="inputZip">
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()" id="requestCreateUserCheck">
+                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()" id="requestCreateUserCheck" name="requestCreateUserCheck">
                                         <label class="form-check-label" for="requestCreateUserCheck">
                                             Lav en bruger med disse oplysninger
                                         </label>
@@ -503,10 +503,12 @@
                                 </div>
                                 <div class="col-md-12" id="requestCreateUserPassword" style="display: none;">
                                     <label for="inputPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword">
+                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Godkend</button>
+                                    <form action="CreatePersonController" method="post">
+                                    <button type="submit" class="btn btn-primary" name="submitPerson">Godkend</button>
+                                    </form>
                                 </div>
                             </form>
                         </div>
