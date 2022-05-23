@@ -17,9 +17,9 @@ public class OrderFacade {
     }
 
     @SneakyThrows
-    public static void createFullOrder(ConnectionPool connectionPool, User user, CarportRequest carportRequest, PartsList partsList, Orderitem orderitem) {
+    public static void createFullOrder(ConnectionPool connectionPool, User user, CarportRequest carportRequest, PartsList partsList) {
         OrderMapper orderMapper = new OrderMapper(connectionPool);
-        orderMapper.createFullOrder(user, carportRequest, partsList, orderitem);
+        orderMapper.createFullOrder(user, carportRequest, partsList);
 
     }
 

@@ -42,16 +42,7 @@ public class DashboardController extends HttpServlet {
             CarportRequest carportRequest = CarportRequestFacade.getCarportRequestByID(connectionPool, requestID);
             User user = carportRequest.getUser();
             PartsList partsList = PartsListFacade.getPartsList(connectionPool, carportRequest);
-            OrderFacade.createOrder(connectionPool, user);
-            int orderID = OrderFacade.getNewestOrderID(connectionPool);
-            Order order = new Order(orderID, user);
-            int price = 0;
-            for (PartsListItem parts: partsList.getPartsListItemArrayList() ) {
-                price+=parts.getParts().getPrice();
-            }
-
-            Orderitem orderitem = new Orderitem(order,price);
-            OrderFacade.createFullOrder(connectionPool, user, carportRequest, partsList, orderitem);
+            OrderFacade.createFullOrder(connectionPool, user, carportRequest, partsList);
 
         }else if(command.equals("Annuller")){
             CarportRequestFacade.deleteOrder(connectionPool, requestID);

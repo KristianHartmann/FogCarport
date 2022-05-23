@@ -12,7 +12,8 @@ public interface IOrderMapper {
     void createOrder(User user) throws DatabaseException, SQLException;
 
 
-    void createFullOrder(User user, CarportRequest request, PartsList list, Orderitem orderitem) throws SQLException, DatabaseException;
+
+    void createFullOrder(User user, CarportRequest request, PartsList list) throws SQLException, DatabaseException;
 
     void deleteOrder(int id) throws DatabaseException, SQLException;
 

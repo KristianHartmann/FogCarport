@@ -40,7 +40,7 @@ public class OrderMapper extends SuperMapper implements IOrderMapper {
 
 
     @Override
-    public void createFullOrder(User user, CarportRequest request, PartsList list, Orderitem orderitem) throws SQLException, DatabaseException {
+    public void createFullOrder(User user, CarportRequest request, PartsList list) throws SQLException, DatabaseException {
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         PartsListMapper partsListMapper = new PartsListMapper(connectionPool);
         PartsListItemMapper partsListItemMapper = new PartsListItemMapper(connectionPool);
@@ -53,8 +53,7 @@ public class OrderMapper extends SuperMapper implements IOrderMapper {
             partsListItemMapper.createPartsListItem(item, list.getPartslist_id());
         }
         Order order = new Order(getNewestOrderID(), user);
-        orderitem.setOrder(order);
-        orderItemMapper.createOrderItem(list.getPartslist_id(), orderitem);
+        orderItemMapper.createOrderItem(list, order);
     }
 
 

@@ -19,4 +19,14 @@ public class PartsListFacade {
     }
 
 
+    @SneakyThrows
+    public static int getPartsListSum(PartsList list) {
+        int totalPrice = 0;
+        for (PartsListItem listItem : list.getPartsListItemArrayList() ) {
+            totalPrice = totalPrice + (listItem.getParts().getPrice() * listItem.getAmount());
+        }
+        return totalPrice;
+    }
+
+
 }
