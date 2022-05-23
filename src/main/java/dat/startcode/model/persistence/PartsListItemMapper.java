@@ -61,4 +61,29 @@ public class PartsListItemMapper extends SuperMapper {
             }
         }
     }
+    public PartsList getPartsListByRequestID(int request_id) throws DatabaseException, SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        ArrayList<PartsListItem> partsListItemArrayList = null;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectPartsListItemsFromRequestID)) {
+                ps.setInt(1, request_id);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int amount = rs.getInt("amount");
+                    String itemDescription = rs.getString(2);
+                    String name = rs.getString("name");
+                    String partDescription = rs.getString(4);
+                    int length = rs.getInt("length");
+                    String unit = rs.getString("unit");
+                    int price = rs.getInt("price");
+                    PartsListItem partsListItem = new PartsListItem(new Parts(null, name, partDescription, length, unit, price), amount, itemDescription);
+                    partsListItemArrayList.add(partsListItem);
+                }
+                PartsList list = new PartsList();
+                list.setPartsListItemArrayList(partsListItemArrayList);
+                return list;
+            }
+        }
+    }
+
 }

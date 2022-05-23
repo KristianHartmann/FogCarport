@@ -31,6 +31,11 @@ public class SQLStatements {
             "FROM partslistitem pli\n" +
             "INNER JOIN parts p ON pli.parts_id = p.parts_id\n" +
             "WHERE pli.partslistitem_id = ?";
+    public static String selectPartsListItemsFromRequestID= "SELECT DISTINCT pli.amount, pli.`description`, p.`name`, p.`description`, p.length, p.unit, p.price\n" +
+            "\t\tFROM partslistitem pli\n" +
+            "\t\tINNER JOIN parts p ON pli.parts_id = p.parts_id\n" +
+            "        INNER JOIN partslist pl ON pli.partslist_id = pli.partslistitem_id\n" +
+            "\t\tWHERE pl.carport_request_id = '1'";
 
 
     // insert
