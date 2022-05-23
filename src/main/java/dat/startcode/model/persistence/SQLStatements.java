@@ -20,6 +20,7 @@ public class SQLStatements {
             "            INNER JOIN zipcode z on p.zipcode = z.zipcode";
     public static String selectAllOrderFromUserId = "select * from carport.order where user_id = ?";
     public static String selectAllOrder = "select * from carport.order";
+    public static String SelectAllPartsList = "select * from carport.partslist WHERE carport_request_id = (?)";
     public static String selectMaxOrder = "SELECT MAX(order_id) FROM carport.order;";
     public static String selectAllParts = "SELECT * FROM parts";
     public static String selectUserFromEmailAndPassword = "SELECT * FROM user WHERE email = ? AND password = ?";
@@ -45,9 +46,9 @@ public class SQLStatements {
     public static String insertOrder = "INSERT INTO carport.order (user_id) VALUES (?);";
     public static String insertUser = "insert into `user` (email, password, role) values (?,?,?);";
     public static String insertCarportRequest = "insert into carport.carport_request (length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email) values (?,?,?,?,?,?,?);";
-    public static String insertPartsList = "insert into carport.partslist(carport_request_id) values (?)";
+    public static String insertPartsList = "insert into carport.partslist (carport_request_id) values (?)";
     public static String insertPartsListItem = "INSERT INTO partslistitem (amount, description, partslist_id, parts_id) VALUES (?, ?, ?, ?);";
-    public static String insertOrderItem = "INSERT INTO `carport`.`orderitem` (`partslist_id`, `price`, `order_id`) VALUES ('?', '?', '?');";
+    public static String insertOrderItem = "INSERT INTO `carport`.`orderitem` (`partslist_id`, `price`, `order_id`) VALUES (?, ?, ?);";
 
     // update
     public static String  updateUserPasswordById= "UPDATE carport.user SET password = '?' WHERE carport.user.id = '?'";

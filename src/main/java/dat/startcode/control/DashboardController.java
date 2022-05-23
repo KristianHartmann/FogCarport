@@ -37,19 +37,15 @@ public class DashboardController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("Handle");
-        int requestID = Integer.parseInt(request.getParameter("requestID"));
+        int requestID = Integer.parseInt(request.getParameter("orderID"));
         if(command.equals("Godkend")){
             CarportRequest carportRequest = CarportRequestFacade.getCarportRequestByID(connectionPool, requestID);
-            User user = carportRequest.getUser();
             PartsList partsList = PartsListFacade.getPartsList(connectionPool, carportRequest);
-            OrderFacade.createFullOrder(connectionPool, user, carportRequest, partsList);
-
+            OrderFacade.createFullOrder(connectionPool, carportRequest.getUser(), carportRequest, partsList);
         }else if(command.equals("Annuller")){
             CarportRequestFacade.deleteOrder(connectionPool, requestID);
         }
         request.getRequestDispatcher("dashboard.jsp").forward(request,response);
-
-
     }
 
 }

@@ -2,6 +2,7 @@ package dat.startcode.model.persistence;
 
 import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
+import dat.startcode.model.services.PartslistGenerator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,19 +42,17 @@ public class OrderMapper extends SuperMapper implements IOrderMapper {
 
     @Override
     public void createFullOrder(User user, CarportRequest request, PartsList list) throws SQLException, DatabaseException {
-        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         PartsListMapper partsListMapper = new PartsListMapper(connectionPool);
         PartsListItemMapper partsListItemMapper = new PartsListItemMapper(connectionPool);
         OrderItemMapper orderItemMapper = new OrderItemMapper(connectionPool);
 
-        createOrder(user);
-        carportRequestMapper.createCarportrequest(request);
-        partsListMapper.createPartsList(request);
-        for (PartsListItem item : list.getPartsListItemArrayList()) {
-            partsListItemMapper.createPartsListItem(item, list.getPartslist_id());
-        }
-        Order order = new Order(getNewestOrderID(), user);
-        orderItemMapper.createOrderItem(list, order);
+            partsListMapper.createPartsList(request);
+            createOrder(user);
+            for (PartsListItem item : list.getPartsListItemArrayList()) {
+                partsListItemMapper.createPartsListItem(item, list.getPartslist_id());
+            }
+            Order order = new Order(getNewestOrderID(), user);
+            orderItemMapper.createOrderItem(list, order);
     }
 
 

@@ -5,6 +5,7 @@ import dat.startcode.model.entities.PartsList;
 import dat.startcode.model.entities.PartsListItem;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.PartsListMapper;
 import dat.startcode.model.persistence.UserMapper;
 import lombok.SneakyThrows;
 
@@ -15,7 +16,15 @@ public class PartsListFacade {
     @SneakyThrows
     public static  PartsList getPartsList(ConnectionPool connectionPool, CarportRequest request) {
         PartslistGenerator generator = new PartslistGenerator(connectionPool);
-        return generator.generateFlatroofPartsList(request);
+        PartsList list = generator.generateFlatroofPartsList(request);
+        PartsListMapper mapper = new PartsListMapper(connectionPool);
+        if(mapper.getPartsListIDByRequestID(request) != 0){
+            list.setPartslist_id(mapper.getPartsListIDByRequestID(request));
+        } else{
+            mapper.createPartsList(request);
+            list.setPartslist_id(mapper.getPartsListIDByRequestID(request));
+        }
+        return list;
     }
 
 

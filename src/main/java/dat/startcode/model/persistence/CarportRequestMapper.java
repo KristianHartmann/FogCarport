@@ -41,6 +41,7 @@ public class CarportRequestMapper extends SuperMapper {
                             String password = rs2.getString("password");
                             String email = rs2.getString("email");
                             carportRequest = new CarportRequest(length, width, rooftype, roofpitch, toolbox_length, toolbox_width, new User(user_id, role, balance, password, email));
+                            carportRequest.setCarport_request_id(carport_request_id);
                             return carportRequest;
                         }
                     }
