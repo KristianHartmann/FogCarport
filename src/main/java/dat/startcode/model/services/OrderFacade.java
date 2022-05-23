@@ -14,5 +14,11 @@ public class OrderFacade {
         return orderMapper.getAllOrders();
     }
 
+    @SneakyThrows
+    public static void createFullOrder(ConnectionPool connectionPool){
+        OrderMapper orderMapper = new OrderMapper(connectionPool);
+        orderMapper.createFullOrder();
+    }
+
 
 }

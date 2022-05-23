@@ -4,10 +4,12 @@ import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.CarportRequest;
 import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.Person;
+import dat.startcode.model.entities.User;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.services.CarportRequestFacade;
 import dat.startcode.model.services.OrderFacade;
 import dat.startcode.model.services.PersonFacade;
+import dat.startcode.model.services.UserFacade;
 import lombok.SneakyThrows;
 
 import javax.servlet.*;
@@ -20,10 +22,10 @@ import java.util.ArrayList;
 public class DashboardController extends HttpServlet {
     private ConnectionPool connectionPool;
 
-    public DashboardController()
-    {
+    public DashboardController() {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
+
     @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,6 +42,10 @@ public class DashboardController extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String command = request.getParameter("Handle");
+        int requestID = Integer.parseInt(request.getParameter("requestID"));
+        CarportRequest carportRequest = CarportRequestFacade.getCarportRequestByID(connectionPool, requestID);
+        User user = carportRequest.getUser();
 
     }
 }

@@ -16,4 +16,9 @@ public class CarportRequestFacade {
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         return carportRequestMapper.getAllCarportRequest();
     }
+
+    public static CarportRequest getCarportRequestByID(ConnectionPool connectionPool, int ID) throws SQLException {
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        return carportRequestMapper.getCarportRequestById(ID);
+    }
 }
