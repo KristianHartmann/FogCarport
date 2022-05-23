@@ -7,6 +7,8 @@ public class SQLStatements {
     // delete
     public static String deleteOrderItem = "DELETE FROM orderitem WHERE order_id = ?;";
     public static String deleteOrder = "DELETE FROM `order` WHERE order_id = ?;";
+    public static String deleteCarportRequest = "delete from carport.carport_request" +
+            "where carport_request_id = ?;";
 
 
     // select

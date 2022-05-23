@@ -1,15 +1,9 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
-import dat.startcode.model.entities.CarportRequest;
-import dat.startcode.model.entities.Order;
-import dat.startcode.model.entities.Person;
-import dat.startcode.model.entities.User;
+import dat.startcode.model.entities.*;
 import dat.startcode.model.persistence.ConnectionPool;
-import dat.startcode.model.services.CarportRequestFacade;
-import dat.startcode.model.services.OrderFacade;
-import dat.startcode.model.services.PersonFacade;
-import dat.startcode.model.services.UserFacade;
+import dat.startcode.model.services.*;
 import lombok.SneakyThrows;
 
 import javax.servlet.*;
@@ -44,8 +38,27 @@ public class DashboardController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("Handle");
         int requestID = Integer.parseInt(request.getParameter("requestID"));
-        CarportRequest carportRequest = CarportRequestFacade.getCarportRequestByID(connectionPool, requestID);
-        User user = carportRequest.getUser();
+        if(command.equals("Godkend")){
+            CarportRequest carportRequest = CarportRequestFacade.getCarportRequestByID(connectionPool, requestID);
+            User user = carportRequest.getUser();
+            PartsList partsList = PartsListFacade.getPartsList(connectionPool, carportRequest);
+            OrderFacade.createOrder(connectionPool, user);
+            int orderID = OrderFacade.getNewestOrderID(connectionPool);
+            Order order = new Order(orderID, user);
+            int price = 0;
+            for (PartsListItem parts: partsList.getPartsListItemArrayList() ) {
+                price+=parts.getParts().getPrice();
+            }
+
+            Orderitem orderitem = new Orderitem(order,price);
+            OrderFacade.createFullOrder(connectionPool, user, carportRequest, partsList, orderitem);
+
+        }else if(command.equals("Annuller")){
+            CarportRequestFacade.deleteOrder(connectionPool, requestID);
+        }
+        request.getRequestDispatcher("dashboard.jsp").forward(request,response);
+
 
     }
+
 }

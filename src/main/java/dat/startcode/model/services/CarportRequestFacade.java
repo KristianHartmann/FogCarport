@@ -6,6 +6,7 @@ import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.CarportRequestMapper;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.UserMapper;
+import lombok.SneakyThrows;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,5 +21,10 @@ public class CarportRequestFacade {
     public static CarportRequest getCarportRequestByID(ConnectionPool connectionPool, int ID) throws SQLException {
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         return carportRequestMapper.getCarportRequestById(ID);
+    }
+    @SneakyThrows
+    public static void deleteOrder(ConnectionPool connectionPool, int ID){
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        carportRequestMapper.deleteCarportRequest(ID);
     }
 }
