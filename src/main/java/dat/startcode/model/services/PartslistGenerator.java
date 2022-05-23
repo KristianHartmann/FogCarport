@@ -47,22 +47,22 @@ public class PartslistGenerator {
 
 
 
-//    FOR TESTING
-//    public static void main(String[] args) throws DatabaseException {
-//        CarportRequest request = new CarportRequest(780, 600, "flat", 25, 210, 530, null);
-//        ConnectionPool connectionPool = new ConnectionPool();
-//
-//        PartslistGenerator generator = new PartslistGenerator(connectionPool);
-//        PartsList test = generator.generateFlatroofPartsList(request);
-//        PartsList test2 = generator.generateRaisedroofPartsList(request);
-//        ArrayList<PartsListItem> itemList = test.getPartsListItemArrayList();
-//        ArrayList<PartsListItem> itemList2 = test2.getPartsListItemArrayList();
-//
-////        for (PartsListItem item : itemList) {
-////            System.out.println("Description: "+ item.getDescription() + " amount: " + item.getAmount() + " part name: " + item.getParts().getName());
-////        }
+    // FOR TESTING
+    public static void main(String[] args) throws DatabaseException {
+        CarportRequest request = new CarportRequest(780, 600, "flat", 25, 210, 530, null);
+        ConnectionPool connectionPool = new ConnectionPool();
+
+        PartslistGenerator generator = new PartslistGenerator(connectionPool);
+        PartsList test = generator.generateFlatroofPartsList(request);
+        PartsList test2 = generator.generateRaisedroofPartsList(request);
+        ArrayList<PartsListItem> itemList = test.getPartsListItemArrayList();
+        ArrayList<PartsListItem> itemList2 = test2.getPartsListItemArrayList();
+
+        for (PartsListItem item : itemList) {
+            System.out.println("Description: "+ item.getDescription() + " amount: " + item.getAmount() + " part name: " + item.getParts().getName());
+        }
 //        for (PartsListItem item : itemList2) {
 //            System.out.println("Description: "+ item.getDescription() + " amount: " + item.getAmount() + " part name: " + item.getParts().getName());
 //        }
-//    }
+    }
 }

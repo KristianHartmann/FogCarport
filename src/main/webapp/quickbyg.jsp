@@ -22,9 +22,7 @@
                     <a class="list-group-item list-group-item-action active" id="list-qb-list" data-bs-toggle="list"
                        href="#list-qb" role="tab" aria-controls="list-qb">QUICKBYG</a>
                     <a class="list-group-item list-group-item-action" id="list-cpur-list" data-bs-toggle="list"
-                       href="#list-cpur" role="tab" aria-controls="list-cpur">CARPORT MED FLADT TAG</a>
-                    <a class="list-group-item list-group-item-action" id="list-cpmr-list" data-bs-toggle="list"
-                       href="#list-cpmr" role="tab" aria-controls="list-cpmr">CARPORT MED REJSNING</a>
+                       href="#list-cpur" role="tab" aria-controls="list-cpur">CARPORT MED EGNE MÅL</a>
                     <a class="list-group-item list-group-item-action" id="list-stcp-list" data-bs-toggle="list"
                        href="#list-stcp" role="tab" aria-controls="list-stcp">STANDARD CARPORTE</a>
                 </div>
@@ -59,69 +57,112 @@
                     </div>
                     <div class="tab-pane fade" id="list-cpur" role="tabpanel" aria-labelledby="list-cpur-list">
                         <div class="row">
-                            <h3>QUICK-BYG TILBUD - CARPORT MED FLADT TAG</h3>
+                            <h3>QUICK-BYG TILBUD - CARPORT MED EGNE MÅL</h3>
                             <p>Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en
                                 skitsetegning på en carport indenfor vores standardprogram.
 
                                 Tilbud og skitsetegning fremsendes med post hurtigst muligt.
-                                Standardbyggevejledning medfølger ved bestilling.</p>
-                            <p><strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
+                                Standardbyggevejledning medfølger ved bestilling.<br>
+                                <strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
                                 Felter markeret * SKAL udfyldes!</p>
                             <p>Ønsket carport mål:</p>
-                            <form action="TestServlet" id="confirmOrderForm" method="post">
-                                <div class="form-group">
+                            <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation"
+                                  style="width: 50%;">
+                                <div class="form-group mb-2">
                                     <label for="cpwidth">Carport bredde:</label>
-                                    <select class="form-control" id="cpwidth" name="cpwidth">
+                                    <select class="form-control" id="cpwidth" name="cpwidth" onchange="checkShed()">
                                         <option value="0" selected hidden>Vælg bredde</option>
                                         <c:forEach begin="240" end="600" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-2">
                                     <label for="cplength">Carport længde:</label>
-                                    <select class="form-control" id="cplength" name="cplength">
+                                    <select class="form-control" id="cplength" name="cplength" onchange="checkShed()">
                                         <option value="0" selected hidden>Vælg længde</option>
                                         <c:forEach begin="240" end="780" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <p><strong>Redskabsrum:</strong><br>
-                                    NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet*</p>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
-                                           id="cpshed">
-                                    <label class="form-check-label" for="cpshed">Tilføj redskabskur</label>
+                                <div class="form-check mb-2 form-switch">
+                                    <input class="form-check-input" onchange="showRaised()" type="checkbox"
+                                           role="switch"
+                                           id="isRaised" name="isRaised">
+                                    <label class="form-check-label" for="isRaised" id="isRaisedLabel">Med
+                                        rejsning</label>
                                 </div>
-                                <div class="form-group" id="cpshedwidthdiv" style="display: none">
-                                    <label for="cpshedwidth">Redskabsrum bredde:</label>
-                                    <select class="form-control" id="cpshedwidth" name="cpshedwidth">
-                                        <option value="0" selected hidden>Vælg bredde</option>
-                                        <c:forEach begin="240" end="530" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
+                                <div class="form-group mb-2" id="raisedRoofdiv" style="display: none">
+                                    <label for="rooftype">Tag:</label>
+                                    <select class="form-control" id="rooftype" name="rooftype">
+                                        <option value=" " selected hidden>Vælg tagtype</option>
+                                    </select>
+                                    <label for="roofangle">Taghældning</label>
+                                    <select class="form-control" id="roofangle" name="roofangle">
+                                        <option value="0" selected hidden>Vælg hældning</option>
+                                        <c:forEach begin="15" end="45" step="5" var="i">
+                                            <option value="${i}">${i} grader</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <div class="form-group" id="cpshedlengthdiv" style="display: none">
+                                <div class="form-check mb-2 form-switch">
+                                    <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
+                                           id="isShed" name="isShed" disabled>
+                                    <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj redskabskur
+                                        (vælg længde og bredde først!)</label>
+                                </div>
+                                <div class="form-group mb-2" id="cpshedwidthdiv" style="display: none">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">1/4 Skur</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">2/4 Skur</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio3" value="option3">
+                                        <label class="form-check-label" for="inlineRadio3">3/4 Skur</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                               id="inlineRadio4" value="option3">
+                                        <label class="form-check-label" for="inlineRadio3">4/4 Skur</label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-2" id="cpshedlengthdiv" style="display: none">
                                     <label for="cpshedlength">Redskabsrum længde:</label>
                                     <select class="form-control" id="cpshedlength" name="cpshedlength">
                                         <option value="0" selected hidden>Vælg længde</option>
-                                        <c:forEach begin="150" end="390" var="i" step="30">
-                                            <option value="${i}">${i} cm</option>
+                                        <c:forEach begin="90" end="390" var="i" step="30">
+                                            <option value="${i}" >${i} cm</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <button type="submit"
-                                        class="btn btn-primary">Bestil
-                                </button>
-                                <p>* Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet
-                                    maksimalt måle <strong>210x330 cm.</strong></p>
+                                <c:choose>
+                                    <c:when test="${sessionScope.containsKey('user')}">
+                                        <button type="submit"
+                                                class="btn btn-primary">Bestil
+                                        </button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                              data-bs-trigger="hover focus"
+                                              data-bs-content="Log ind for at bestille direkte">
+                                            <button type="button"
+                                                    class="btn btn-secondary" disabled>Bestil
+                                            </button>
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal" class="btn btn-primary">Forspørg</button>
+                                <p id="textForBtns" class="mt-3">Bestil direkte eller send forspørgelse til Fog</p>
                             </form>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="list-cpmr" role="tabpanel" aria-labelledby="list-cpmr-list">
-                        <h1>under construction</h1>
                     </div>
                     <div class="tab-pane fade" id="list-stcp" role="tabpanel" aria-labelledby="list-stcp-list">
                         <div class="row">
@@ -190,7 +231,7 @@
                                             de mål du ønsker.
                                             Tilbud og skitsetegning fremsendes med post hurtigst muligt.</p>
                                     </div>
-                                 </div>
+                                </div>
                                 <h4 id="scrollspyHeading2">Dobbelt Carport</h4>
                                 <hr class="mt-0">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique, ligula
@@ -203,7 +244,9 @@
                                     vulputate tortor.
 
                                     Proin ullamcorper vestibulum sem, ut commodo ante malesuada a. Quisque ac magna non
-                                    neque sagittis luctus. Sed tempor tellus ligula, non <pharetr></pharetr>a urna auctor in.
+                                    neque sagittis luctus. Sed tempor tellus ligula, non
+                                    <pharetr></pharetr>
+                                    a urna auctor in.
                                     Vestibulum suscipit fermentum arcu, at bibendum libero egestas in. Pellentesque
                                     imperdiet, mi et euismod porttitor, metus ante ultrices erat, ac maximus tortor
                                     lacus a ligula. Fusce efficitur magna molestie sapien suscipit, sed dignissim mi
@@ -235,7 +278,8 @@
                                     eu dignissim diam. Sed et venenatis magna. Etiam aliquam massa id sem ultrices
                                     lacinia. Donec tincidunt, urna eu rhoncus pulvinar, felis nisl vulputate neque,
                                     vitae pellentesque urna est ac eros. Praesent felis dui, tincidunt non consectetur
-                                    ac, dapibus sit amet arcu.</p>
+                                    ac, dapibus sit amet arcu.
+                                </p>
                                 <h4 id="scrollspyHeading3">Third heading</h4>
                                 <hr>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique, ligula
@@ -351,7 +395,7 @@
             </div>
         </div>
 
-        <%-- Modals --%>
+        <%-- BestilModal --%>
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -386,43 +430,86 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-                        <a class="btn btn-info dropdown-toggle" data-bs-toggle="collapse" href="#table-container"
-                           role="button" aria-expanded="false" aria-controls="collapseExample">Vis stykliste</a>
-                        <div id="table-container" class="collapse">
-                            <table class="table caption-top">
-                                <caption>StykListe</caption>
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div style="font-size: 10px; text-align: start">
+                            <p>* Mål udvendig på stolper<br>
+                                ** Afstand fra stern ved H = 250cm<br>
+                                *** Mål overkant rem</p>
+                            <p>Stolpe 100x100 Trikimprægneret<br>
+                                Rem 45x195 Spærtræ<br>
+                                Spær 45x195 Reglar<br>
+                                Tag Plasttrapez<br>
+                                Stern 25x100 Trykimprægneret<br>
+                                Beklædning 16x100 Trykimprægneret<br>
+                                Ekstra stolpe til brug for valgfri placering af dør i udehus medfølger Incl. Søm, skruer
+                                og
+                                beslag</p>
                         </div>
                         <p id="ajaxtest"></p>
-                        <button type="button" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+<%--                        <form action="PartslistController" method="post">--%>
+                            <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+<%--                        </form>--%>
+                        <button type="button" style="width: 50%" data-bs-dismiss="modal"
+                                class="btn btn-secondary mt-2 py-2">Annuller
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="text-muted">&copy; Johannes Fog A/S</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%--    ForspørgelsesModal    --%>
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="requestModalLabel">Kontakt info</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="inputEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="inputEmail">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputName" class="form-label">Navn</label>
+                                    <input type="text" class="form-control" id="inputName">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
+                                    <input type="number" class="form-control" id="inputPhonenumber">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputAddress" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="Jensjensensvej 9" name="contactaddress">
+                                </div>
+                                <div class="col-md-10">
+                                    <label for="inputCity" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="inputCity" name="contactcity">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="inputZip" class="form-label">Zip</label>
+                                    <input type="text" class="form-control" id="inputZip" name="contactzip">
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()" id="requestCreateUserCheck">
+                                        <label class="form-check-label" for="requestCreateUserCheck">
+                                            Lav en bruger med disse oplysninger
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="requestCreateUserPassword" style="display: none;">
+                                    <label for="inputPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="inputPassword">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Godkend</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <p class="text-muted">&copy; Johannes Fog A/S</p>

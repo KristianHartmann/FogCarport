@@ -36,7 +36,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="${pageContext.request.contextPath}/carport.jsp" class="nav-link text-white">
+                            <a href="${pageContext.request.contextPath}/quickbyg.jsp" class="nav-link text-white">
                                 Quick-byg
                             </a>
                         </li>
@@ -70,18 +70,19 @@
                 <div class="text-end">
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
-                            <form action="Logout" method="post"  class="btn btn-light text-dark" >
-                                <label></label>
-                                <input type="submit"value="Logout" class="btn btn-light text-dark" >
+                            <form method="post" style="display: inline-block">
+                                <button type="submit" formaction="Logout" class="btn btn-light text-dark">Logout</button>
                             </form>
+                            <form method="post" style="display: inline-block" id="balanceForm">
                             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownBalanceMenu"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                 Balance: ${sessionScope.user.balance}kr,-
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownBalanceMenu">
-                                <li><a class="dropdown-item" href="#">Tilføj penge</a></li>
-                                <li><a class="dropdown-item" href="#">Fjern penge</a></li>
+                                <li><button type="button" class="dropdown-item">Tilføj penge</button></li>
+                                <li><button type="button" class="dropdown-item">Fjern penge</button></li>
                             </ul>
+                            </form>
                         </c:when>
                         <c:otherwise>
                             <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
@@ -95,7 +96,7 @@
         </div>
     </header>
 
-    <div id="body" class="container-fluid" style="height: calc(100vh - calc(146.27px + 81.08px + 1rem));">
+    <div id="body" class="container-fluid">
         <jsp:doBody/>
     </div>
 
@@ -156,6 +157,7 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="./webjars/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="./webjars/jquery.ajax/1.2.0/src/jquery.ajaxs.js"></script>
+<script src="./webjars/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script type="text/javascript" rel="script" src="${pageContext.request.contextPath}/js/script.js"></script>
 </body>
 </html>
