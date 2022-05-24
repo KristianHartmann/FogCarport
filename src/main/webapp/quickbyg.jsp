@@ -178,7 +178,9 @@
                                         </span>
                                     </c:otherwise>
                                 </c:choose>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal" class="btn btn-primary">Forspørg</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal"
+                                        class="btn btn-primary">Forspørg
+                                </button>
                                 <p id="textForBtns" class="mt-3">Bestil direkte eller send forspørgelse til Fog</p>
                             </form>
                         </div>
@@ -487,7 +489,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form class="row g-3">
+                            <form class="row g-3" action="QuickbygController" method="post">
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="inputEmail" name="inputEmail">
@@ -498,11 +500,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
-                                    <input type="number" class="form-control" id="inputPhonenumber" name="inputPhonenumber">
+                                    <input type="number" class="form-control" id="inputPhonenumber"
+                                           name="inputPhonenumber">
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Jensjensensvej 9" name="inputAddress">
+                                    <input type="text" class="form-control" id="inputAddress"
+                                           placeholder="Jensjensensvej 9" name="inputAddress">
                                 </div>
                                 <div class="col-md-10">
                                     <label for="inputCity" class="form-label">City</label>

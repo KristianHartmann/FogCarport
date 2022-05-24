@@ -44,30 +44,17 @@ public class UserMapper extends SuperMapper implements IUserMapper {
     public User createUser(String email, String password, String role) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         User user;
-        String getEmailFromPerson = "select email from person where email = '" + email + "'";
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(getEmailFromPerson)) {
-                int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1) {
-                    try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.insertUser)) {
-                        ResultSet rs = ps.executeQuery();
-                        if (!rs.next()) {
-                            return null;
-                        } else {
-                            ps2.setString(1, rs.getString("email"));
-                            ps2.setString(2, password);
-                            ps2.setString(3, role);
-                        }
-                        int rowsAffected2 = ps2.executeUpdate();
-                        if (rowsAffected2 == 1) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.insertUser)) {
+                        ps.setString(1, email);
+                        ps.setString(2, password);
+                        ps.setString(3, role);
+                        int rowsAffected = ps.executeUpdate();
+                        if (rowsAffected == 1) {
                             user = new User(email, password, role);
                         } else {
                             throw new DatabaseException("The user with email = " + email + " could not be inserted into the database");
                         }
-                    }
-                } else {
-                    throw new DatabaseException("Could not find a person with this email.");
-                }
             }
         } catch (SQLException ex) {
             throw new DatabaseException(ex, "Failed");

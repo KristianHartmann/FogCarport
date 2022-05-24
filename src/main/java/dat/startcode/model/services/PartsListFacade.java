@@ -35,6 +35,15 @@ public class PartsListFacade {
             totalPrice = totalPrice + (listItem.getParts().getPrice() * listItem.getAmount());
         }
         return totalPrice;
+    }    @SneakyThrows
+    public static void createPartsList(ConnectionPool connectionPool, CarportRequest request) {
+        PartsListMapper mapper = new PartsListMapper(connectionPool);
+        mapper.createPartsList(request);
+    }
+    @SneakyThrows
+    public static int getNewestPartsList(ConnectionPool connectionPool) {
+        PartsListMapper mapper = new PartsListMapper(connectionPool);
+        return mapper.getNewestPartsList();
     }
 
 

@@ -5,6 +5,7 @@ import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.CarportRequestMapper;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.PartsListMapper;
 import dat.startcode.model.persistence.UserMapper;
 import lombok.SneakyThrows;
 
@@ -36,5 +37,19 @@ public class CarportRequestFacade {
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
        return carportRequestMapper.getCarportRequestByPartsListId(partslistID);
     }
+
+    @SneakyThrows
+    public static void createCartportRequest(ConnectionPool connectionPool, CarportRequest request) throws SQLException {
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        carportRequestMapper.createCarportrequest(request);
+    }
+
+    @SneakyThrows
+    public static int getNewestCarportRequest(ConnectionPool connectionPool) {
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        return carportRequestMapper.getNewestCarportRequest();
+    }
+
+
 }
 

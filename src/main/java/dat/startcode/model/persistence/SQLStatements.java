@@ -31,6 +31,8 @@ public class SQLStatements {
     public static String selectAllOrderItemByOrderID = "SELECT * FROM carport.orderitem where order_id = ?";
     public static String SelectAllPartsList = "select * from carport.partslist WHERE carport_request_id = (?)";
     public static String selectMaxOrder = "SELECT MAX(order_id) FROM carport.order;";
+    public static String selectMaxPartslist = "SELECT MAX(partslist_id) FROM carport.partslist;";
+    public static String getNewestCarportRequest = "SELECT MAX(carport_request_id) FROM carport.carport_request;";
     public static String selectAllParts = "SELECT * FROM parts";
     public static String selectUserFromEmailAndPassword = "SELECT * FROM user WHERE email = ? AND password = ?";
     public static String selectAllUserFromUserID= "select * from carport.user where user_id = ?";

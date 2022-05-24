@@ -57,26 +57,23 @@ public class CarportRequestMapper extends SuperMapper {
         CarportRequest carportRequest;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.insertCarportRequest)) {
-                try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.selectAllUser)) {
-                    ps.setInt(2, request.getLength());
-                    ps.setInt(3, request.getWidth());
-                    ps.setString(4, request.getRooftype());
-                    ps.setInt(5, request.getRoofpitch());
-                    ps.setInt(6, request.getToolbox_length());
-                    ps.setInt(7, request.getToolbox_width());
-                    ps.setString(8, request.getUser().getEmail());
-                    int rowsAffected = ps.executeUpdate();
-                    if (rowsAffected == 1) {
-                        throw new SQLException("Failed");
-                    } else {
-                        throw new DatabaseException("Could not find a person with this email.");
-                    }
+                ps.setInt(1, request.getLength());
+                ps.setInt(2, request.getWidth());
+                ps.setString(3, request.getRooftype());
+                ps.setInt(4, request.getRoofpitch());
+                ps.setInt(5, request.getToolbox_length());
+                ps.setInt(6, request.getToolbox_width());
+                ps.setString(7, request.getUser().getEmail());
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 1) {
+                    System.out.println("success");
+                } else {
+                    throw new DatabaseException("Could not find a person with this email.");
                 }
             }
-        } catch (SQLException | DatabaseException ex) {
-            throw new DatabaseException(ex, "Failed");
         }
-    }
+}
+
 
     public ArrayList<CarportRequest> getAllCarportRequest() throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
@@ -146,11 +143,25 @@ public class CarportRequestMapper extends SuperMapper {
                     int toolbox_length = rs.getInt("toolbox_length");
                     int toolbox_width = rs.getInt("toolbox_width");
                     String email = rs.getString("email");
-                    carportRequest = new CarportRequest(id, length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email );
+                    carportRequest = new CarportRequest(id, length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email);
                     return carportRequest;
                 }
             }
         }
         return null;
     }
+
+    public int getNewestCarportRequest() throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.getNewestCarportRequest)) {
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int partsListID = rs.getInt(1);
+                    return partsListID;
+                }
+            }
+        } return Integer.parseInt(null);
+    }
+
 }

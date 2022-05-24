@@ -6,9 +6,7 @@ import dat.startcode.model.entities.PartsList;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
-import dat.startcode.model.services.PartslistGenerator;
-import dat.startcode.model.services.SideView;
-import dat.startcode.model.services.TopView;
+import dat.startcode.model.services.*;
 import lombok.SneakyThrows;
 import org.json.JSONObject;
 
@@ -51,14 +49,25 @@ public class TestServlet extends HttpServlet {
         boolean isShed = request.getParameterMap().containsKey("isShed");
         int toolLength = ((isShed) ? Integer.parseInt(request.getParameter("cpshedlength")) : 0);
         int toolWidth = ((isShed) ? (int) Float.parseFloat(request.getParameter("cpshedwidth")) : 0);
+        String rooftype;
+        if(request.getParameter("isRaised") == null){
+            rooftype = "flat";
+        } else{
+            rooftype = "raised";
+        }
         int roofPitch = 0;
-        String roofType = "plast";
-        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, roofType, roofPitch, toolLength, toolWidth, user);
+        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, user);
         PartsList list = generator.generateFlatroofPartsList(carportRequest);
         SideView sideView = new SideView(list, cplength, toolLength, isShed);
         TopView topview = new TopView(cplength, cpwidth, isShed, toolLength, toolWidth, list);
         jsonObject.put("sideview", sideView.svgSideGen());
         jsonObject.put("topview", topview.svgTopViewGen());
+
+        CarportRequestFacade.createCartportRequest(connectionPool,carportRequest);
+        carportRequest.setCarport_request_id(CarportRequestFacade.getNewestCarportRequest(connectionPool));
+        PartsListFacade.createPartsList(connectionPool, carportRequest);
+        list.setPartslist_id(PartsListFacade.getNewestPartsList(connectionPool));
+        OrderFacade.createFullOrder(connectionPool, user, carportRequest, list);
 
         PrintWriter out = response.getWriter(); // vi får fat i en writer så vi kan skrive til vores response
         response.setContentType("application/json"); // vi sørger her for at vores response kan tage og håndtere json
