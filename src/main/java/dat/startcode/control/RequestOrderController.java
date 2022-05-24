@@ -3,7 +3,6 @@ package dat.startcode.control;
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.CarportRequest;
 import dat.startcode.model.entities.PartsList;
-import dat.startcode.model.entities.Person;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
@@ -44,9 +43,9 @@ public class RequestOrderController extends HttpServlet {
 
         JSONObject jsonObject = new JSONObject();
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         PartslistGenerator generator = new PartslistGenerator(connectionPool);
-        PartsList list;
-        User user = null;
+
         int cplength = Integer.parseInt(request.getParameter("cplength"));
         int cpwidth = Integer.parseInt(request.getParameter("cpwidth"));
         boolean isShed = request.getParameterMap().containsKey("isShed");
@@ -59,39 +58,24 @@ public class RequestOrderController extends HttpServlet {
             rooftype = "raised";
         }
         int roofPitch = 0;
-        CarportRequest carportRequest;
-        if(isRequest.equals("request")){
-            String email = request.getParameter("inputEmail");
-            String name = request.getParameter("inputName");
-            String phonenr = request.getParameter("inputPhonenumber");
-            String address = request.getParameter("inputAddress");
-            int zip = Integer.parseInt(request.getParameter("inputZip"));
+        CarportRequest carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, user);
+        PartsList list = generator.generateFlatroofPartsList(carportRequest);
+        SideView sideView = new SideView(list, cplength, toolLength, isShed);
+        TopView topview = new TopView(cplength, cpwidth, isShed, toolLength, toolWidth, list);
+        jsonObject.put("sideview", sideView.svgSideGen());
+        jsonObject.put("topview", topview.svgTopViewGen());
 
-            boolean createUser = request.getParameterMap().containsKey("requestCreateUserCheck");
-            PersonFacade.createPerson(email, address, name, phonenr, zip, connectionPool);
-            if(createUser){
-                String password = request.getParameter("inputPassword");
-                user = new User("customer", password, email);
-                UserFacade.createUser(user.getEmail(), user.getPassword(), user.getRole(), connectionPool);
-                carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, user);
-            }else {
-                carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, email);
-            }
-            CarportRequestFacade.createCartportRequestEmail(connectionPool,carportRequest, email);
-            jsonObject.put("request", "true");
-        }else{
-            user = (User) session.getAttribute("user");
-            carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, user);
+        if (isRequest.equals("request")){
+            CarportRequestFacade.createCartportRequest(connectionPool,carportRequest);
             carportRequest.setCarport_request_id(CarportRequestFacade.getNewestCarportRequest(connectionPool));
             PartsListFacade.createPartsList(connectionPool, carportRequest);
-            list = generator.generateFlatroofPartsList(carportRequest);
+            jsonObject.put("request", "true");
+        }else if (isRequest.equals("order")){
             list.setPartslist_id(PartsListFacade.getNewestPartsList(connectionPool));
             OrderFacade.createFullOrder(connectionPool, user, carportRequest, list);
             jsonObject.put("request", "false");
-            SideView sideView = new SideView(list, cplength, toolLength, isShed);
-            TopView topview = new TopView(cplength, cpwidth, isShed, toolLength, toolWidth, list);
-            jsonObject.put("sideview", sideView.svgSideGen());
-            jsonObject.put("topview", topview.svgTopViewGen());
+        }else{
+            throw new SQLException("noget gik galt med dit hidden input");
         }
 
         PrintWriter out = response.getWriter(); // vi får fat i en writer så vi kan skrive til vores response

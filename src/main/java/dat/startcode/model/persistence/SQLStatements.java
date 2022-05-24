@@ -14,6 +14,10 @@ public class SQLStatements {
     public static String selectCarportRequestByID = "select * from carport.carport_request where carport_request_id = ?";
     public static String selectAllCarportRequest = "SELECT * FROM carport.carport_request;";
     public static String selectAllUser = "select * from carport.user";
+    public static String isPersonAUser = "Select u.email, p.email\n" +
+            "FROM person p\n" +
+            "INNER JOIN `user` u on u.email = p.email\n" +
+            "WHERE p.email = ?";
     public static String isRequestApproved = "Select carport_request.carport_request_id, partslist.partslist_id \n" +
             "FROM carport_request \n" +
             "INNER JOIN partslist on partslist.carport_request_id = carport_request.carport_request_id\n" +
@@ -62,8 +66,8 @@ public class SQLStatements {
 
     // update
     public static String  updateUserPasswordById= "UPDATE carport.user SET password = '?' WHERE carport.user.id = '?'";
-    public static String  removeUserBalance = "UPDATE `carport`.`user` SET balance = balance - ? WHERE user_id = ?;";
-    public static String  addUserBalanace = "UPDATE `carport`.`user` SET balance = balance + ? WHERE user_id = ?;";
+    public static String  removeUserBalance = "UPDATE `carport`.`user` SET `balance` = `balance` + -? WHERE (`user_id` = ?);\n";
+    public static String  addUserBalanace = "UPDATE `carport`.`user` SET `balance` = `balance` +? WHERE (`user_id` = ?);";
 
 
 }

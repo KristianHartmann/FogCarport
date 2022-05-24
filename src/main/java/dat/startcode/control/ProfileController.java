@@ -51,7 +51,7 @@ public class ProfileController extends HttpServlet {
 
         int orderId = Integer.parseInt(request.getParameter("orderID"));
         Order order = new Order(orderId, user);
-        Orderitem orderitem = OrderItemFacade.getOrderItemByOrderId(order, connectionPool);
+        Orderitem orderitem = OrderItemFacade.getOrderItemByOrderId(order.getOrder_id(), connectionPool);
         PartsList list = new PartsList();
         list.setPartslist_id(orderitem.getPartslist_id());
         CarportRequest carportRequest = CarportRequestFacade.getRequestByPartsListID(connectionPool, list.getPartslist_id());

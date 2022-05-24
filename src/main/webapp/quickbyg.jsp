@@ -539,7 +539,7 @@
                         <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
                             <%--                        </form>--%>
                         <button type="button" style="width: 50%" data-bs-dismiss="modal"
-                                class="btn btn-secondary mt-2 py-2">Annuller
+                                class="btn btn-success mt-2 py-2">Ok
                         </button>
                     </div>
                     <div class="modal-footer">

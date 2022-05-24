@@ -10,4 +10,7 @@ import java.util.ArrayList;
 public interface IPersonMapper {
 
     ArrayList<Person> getAllPersons() throws SQLException;
+
+
+    boolean isPersonAUser(String email) throws SQLException;
 }
