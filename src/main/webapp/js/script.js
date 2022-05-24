@@ -25,11 +25,20 @@ function showRequestUserPass() {
 }
 
 function checkShed() {
-    let minLengthForShed = 480;
+    let minLengthForShed = 510;
     let carportWidth = document.getElementById('cpwidth').value;
     let carportLength = document.getElementById('cplength').value;
     let shedLabel = document.getElementById('isShedLabel');
     let shedButton = document.getElementById('isShed');
+    let shedMaxLength = carportLength-390-30;
+    $('#cpshedlength > option').each(function (){
+        if($(this).val() > shedMaxLength){
+            this.disabled = true;
+        }
+        else{
+            this.disabled = false;
+        }
+    });
     let offValue = 0.25;
     for (let i = 1; i < 5; i++) {
         let radio = document.getElementById('inlineRadio' + i);
@@ -63,27 +72,52 @@ function checkShed() {
     }
 }
 
+function formCheckboxCheck(){
+    var isRaised = document.getElementById("isRaised");
+    var isShed = document.getElementById("isShed");
+    var cpshedlength = document.getElementById("cpshedlength");
+    var roofangle = document.getElementById("roofangle");
+    var rooftype = document.getElementById("rooftype");
+
+    cpshedlength.required = !!isShed.checked;
+    if(isRaised.checked){
+        rooftype.required = true;
+        roofangle.required = true;
+    }else{
+        rooftype.required = false;
+        roofangle.required = false;
+    }
+}
+
 $(document).ready(function () {
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
 
     $('#confirmOrderForm').submit(function (e) { // vores bestil form's submit funktion
+
+        formCheckboxCheck();
+
         e.preventDefault(); // sørger for at vores submit ikke laver et postback, det vil sige refresher vores side.
 
         var form = $(this); // sætter en variabel som indeholder vores form
 
-        $.ajax({ // ajax er til for at vi kan fange et server response fra en servlet uden at skulle request.getDispatcher til en eller anden jsp side
-            url: './' + form.attr('action'), // sætter urlen på requesten til at være vores forms action hvilket i dette tilfælde er TestServlet
-            type: form.attr('method'), // sætter vores metode/method til vores forms metode/method som i dette tilfælde er post
-            data: form.serialize(), // sætter den data vi gerne vil have med ind i TestServlet
-            dataType: 'json', // vores data type for vores response, som vil være json, så vi kan få fat i de værdier vi nu vil sende tilbage til siden
-            success: function (response) { // funktion for hvis ajax kaldet lykkedes, det parameter den får er vores response fra TestServlet
+        if ($(form)[0].checkValidity() === false) {
+            e.stopPropagation();
+        } else {
+            $.ajax({ // ajax er til for at vi kan fange et server response fra en servlet uden at skulle request.getDispatcher til en eller anden jsp side
+                url: './' + form.attr('action'), // sætter urlen på requesten til at være vores forms action hvilket i dette tilfælde er TestServlet
+                type: form.attr('method'), // sætter vores metode/method til vores forms metode/method som i dette tilfælde er post
+                data: form.serialize(), // sætter den data vi gerne vil have med ind i TestServlet
+                dataType: 'json', // vores data type for vores response, som vil være json, så vi kan få fat i de værdier vi nu vil sende tilbage til siden
+                success: function (response) { // funktion for hvis ajax kaldet lykkedes, det parameter den får er vores response fra TestServlet
 
-                $('#svgSideViewPreview').html(response.sideview);
-                $('#svgTopViewPreview').html(response.topview);
-                $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
-            }
-        });
+                    $('#svgSideViewPreview').html(response.sideview);
+                    $('#svgTopViewPreview').html(response.topview);
+                    $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
+                }
+            });
+        }
+        $(form).addClass('was-validated');
     });
 })

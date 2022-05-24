@@ -67,49 +67,65 @@
                                 Felter markeret * SKAL udfyldes!</p>
                             <p>Ønsket carport mål:</p>
                             <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation"
+                                  novalidate
                                   style="width: 50%;">
                                 <div class="form-group mb-2">
                                     <label for="cpwidth">Carport bredde:</label>
-                                    <select class="form-control" id="cpwidth" name="cpwidth" onchange="checkShed()">
-                                        <option value="0" selected hidden>Vælg bredde</option>
+                                    <select class="form-control" id="cpwidth" name="cpwidth" onchange="checkShed()"
+                                            required>
+                                        <option value="" selected hidden>Vælg bredde</option>
                                         <c:forEach begin="240" end="600" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
+                                    <div class="invalid-feedback">
+                                        Vælg venligst en bredde!
+                                    </div>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="cplength">Carport længde:</label>
-                                    <select class="form-control" id="cplength" name="cplength" onchange="checkShed()">
-                                        <option value="0" selected hidden>Vælg længde</option>
+                                    <select class="form-select" id="cplength" name="cplength" onchange="checkShed()"
+                                            required>
+                                        <option value="" selected hidden>Vælg længde</option>
                                         <c:forEach begin="240" end="780" var="i" step="30">
                                             <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
+                                    <div class="invalid-feedback">
+                                        Vælg venligst en længde!
+                                    </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input" onchange="showRaised()" type="checkbox"
+                                    <input class="form-check-input no-validate" onchange="showRaised()" type="checkbox"
                                            role="switch"
                                            id="isRaised" name="isRaised">
-                                    <label class="form-check-label" for="isRaised" id="isRaisedLabel">Med
-                                        rejsning</label>
+                                    <label class="form-check-label" for="isRaised" id="isRaisedLabel">Tilføj
+                                        tagrejsning</label>
                                 </div>
                                 <div class="form-group mb-2" id="raisedRoofdiv" style="display: none">
                                     <label for="rooftype">Tag:</label>
-                                    <select class="form-control" id="rooftype" name="rooftype">
-                                        <option value=" " selected hidden>Vælg tagtype</option>
+                                    <select class="form-select" id="rooftype" name="rooftype">
+                                        <option value="" selected hidden>Vælg tagtype</option>
                                     </select>
+                                    <div class="invalid-feedback">
+                                        Vælg venligst en tagtype!
+                                    </div>
                                     <label for="roofangle">Taghældning</label>
-                                    <select class="form-control" id="roofangle" name="roofangle">
-                                        <option value="0" selected hidden>Vælg hældning</option>
+                                    <select class="form-select" id="roofangle" name="roofangle">
+                                        <option value="" selected hidden>Vælg hældning</option>
                                         <c:forEach begin="15" end="45" step="5" var="i">
                                             <option value="${i}">${i} grader</option>
                                         </c:forEach>
                                     </select>
+                                    <div class="invalid-feedback">
+                                        Vælg venligst en taghældning!
+                                    </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input" onchange="showShed()" type="checkbox" role="switch"
+                                    <input class="form-check-input no-validate" onchange="showShed()" type="checkbox" role="switch"
                                            id="isShed" name="isShed" disabled>
-                                    <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj redskabskur
+                                    <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj
+                                        redskabskur
                                         (vælg længde og bredde først!)</label>
                                 </div>
                                 <div class="form-group mb-2" id="cpshedwidthdiv" style="display: none">
@@ -136,12 +152,15 @@
                                 </div>
                                 <div class="form-group mb-2" id="cpshedlengthdiv" style="display: none">
                                     <label for="cpshedlength">Redskabsrum længde:</label>
-                                    <select class="form-control" id="cpshedlength" name="cpshedlength">
-                                        <option value="0" selected hidden>Vælg længde</option>
-                                        <c:forEach begin="90" end="390" var="i" step="30">
-                                            <option value="${i}" >${i} cm</option>
+                                    <select class="form-select" id="cpshedlength" name="cpshedlength">
+                                        <option value="" selected hidden>Vælg længde</option>
+                                        <c:forEach begin="90" end="360" var="i" step="30">
+                                            <option value="${i}">${i} cm</option>
                                         </c:forEach>
                                     </select>
+                                    <div class="invalid-feedback">
+                                        Vælg venligst længde på skur!
+                                    </div>
                                 </div>
                                 <c:choose>
                                     <c:when test="${sessionScope.containsKey('user')}">
@@ -159,7 +178,9 @@
                                         </span>
                                     </c:otherwise>
                                 </c:choose>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal" class="btn btn-primary">Forspørg</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal"
+                                        class="btn btn-primary">Forspørg
+                                </button>
                                 <p id="textForBtns" class="mt-3">Bestil direkte eller send forspørgelse til Fog</p>
                             </form>
                         </div>
@@ -445,9 +466,9 @@
                                 beslag</p>
                         </div>
                         <p id="ajaxtest"></p>
-<%--                        <form action="PartslistController" method="post">--%>
-                            <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
-<%--                        </form>--%>
+                            <%--                        <form action="PartslistController" method="post">--%>
+                        <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+                            <%--                        </form>--%>
                         <button type="button" style="width: 50%" data-bs-dismiss="modal"
                                 class="btn btn-secondary mt-2 py-2">Annuller
                         </button>
@@ -483,7 +504,8 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Jensjensensvej 9" name="contactaddress">
+                                    <input type="text" class="form-control" id="inputAddress"
+                                           placeholder="Jensjensensvej 9" name="contactaddress">
                                 </div>
                                 <div class="col-md-10">
                                     <label for="inputCity" class="form-label">City</label>
@@ -495,7 +517,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()" id="requestCreateUserCheck">
+                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()"
+                                               id="requestCreateUserCheck">
                                         <label class="form-check-label" for="requestCreateUserCheck">
                                             Lav en bruger med disse oplysninger
                                         </label>
