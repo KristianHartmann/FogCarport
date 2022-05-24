@@ -24,18 +24,33 @@ function showRequestUserPass() {
     }
 }
 
+$('#isRequest').change(function (){
+    var orderBtn = document.getElementById('orderBtn');
+    var hiddenInput = document.getElementById('hiddenRequestInput');
+    var isRequestInput = document.getElementById('isRequest');
+    var contactInfo = document.getElementById('contactInfodiv');
+    if (isRequestInput.checked) {
+        contactInfo.style.display = "block";
+        orderBtn.innerText = "Forespørg";
+        hiddenInput.setAttribute('value', 'request');
+    } else {
+        contactInfo.style.display = "none";
+        orderBtn.innerText = "Bestil";
+        hiddenInput.setAttribute('value', 'order');
+    }
+});
+
 function checkShed() {
     let minLengthForShed = 510;
     let carportWidth = document.getElementById('cpwidth').value;
     let carportLength = document.getElementById('cplength').value;
     let shedLabel = document.getElementById('isShedLabel');
     let shedButton = document.getElementById('isShed');
-    let shedMaxLength = carportLength-390-30;
-    $('#cpshedlength > option').each(function (){
-        if($(this).val() > shedMaxLength){
+    let shedMaxLength = carportLength - 390 - 30;
+    $('#cpshedlength > option').each(function () {
+        if ($(this).val() > shedMaxLength) {
             this.disabled = true;
-        }
-        else{
+        } else {
             this.disabled = false;
         }
     });
@@ -43,11 +58,7 @@ function checkShed() {
     for (let i = 1; i < 5; i++) {
         let radio = document.getElementById('inlineRadio' + i);
         radio.value = (carportWidth - 70) * offValue;
-        if (radio.value < 100) {
-            radio.disabled = true;
-        } else {
-            radio.disabled = false;
-        }
+        radio.disabled = radio.value < 100;
         offValue = offValue + 0.25;
     }
     if (carportLength <= 0 || carportWidth <= 0) {
@@ -59,10 +70,10 @@ function checkShed() {
             shedButton.disabled = false;
         }
     }
-    if (shedButton.disabled === true){
+    if (shedButton.disabled === true) {
         shedButton.checked = false;
         showShed();
-        if(carportLength <= 0 || carportWidth <= 0){
+        if (carportLength <= 0 || carportWidth <= 0) {
             shedLabel.innerHTML = "Tilføj redskabskur (vælg længde og bredde først!)";
         } else {
             shedLabel.innerHTML = "Tilføj redskabskur (længde og bredde stemmer ikke overens!)";
@@ -72,7 +83,7 @@ function checkShed() {
     }
 }
 
-function formCheckboxCheck(){
+function formCheckboxCheck() {
     var isRaised = document.getElementById("isRaised");
     var isShed = document.getElementById("isShed");
     var cpshedlength = document.getElementById("cpshedlength");
@@ -80,10 +91,10 @@ function formCheckboxCheck(){
     var rooftype = document.getElementById("rooftype");
 
     cpshedlength.required = !!isShed.checked;
-    if(isRaised.checked){
+    if (isRaised.checked) {
         rooftype.required = true;
         roofangle.required = true;
-    }else{
+    } else {
         rooftype.required = false;
         roofangle.required = false;
     }
@@ -93,6 +104,7 @@ $(document).ready(function () {
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
+    $('#isRequest').trigger("change");
 
     $('#profileOrderForm').submit(function (e) {
         e.preventDefault();
