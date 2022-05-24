@@ -10,8 +10,8 @@ public class RaisedRoofCalc implements ICalculator {
     private int shedWidth;
     private int shedLength;
     private double angle;
-    private int maxShedWidth = carportWidth - 70;
-    private double maxHalfShedWidth = maxShedWidth * 0.5;
+    private int maxShedWidth;
+    private double maxHalfShedWidth;
 
 
     public RaisedRoofCalc(int carportWidth, int carportLength, int shedWidth, int shedLength, int angle) {
@@ -20,6 +20,8 @@ public class RaisedRoofCalc implements ICalculator {
         this.shedWidth = shedWidth;
         this.shedLength = shedLength;
         this.angle = angle;
+        maxShedWidth = carportWidth - 70;
+        maxHalfShedWidth = maxShedWidth * 0.5;
     }
 
     @Override
@@ -255,16 +257,27 @@ public class RaisedRoofCalc implements ICalculator {
         double totalLength; // Den totale længde af ekstra spær der skal bruges
         int rafters; // Det totale antal spær vi skal bruge
 
+
+
         raisedLength = (0.5 * carportWidth) / Math.cos(angle);
         raisedHeight = Math.sqrt((Math.pow(raisedLength, 2)) + (Math.pow(0.5 * carportWidth, 2)));
         totalLength = 2 * raisedLength + raisedHeight;
-        rafters = (int) (carportLength / 55) + 1;
+
+        rafters = carportLength/55;
+        float distance = carportLength/rafters;
+
+        if (distance> 55) {
+            rafters = rafters+2;
+
+        } else {
+            rafters = rafters+1;
+        }
+
         if (totalLength <= 600) {
             rafters++;
         } else {
             rafters = rafters + 2;
         }
-
 
         return rafters;
     }
@@ -290,7 +303,7 @@ public class RaisedRoofCalc implements ICalculator {
             third = 2;
         }
 
-        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth) {
+        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth || shedWidth < maxHalfShedWidth && shedWidth > 0); {
             if (shedLength <= 310) {
                 fourth = 2;
             } else {
