@@ -47,4 +47,17 @@ public class PartsListMapper extends SuperMapper implements IPartslist {
         }
         return 0;
     }
+    public int getNewestPartsList() throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectMaxPartslist)) {
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int partsListID = rs.getInt(1);
+                    return partsListID;
+                }
+            }
+        } return Integer.parseInt(null);
+    }
+
 }

@@ -89,7 +89,7 @@
                                 <div class="form-check mb-2 form-switch">
                                     <input class="form-check-input" onchange="showRaised()" type="checkbox"
                                            role="switch"
-                                           id="isRaised" name="isRaised">
+                                           id="isRaised" name="isRaised" value="isRaised">
                                     <label class="form-check-label" for="isRaised" id="isRaisedLabel">Med
                                         rejsning</label>
                                 </div>
@@ -159,7 +159,9 @@
                                         </span>
                                     </c:otherwise>
                                 </c:choose>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal" class="btn btn-primary">Forspørg</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal"
+                                        class="btn btn-primary">Forspørg
+                                </button>
                                 <p id="textForBtns" class="mt-3">Bestil direkte eller send forspørgelse til Fog</p>
                             </form>
                         </div>
@@ -445,9 +447,7 @@
                                 beslag</p>
                         </div>
                         <p id="ajaxtest"></p>
-<%--                        <form action="PartslistController" method="post">--%>
-                            <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
-<%--                        </form>--%>
+                        <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
                         <button type="button" style="width: 50%" data-bs-dismiss="modal"
                                 class="btn btn-secondary mt-2 py-2">Annuller
                         </button>
@@ -468,7 +468,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <form class="row g-3">
+                            <form class="row g-3" action="QuickbygController" method="post">
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="inputEmail" name="inputEmail">
@@ -479,11 +479,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
-                                    <input type="number" class="form-control" id="inputPhonenumber" name="inputPhonenumber">
+                                    <input type="number" class="form-control" id="inputPhonenumber"
+                                           name="inputPhonenumber">
                                 </div>
                                 <div class="col-12">
                                     <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress" placeholder="Jensjensensvej 9" name="inputAddress">
+                                    <input type="text" class="form-control" id="inputAddress"
+                                           placeholder="Jensjensensvej 9" name="inputAddress">
                                 </div>
                                 <div class="col-md-10">
                                     <label for="inputCity" class="form-label">City</label>
@@ -495,7 +497,9 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()" id="requestCreateUserCheck" name="requestCreateUserCheck">
+                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()"
+                                               id="requestCreateUserCheck" name="requestCreateUserCheck"
+                                               value="requestCreateUserCheck">
                                         <label class="form-check-label" for="requestCreateUserCheck">
                                             Lav en bruger med disse oplysninger
                                         </label>
@@ -503,11 +507,14 @@
                                 </div>
                                 <div class="col-md-12" id="requestCreateUserPassword" style="display: none;">
                                     <label for="inputPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+                                    <input type="password" class="form-control" id="inputPassword" value="inputPassword"
+                                           name="inputPassword">
                                 </div>
                                 <div class="col-12">
-                                    <form action="CreatePersonController" method="post">
-                                    <button type="submit" class="btn btn-primary" name="submitPerson">Godkend</button>
+                                    <form action="PartslistController" method="post">
+                                        <button type="submit" id="submitRequest" name="submitRequest"
+                                                class="btn btn-primary">Godkend
+                                        </button>
                                     </form>
                                 </div>
                             </form>
