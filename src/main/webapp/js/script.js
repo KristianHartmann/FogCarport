@@ -51,6 +51,8 @@ function checkShed() {
         }
     }
     if (shedButton.disabled === true){
+        shedButton.checked = false;
+        showShed();
         if(carportLength <= 0 || carportWidth <= 0){
             shedLabel.innerHTML = "Tilføj redskabskur (vælg længde og bredde først!)";
         }else{
