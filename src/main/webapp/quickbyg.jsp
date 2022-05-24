@@ -518,7 +518,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()" id="requestCreateUserCheck" name="requestCreateUserCheck">
+                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()"
+                                               id="requestCreateUserCheck" name ="requestCreateUserCheck">
                                         <label class="form-check-label" for="requestCreateUserCheck">
                                             Lav en bruger med disse oplysninger
                                         </label>
