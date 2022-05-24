@@ -94,7 +94,7 @@ $(document).ready(function () {
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
 
-    $('#profileOrderForm').submit(function (e) {
+    $('.profileOrderForm').submit(function (e) {
         e.preventDefault();
 
         var form = $(this);
