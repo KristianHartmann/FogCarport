@@ -15,11 +15,20 @@ public class SQLStatements {
     public static String selectCarportRequestByID = "select * from carport.carport_request where carport_request_id = ?";
     public static String selectAllCarportRequest = "SELECT * FROM carport.carport_request;";
     public static String selectAllUser = "select * from carport.user";
+    public static String isRequestApproved = "Select carport_request.carport_request_id, partslist.partslist_id \n" +
+            "FROM carport_request \n" +
+            "INNER JOIN partslist on partslist.carport_request_id = carport_request.carport_request_id\n" +
+            "WHERE carport_request.carport_request_id = ?\n";
     public static String selectAllPerson = "select p.email, p.address, p.`name`, p.phonenumber, p.zipcode, z.city\n" +
             "            FROM person p\n" +
             "            INNER JOIN zipcode z on p.zipcode = z.zipcode";
     public static String selectAllOrderFromUserId = "select * from carport.order where user_id = ?";
     public static String selectAllOrder = "select * from carport.order";
+    public static String selectRequestByPartsListID = "    SELECT carport_request.carport_request_id, carport_request.length, carport_request.width, carport_request.rooftype, carport_request.roofpitch, carport_request.toolbox_length, carport_request.toolbox_width, carport_request.email\n" +
+            "        FROM `carport_request`\n" +
+            "        INNER JOIN partslist ON carport_request.carport_request_id = partslist.carport_request_id\n" +
+            "        WHERE partslist_id = 26\n";
+    public static String selectAllOrderItemByOrderID = "SELECT * FROM carport.orderitem where order_id = ?";
     public static String SelectAllPartsList = "select * from carport.partslist WHERE carport_request_id = (?)";
     public static String selectMaxOrder = "SELECT MAX(order_id) FROM carport.order;";
     public static String selectAllParts = "SELECT * FROM parts";

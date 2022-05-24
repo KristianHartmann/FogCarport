@@ -3,6 +3,7 @@ package dat.startcode.model.persistence;
 import dat.startcode.model.entities.CarportRequest;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
+import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.BOBYQAOptimizer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -99,18 +100,57 @@ public class CarportRequestMapper extends SuperMapper {
         return carportRequestArrayList;
     }
 
-    public void deleteCarportRequest(int ID) throws SQLException{
+    public void deleteCarportRequest(int ID) throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
-              try(Connection connection = connectionPool.getConnection()){
-            try(PreparedStatement ps = connection.prepareStatement(SQLStatements.deleteCarportRequest)){
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.deleteCarportRequest)) {
                 ps.setInt(1, ID);
                 int rowsAffected = ps.executeUpdate();
-                if(rowsAffected == 1){
+                if (rowsAffected == 1) {
                     System.out.println("Succes");
-                }else{
+                } else {
                     throw new SQLException();
                 }
             }
         }
+    }
+
+    public boolean isRequestApproved(int ID) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.isRequestApproved)) {
+                ps.setInt(1, ID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+
+    public CarportRequest getCarportRequestByPartsListId(int partslistID) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        CarportRequest carportRequest;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectRequestByPartsListID)) {
+                ps.setInt(1, partslistID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("carport_request_id");
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    String rooftype = rs.getString("rooftype");
+                    int roofpitch = rs.getInt("roofpitch");
+                    int toolbox_length = rs.getInt("toolbox_length");
+                    int toolbox_width = rs.getInt("toolbox_width");
+                    String email = rs.getString("email");
+                    carportRequest = new CarportRequest(id, length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email );
+                    return carportRequest;
+                }
+            }
+        }
+        return null;
     }
 }

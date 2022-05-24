@@ -22,9 +22,19 @@ public class CarportRequestFacade {
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         return carportRequestMapper.getCarportRequestById(ID);
     }
+    public static boolean isRequestApproved(ConnectionPool connectionPool, int ID) throws SQLException {
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        return carportRequestMapper.isRequestApproved(ID);
+    }
     @SneakyThrows
     public static void deleteOrder(ConnectionPool connectionPool, int ID){
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         carportRequestMapper.deleteCarportRequest(ID);
     }
+    @SneakyThrows
+    public static CarportRequest getRequestByPartsListID(ConnectionPool connectionPool, int partslistID){
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+       return carportRequestMapper.getCarportRequestByPartsListId(partslistID);
+    }
 }
+

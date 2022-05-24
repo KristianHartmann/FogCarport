@@ -6,11 +6,13 @@ import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.services.*;
 import lombok.SneakyThrows;
 
+import javax.lang.model.type.ArrayType;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 @WebServlet(name = "Dashboard", value = "/Dashboard")
 public class DashboardController extends HttpServlet {
@@ -26,6 +28,15 @@ public class DashboardController extends HttpServlet {
         ServletContext context = request.getServletContext();
         ArrayList<Person> personArrayList = PersonFacade.getAllPersons(connectionPool);
         ArrayList<CarportRequest> carportRequestArrayList = CarportRequestFacade.getAllCarportRequests(connectionPool);
+
+        Iterator<CarportRequest> i = carportRequestArrayList.iterator();
+        while(i.hasNext()){
+            CarportRequest c = i.next();
+            if(CarportRequestFacade.isRequestApproved(connectionPool, c.getCarport_request_id())){
+                i.remove();
+            }
+        }
+
         ArrayList<Order> orderArrayList = OrderFacade.getAllOrder(connectionPool);
         context.setAttribute("personArrayList", personArrayList);
         context.setAttribute("carportRequestArrayList", carportRequestArrayList);

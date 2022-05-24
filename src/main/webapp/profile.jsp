@@ -44,9 +44,13 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownProfileMenu">
                     <li>
-                        <button class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrder"
-                                type="button">ordre 1
-                        </button>
+                        <form action="/ProfileController" method="post">
+                            <c:forEach items="${applicationScope.orderArrayList}" var="order">
+                                <button class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrder"
+                                        type="button" value="${order.order_id}" name="orderIDButton">Order ${order.order_id}
+                                </button>
+                            </c:forEach>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -56,55 +60,54 @@
         <%--    Offcanvas    --%>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrder" aria-labelledby="offcanvasOrderLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasOrderLabel">Ordre 1</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <h5 class="offcanvas-title" id="offcanvasOrderLabel">${requestScope.get("orderID")}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body" style="text-align: center">
-                <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#partList-table"
-                        aria-expanded="false" aria-controls="partList-table">vis stykliste
-                </button>
+                    <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#partList-table"
+                            aria-expanded="false" type="submit" aria-controls="partList-table"name="StykListeKnap">vis stykliste
+                    </button>
+
+
                 <div class="collapse mt-2" id="partList-table">
                     <table class="table table-hover">
                         <thead>
+
+                        <c:forEach items="${applicationScope.partsListItemArray}" var="partsListItem">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">PartlistItem Description</th>
+                            <th scope="col">PartlistItem Amount</th>
+                            <th scope="col">Part Description</th>
+                            <th scope="col">Part name</th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
+                            <th>${partsListItem.description}</th>
+                            <td>${partsListItem.amount}</td>
+                            <td>${partsListItem.parts.description}</td>
+                            <td>${partsListItem.parts.name}</td>
                         </tr>
                         </tbody>
+                        <br>
+                        </c:forEach>
                         <tfoot>
                         </tfoot>
                     </table>
-                </div><br>
-                <button class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#svgOrderModal">vis tegninger</button>
+                </div>
+                <br>
+                <button class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#svgOrderModal">vis
+                    tegninger
+                </button>
             </div>
         </div>
         <%--    svgOrderModal    --%>
-        <div class="modal modal-lg fade" id="svgOrderModal" tabindex="-1" aria-labelledby="svgOrderModalLabel" aria-hidden="true">
+        <div class="modal modal-lg fade" id="svgOrderModal" tabindex="-1" aria-labelledby="svgOrderModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="svgOrderModalLabel">Tegninger for ordre 1</h5>
+                        <h5 class="modal-title" id="svgOrderModalLabel">Tegninger for ${requestScope.get("orderID")}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

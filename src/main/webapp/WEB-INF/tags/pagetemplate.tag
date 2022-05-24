@@ -50,7 +50,7 @@
                             </c:when>
                             <c:when test="${sessionScope.user.role.equals('customer')}">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/profile.jsp"
+                                    <a href="${pageContext.request.contextPath}/ProfileController"
                                        class="nav-link text-white">
                                         Profile
                                     </a>

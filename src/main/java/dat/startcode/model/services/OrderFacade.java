@@ -15,6 +15,11 @@ public class OrderFacade {
         OrderMapper orderMapper = new OrderMapper(connectionPool);
         return orderMapper.getAllOrders();
     }
+    @SneakyThrows
+    public static ArrayList<Order> getAllOrderByUserID(ConnectionPool connectionPool, User user) {
+        OrderMapper orderMapper = new OrderMapper(connectionPool);
+        return orderMapper.getAllOrdersFromUser(user);
+    }
 
     @SneakyThrows
     public static void createFullOrder(ConnectionPool connectionPool, User user, CarportRequest carportRequest, PartsList partsList) {
@@ -27,7 +32,6 @@ public class OrderFacade {
     public static void createOrder(ConnectionPool connectionPool, User user) {
         OrderMapper orderMapper = new OrderMapper(connectionPool);
         orderMapper.createOrder(user);
-
     }
 
     @SneakyThrows

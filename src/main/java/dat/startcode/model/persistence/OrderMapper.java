@@ -31,7 +31,7 @@ public class OrderMapper extends SuperMapper implements IOrderMapper {
                 ps.setInt(1, user.getUser_id());
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
-                    System.out.println("success!");
+                    System.out.println("Created Order! for " + user.getEmail());
                 } else {
                     throw new DatabaseException("couldn't create order for " + user.getEmail());
                 }
@@ -42,11 +42,9 @@ public class OrderMapper extends SuperMapper implements IOrderMapper {
 
     @Override
     public void createFullOrder(User user, CarportRequest request, PartsList list) throws SQLException, DatabaseException {
-        PartsListMapper partsListMapper = new PartsListMapper(connectionPool);
         PartsListItemMapper partsListItemMapper = new PartsListItemMapper(connectionPool);
         OrderItemMapper orderItemMapper = new OrderItemMapper(connectionPool);
 
-            partsListMapper.createPartsList(request);
             createOrder(user);
             for (PartsListItem item : list.getPartsListItemArrayList()) {
                 partsListItemMapper.createPartsListItem(item, list.getPartslist_id());
