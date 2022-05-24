@@ -270,6 +270,7 @@ public class FlatRoofCalc implements ICalculator {
         int second = 0;
         int third = 0;
         int fourth = 0;
+        int fifth = 0;
 
         if (carportLength >= 240 && carportLength <= 440) {
             first = 4;
@@ -277,22 +278,27 @@ public class FlatRoofCalc implements ICalculator {
             first = 6;
         } else if (carportLength > 750 && carportLength <= 780) {
             first = 8;
-        }
+        } // Tilføjer de yderste stolper hele vejen rundt
+
         if (carportWidth > 380) {
             second = 1;
-        }
-        if (shedWidth > 0 && shedLength > 0) {
-            third = 2;
-        }
+        } // Tilføjer den bagerste midterstolpe hvis carporten er bred
 
-        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth || shedWidth < maxHalfShedWidth && shedWidth > 0); {
-            if (shedLength <= 310) {
-                fourth = 2;
-            } else {
-                fourth = 3;
-            }
+        if (shedWidth > 0 && shedLength > 0) {
+            third = 2; // Tilføjer skurstolpe og dørstolpe hvis der er skur
+            if(shedWidth == maxHalfShedWidth && shedLength > 310) {
+                fifth = 1;
+            } // Tjekker om det er et halvt skur med længde på over 310 - så skal der tilføjes ekstra stolpe
+
+                if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth || shedWidth < maxHalfShedWidth) {
+                if (shedLength <= 310) {
+                    fourth = 2;
+                } else {
+                    fourth = 3;
+                }
+            } // Tilføjer enten 2 eller 3 ekstra stolper, som skal være hvis skuret enten er 3/4 eller 1/4 størrelse.
         }
-        return first + second + third + fourth;
+        return first + second + third + fourth + fifth;
     }
 
     @Override
