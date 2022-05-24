@@ -50,8 +50,10 @@ function checkShed() {
             shedButton.disabled = false;
         }
     }
-    if (shedButton.disabled === true) {
-        if (carportLength <= 0 || carportWidth <= 0) {
+    if (shedButton.disabled === true){
+        shedButton.checked = false;
+        showShed();
+        if(carportLength <= 0 || carportWidth <= 0){
             shedLabel.innerHTML = "Tilføj redskabskur (vælg længde og bredde først!)";
         } else {
             shedLabel.innerHTML = "Tilføj redskabskur (længde og bredde stemmer ikke overens!)";
