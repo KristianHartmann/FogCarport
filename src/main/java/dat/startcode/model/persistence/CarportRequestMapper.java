@@ -24,28 +24,19 @@ public class CarportRequestMapper extends SuperMapper {
         CarportRequest carportRequest;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectCarportRequestByID)) {
-                try (PreparedStatement ps2 = connection.prepareStatement(SQLStatements.selectAllUser)) {
-                    ps.setInt(1, carport_request_id);
-                    ResultSet rs = ps.executeQuery();
-                    ResultSet rs2 = ps2.executeQuery();
-                    if (rs.next()) {
-                        int length = rs.getInt("length");
-                        int width = rs.getInt("width");
-                        String rooftype = rs.getString("rooftype");
-                        int roofpitch = rs.getInt("roofpitch");
-                        int toolbox_length = rs.getInt("toolbox_length");
-                        int toolbox_width = rs.getInt("toolbox_width");
-                        if (rs2.next()) {
-                            int user_id = rs2.getInt("user_id");
-                            String role = rs2.getString("role");
-                            int balance = rs2.getInt("balance");
-                            String password = rs2.getString("password");
-                            String email = rs2.getString("email");
-                            carportRequest = new CarportRequest(length, width, rooftype, roofpitch, toolbox_length, toolbox_width, new User(user_id, role, balance, password, email));
-                            carportRequest.setCarport_request_id(carport_request_id);
-                            return carportRequest;
-                        }
-                    }
+                ps.setInt(1, carport_request_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    String rooftype = rs.getString("rooftype");
+                    int roofpitch = rs.getInt("roofpitch");
+                    int toolbox_length = rs.getInt("toolbox_length");
+                    int toolbox_width = rs.getInt("toolbox_width");
+                    carportRequest = new CarportRequest(length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email);
+                    carportRequest.setCarport_request_id(carport_request_id);
+                    return carportRequest;
                 }
             }
         }
@@ -72,7 +63,29 @@ public class CarportRequestMapper extends SuperMapper {
                 }
             }
         }
-}
+    }
+
+    public void createCarportrequestEmail(CarportRequest request, String email) throws SQLException, DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        CarportRequest carportRequest;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.insertCarportRequest)) {
+                ps.setInt(1, request.getLength());
+                ps.setInt(2, request.getWidth());
+                ps.setString(3, request.getRooftype());
+                ps.setInt(4, request.getRoofpitch());
+                ps.setInt(5, request.getToolbox_length());
+                ps.setInt(6, request.getToolbox_width());
+                ps.setString(7, email);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 1) {
+                    System.out.println("success");
+                } else {
+                    throw new DatabaseException("Could not find a person with this email.");
+                }
+            }
+        }
+    }
 
 
     public ArrayList<CarportRequest> getAllCarportRequest() throws SQLException {
@@ -161,7 +174,8 @@ public class CarportRequestMapper extends SuperMapper {
                     return partsListID;
                 }
             }
-        } return Integer.parseInt(null);
+        }
+        return Integer.parseInt(null);
     }
 
 }

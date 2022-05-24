@@ -15,13 +15,14 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
-@WebServlet(name = "TestServlet", value = "/TestServlet")
-public class TestServlet extends HttpServlet {
+@WebServlet(name = "RequestOrderController", value = "/RequestOrderController")
+public class RequestOrderController extends HttpServlet {
 
     private ConnectionPool connectionPool;
 
-    public TestServlet() {
+    public RequestOrderController() {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
@@ -38,6 +39,7 @@ public class TestServlet extends HttpServlet {
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         response.setDateHeader("Expires", 0); // Proxies.
+        String isRequest = request.getParameter("isRequestHidden");
 
         JSONObject jsonObject = new JSONObject();
         HttpSession session = request.getSession();
@@ -63,11 +65,18 @@ public class TestServlet extends HttpServlet {
         jsonObject.put("sideview", sideView.svgSideGen());
         jsonObject.put("topview", topview.svgTopViewGen());
 
-        CarportRequestFacade.createCartportRequest(connectionPool,carportRequest);
-        carportRequest.setCarport_request_id(CarportRequestFacade.getNewestCarportRequest(connectionPool));
-        PartsListFacade.createPartsList(connectionPool, carportRequest);
-        list.setPartslist_id(PartsListFacade.getNewestPartsList(connectionPool));
-        OrderFacade.createFullOrder(connectionPool, user, carportRequest, list);
+        if (isRequest.equals("request")){
+            CarportRequestFacade.createCartportRequest(connectionPool,carportRequest);
+            carportRequest.setCarport_request_id(CarportRequestFacade.getNewestCarportRequest(connectionPool));
+            PartsListFacade.createPartsList(connectionPool, carportRequest);
+            jsonObject.put("request", "true");
+        }else if (isRequest.equals("order")){
+            list.setPartslist_id(PartsListFacade.getNewestPartsList(connectionPool));
+            OrderFacade.createFullOrder(connectionPool, user, carportRequest, list);
+            jsonObject.put("request", "false");
+        }else{
+            throw new SQLException("noget gik galt med dit hidden input");
+        }
 
         PrintWriter out = response.getWriter(); // vi får fat i en writer så vi kan skrive til vores response
         response.setContentType("application/json"); // vi sørger her for at vores response kan tage og håndtere json

@@ -43,6 +43,11 @@ public class CarportRequestFacade {
         CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
         carportRequestMapper.createCarportrequest(request);
     }
+    @SneakyThrows
+    public static void createCartportRequestEmail(ConnectionPool connectionPool, CarportRequest request, String email) throws SQLException {
+        CarportRequestMapper carportRequestMapper = new CarportRequestMapper(connectionPool);
+        carportRequestMapper.createCarportrequestEmail(request, email);
+    }
 
     @SneakyThrows
     public static int getNewestCarportRequest(ConnectionPool connectionPool) {

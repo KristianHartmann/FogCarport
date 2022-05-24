@@ -66,9 +66,92 @@
                                 <strong>Udfyld nedenstående omhyggeligt og klik på "Bestil"</strong><br>
                                 Felter markeret * SKAL udfyldes!</p>
                             <p>Ønsket carport mål:</p>
-                            <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation"
+                            <form action="RequestOrderController" id="confirmOrderForm" method="post"
+                                  class="needs-validation"
                                   novalidate
                                   style="width: 50%;">
+                                <input hidden value="" id="hiddenRequestInput" name="isRequestHidden">
+                                <div class="form-check mb-2 form-switch">
+                                    <c:choose>
+                                        <c:when test="${!sessionScope.containsKey('user')}">
+                                            <input class="form-check-input no-validate"
+                                                   type="checkbox"
+                                                   role="switch"
+                                                   id="isRequest" name="isRequest" disabled checked>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <input class="form-check-input no-validate"
+                                                   type="checkbox"
+                                                   role="switch"
+                                                   id="isRequest" name="isRequest">
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <label class="form-check-label" for="isRequest"
+                                           id="isRequestLabel">Forespørgelse</label>
+                                </div>
+                                <div class="form-group mb-2" id="contactInfodiv" style="display: none">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="inputEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control contactvali" id="inputEmail"
+                                                   name="inputEmail">
+                                            <div class="invalid-feedback">
+                                                Indtast gyldig email!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="inputName" class="form-label">Navn</label>
+                                            <input type="text" class="form-control contactvali" id="inputName"
+                                                   name="inputName">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst navn!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
+                                            <input type="number" class="form-control contactvali" id="inputPhonenumber"
+                                                   name="inputPhonenumber">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst telefon nummer!
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputAddress" class="form-label">Address</label>
+                                            <input type="text" class="form-control contactvali" id="inputAddress"
+                                                   placeholder="Jensjensensvej 9" name="inputAddress">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst adresse!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <label for="inputCity" class="form-label">City</label>
+                                            <input type="text" class="form-control" id="inputCity" name="inputCity">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="inputZip" class="form-label">Zip</label>
+                                            <input type="text" class="form-control contactvali" id="inputZip"
+                                                   name="inputZip">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst gyldig postnr!
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox"
+                                                       id="requestCreateUserCheck" name="requestCreateUserCheck">
+                                                <label class="form-check-label" for="requestCreateUserCheck">
+                                                    Lav en bruger med disse oplysninger
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" id="requestCreateUserPassword" style="display: none;">
+                                            <label for="inputPassword" class="form-label">Password</label>
+                                            <input type="password" class="form-control" id="inputPassword"
+                                                   name="inputPassword">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                                 <div class="form-group mb-2">
                                     <label for="cpwidth">Carport bredde:</label>
                                     <select class="form-control" id="cpwidth" name="cpwidth" onchange="checkShed()"
@@ -96,7 +179,7 @@
                                     </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input no-validate" onchange="showRaised()" type="checkbox"
+                                    <input class="form-check-input" type="checkbox"
                                            role="switch"
                                            id="isRaised" name="isRaised">
                                     <label class="form-check-label" for="isRaised" id="isRaisedLabel">Tilføj
@@ -122,7 +205,8 @@
                                     </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input no-validate" onchange="showShed()" type="checkbox" role="switch"
+                                    <input class="form-check-input" type="checkbox"
+                                           role="switch"
                                            id="isShed" name="isShed" disabled>
                                     <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj
                                         redskabskur
@@ -130,22 +214,22 @@
                                 </div>
                                 <div class="form-group mb-2" id="cpshedwidthdiv" style="display: none">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio1" value="option1">
                                         <label class="form-check-label" for="inlineRadio1">1/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio2" value="option2">
                                         <label class="form-check-label" for="inlineRadio2">2/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio3" value="option3">
                                         <label class="form-check-label" for="inlineRadio3">3/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio4" value="option3">
                                         <label class="form-check-label" for="inlineRadio3">4/4 Skur</label>
                                     </div>
@@ -162,24 +246,8 @@
                                         Vælg venligst længde på skur!
                                     </div>
                                 </div>
-                                <c:choose>
-                                    <c:when test="${sessionScope.containsKey('user')}">
-                                        <button type="submit"
-                                                class="btn btn-primary">Bestil
-                                        </button>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                              data-bs-trigger="hover focus"
-                                              data-bs-content="Log ind for at bestille direkte">
-                                            <button type="button"
-                                                    class="btn btn-secondary" disabled>Bestil
-                                            </button>
-                                        </span>
-                                    </c:otherwise>
-                                </c:choose>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#requestModal"
-                                        class="btn btn-primary">Forspørg
+                                <button type="submit" id="orderBtn"
+                                        class="btn btn-primary">Bestil
                                 </button>
                                 <p id="textForBtns" class="mt-3">Bestil direkte eller send forspørgelse til Fog</p>
                             </form>
@@ -466,11 +534,11 @@
                                 beslag</p>
                         </div>
                         <p id="ajaxtest"></p>
-<%--                        <form action="PartslistController" method="post">--%>
-                            <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
-<%--                        </form>--%>
+                            <%--                        <form action="PartslistController" method="post">--%>
+                        <button type="submit" style="width: 80%" class="btn btn-primary mt-2 py-2">Confirm</button>
+                            <%--                        </form>--%>
                         <button type="button" style="width: 50%" data-bs-dismiss="modal"
-                                class="btn btn-secondary mt-2 py-2">Annuller
+                                class="btn btn-success mt-2 py-2">Ok
                         </button>
                     </div>
                     <div class="modal-footer">
@@ -479,68 +547,18 @@
                 </div>
             </div>
         </div>
-        <%--    ForspørgelsesModal    --%>
-        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="requestModalLabel">Kontakt info</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <form class="row g-3" action="QuickbygController" method="post">
-                                <div class="col-md-6">
-                                    <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail" name="inputEmail">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="inputName" class="form-label">Navn</label>
-                                    <input type="text" class="form-control" id="inputName" name="inputName">
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
-                                    <input type="number" class="form-control" id="inputPhonenumber"
-                                           name="inputPhonenumber">
-                                </div>
-                                <div class="col-12">
-                                    <label for="inputAddress" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="inputAddress"
-                                           placeholder="Jensjensensvej 9" name="inputAddress">
-                                </div>
-                                <div class="col-md-10">
-                                    <label for="inputCity" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="inputCity" name="inputCity">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="inputZip" class="form-label">Zip</label>
-                                    <input type="text" class="form-control" id="inputZip" name="inputZip">
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" onchange="showRequestUserPass()"
-                                               id="requestCreateUserCheck" name ="requestCreateUserCheck">
-                                        <label class="form-check-label" for="requestCreateUserCheck">
-                                            Lav en bruger med disse oplysninger
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12" id="requestCreateUserPassword" style="display: none;">
-                                    <label for="inputPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword">
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Godkend</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="text-muted">&copy; Johannes Fog A/S</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--        &lt;%&ndash;    requestToats    &ndash;%&gt;--%>
+<%--        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="requestToast">--%>
+<%--            <div class="toast-header">--%>
+<%--                <img src="..." class="rounded me-2" alt="...">--%>
+<%--                <strong class="me-auto">Forespørgelse</strong>--%>
+<%--                <small class="text-muted">Now</small>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>--%>
+<%--            </div>--%>
+<%--            <div class="toast-body">--%>
+<%--                din forspøreglse er gået i gennem!--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </jsp:body>
 
 </t:pagetemplate>

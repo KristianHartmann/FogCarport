@@ -88,7 +88,9 @@
                             <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
                                     data-bs-target="#loginModal">Login
                             </button>
-                            <button type="button" class="btn btn-primary">Sign-up</button>
+                            <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
+                                    data-bs-target="#signupModal">Sign
+                            </button>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -151,6 +153,67 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <form action="CreateUserController" method="post">
+                    <img class="mb-4" src="<%=request.getContextPath()%>/images/logo.png" alt="logo" width="75">
+                    <h1 class="h3 mb-3 fw-normal">Opret Bruger</h1>
+
+                    <div class="form-floating">
+                        <input type="email" name="email" class="form-control" id="email"
+                               placeholder="name@example.com">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="name" class="form-control" id="name"
+                               placeholder="name">
+                        <label for="name">Navn</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="phonenumber" class="form-control" id="phonenumber"
+                               placeholder="telefon nummer">
+                        <label for="phonenumber">Telefon Nummer</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="address" class="form-control" id="address"
+                               placeholder="address">
+                        <label for="address">Adresse</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="zipcode" class="form-control" id="zipcode"
+                               placeholder="Post nummer">
+                        <label for="zipcode">Post Nummer</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="city" class="form-control" id="city"
+                               placeholder="city">
+                        <label for="city">By</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" name="password" class="form-control" id="password"
+                               placeholder="password">
+                        <label for="password">Password</label>
+                    </div>
+
+
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Create User</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p class="text-muted">&copy; Johannes Fog A/S</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
