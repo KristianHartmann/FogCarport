@@ -33,10 +33,10 @@ function checkShed() {
     let offValue = 0.25;
     for (let i = 1; i < 5; i++) {
         let radio = document.getElementById('inlineRadio' + i);
-        radio.value = (carportWidth-70)*offValue;
-        if (radio.value < 100){
+        radio.value = (carportWidth - 70) * offValue;
+        if (radio.value < 100) {
             radio.disabled = true;
-        }else{
+        } else {
             radio.disabled = false;
         }
         offValue = offValue + 0.25;
@@ -46,17 +46,17 @@ function checkShed() {
     } else {
         if (carportLength < minLengthForShed) {
             shedButton.disabled = true;
-        }else {
+        } else {
             shedButton.disabled = false;
         }
     }
-    if (shedButton.disabled === true){
-        if(carportLength <= 0 || carportWidth <= 0){
+    if (shedButton.disabled === true) {
+        if (carportLength <= 0 || carportWidth <= 0) {
             shedLabel.innerHTML = "Tilføj redskabskur (vælg længde og bredde først!)";
-        }else{
+        } else {
             shedLabel.innerHTML = "Tilføj redskabskur (længde og bredde stemmer ikke overens!)";
         }
-    }else{
+    } else {
         shedLabel.innerHTML = "Tilføj redskabskur";
     }
 }
@@ -64,6 +64,27 @@ function checkShed() {
 $(document).ready(function () {
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+
+    $('#profileOrderForm').submit(function (e) {
+        e.preventDefault();
+
+        var form = $(this);
+
+        $.ajax({
+            url: './' + form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            dataType: 'json',
+            success: function (response) {
+                $('#sideView-tab-pane').html(response.sideview);
+                $('#topView-tab-pane').html(response.topview);
+                $('#svgOrderModalLabel').html("Tegninger for ordre " + response.order)
+                $('#offcanvasOrderLabel').html("Ordre " + response.order);
+                $('#offcanvasOrder').offcanvas('show');
+            }
+        })
+    });
 
 
     $('#confirmOrderForm').submit(function (e) { // vores bestil form's submit funktion
@@ -84,4 +105,4 @@ $(document).ready(function () {
             }
         });
     });
-})
+});

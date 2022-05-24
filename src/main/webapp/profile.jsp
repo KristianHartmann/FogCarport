@@ -44,10 +44,11 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownProfileMenu">
                     <li>
-                        <form action="/ProfileController" method="post">
+                        <form action="ProfileController" method="post" id="profileOrderForm">
                             <c:forEach items="${applicationScope.orderArrayList}" var="order">
-                                <button class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasOrder"
-                                        type="button" value="${order.order_id}" name="orderIDButton">Order ${order.order_id}
+                                <input hidden value="${order.order_id}" name="orderID">
+                                <button class="dropdown-item"
+                                        type="submit">Order ${order.order_id}
                                 </button>
                             </c:forEach>
                         </form>
@@ -60,20 +61,18 @@
         <%--    Offcanvas    --%>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrder" aria-labelledby="offcanvasOrderLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasOrderLabel">${requestScope.get("orderID")}</h5>
+                <h5 class="offcanvas-title" id="offcanvasOrderLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body" style="text-align: center">
                     <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#partList-table"
-                            aria-expanded="false" type="submit" aria-controls="partList-table"name="StykListeKnap">vis stykliste
+                            aria-expanded="false" type="button" aria-controls="partList-table" name="StykListeKnap">vis stykliste
                     </button>
 
 
                 <div class="collapse mt-2" id="partList-table">
                     <table class="table table-hover">
                         <thead>
-
-                        <c:forEach items="${applicationScope.partsListItemArray}" var="partsListItem">
                         <tr>
                             <th scope="col">PartlistItem Description</th>
                             <th scope="col">PartlistItem Amount</th>
@@ -81,16 +80,8 @@
                             <th scope="col">Part name</th>
                         </tr>
                         </thead>
-                        <tbody class="table-group-divider">
-                        <tr>
-                            <th>${partsListItem.description}</th>
-                            <td>${partsListItem.amount}</td>
-                            <td>${partsListItem.parts.description}</td>
-                            <td>${partsListItem.parts.name}</td>
-                        </tr>
+                        <tbody class="table-group-divider" id="partsListTableBody">
                         </tbody>
-                        <br>
-                        </c:forEach>
                         <tfoot>
                         </tfoot>
                     </table>
@@ -107,7 +98,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="svgOrderModalLabel">Tegninger for ${requestScope.get("orderID")}</h5>
+                        <h5 class="modal-title" id="svgOrderModalLabel">Tegninger for</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -115,15 +106,15 @@
                             <div class="col-auto">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="orders-tab" data-bs-toggle="tab"
-                                                data-bs-target="#orders-tab-pane" type="button" role="tab"
-                                                aria-controls="home-tab-pane" aria-selected="true">Sideview
+                                        <button class="nav-link active" id="sideView-tab" data-bs-toggle="tab"
+                                                data-bs-target="#sideView-tab-pane" type="button" role="tab"
+                                                aria-controls="sideView-tab-pane" aria-selected="true">Sideview
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="customers-tab" data-bs-toggle="tab"
-                                                data-bs-target="#customers-tab-pane" type="button" role="tab"
-                                                aria-controls="profile-tab-pane" aria-selected="false">Topview
+                                        <button class="nav-link" id="topView-tab" data-bs-toggle="tab"
+                                                data-bs-target="#topView-tab-pane" type="button" role="tab"
+                                                aria-controls="topView-tab-pane" aria-selected="false">Topview
                                         </button>
                                     </li>
                                 </ul>
@@ -131,11 +122,11 @@
                         </div>
                         <div class="row justify-content-center">
                             <div class="tab-content" id="myTabContent" style="width: 100%; height: 600px">
-                                <div class="tab-pane fade show active" id="orders-tab-pane" role="tabpanel"
-                                     aria-labelledby="home-tab" tabindex="0">
+                                <div class="tab-pane fade show active" id="sideView-tab-pane" role="tabpanel"
+                                     aria-labelledby="sideView-tab" tabindex="0" style="height: 600px">
                                 </div>
-                                <div class="tab-pane fade" id="customers-tab-pane" role="tabpanel"
-                                     aria-labelledby="profile-tab" tabindex="0">
+                                <div class="tab-pane fade" id="topView-tab-pane" role="tabpanel"
+                                     aria-labelledby="topView-tab" tabindex="0" style="height: 600px">
                                 </div>
                             </div>
                         </div>

@@ -27,7 +27,7 @@ public class SQLStatements {
     public static String selectRequestByPartsListID = "    SELECT carport_request.carport_request_id, carport_request.length, carport_request.width, carport_request.rooftype, carport_request.roofpitch, carport_request.toolbox_length, carport_request.toolbox_width, carport_request.email\n" +
             "        FROM `carport_request`\n" +
             "        INNER JOIN partslist ON carport_request.carport_request_id = partslist.carport_request_id\n" +
-            "        WHERE partslist_id = 26\n";
+            "        WHERE partslist_id = ?\n";
     public static String selectAllOrderItemByOrderID = "SELECT * FROM carport.orderitem where order_id = ?";
     public static String SelectAllPartsList = "select * from carport.partslist WHERE carport_request_id = (?)";
     public static String selectMaxOrder = "SELECT MAX(order_id) FROM carport.order;";
@@ -39,15 +39,15 @@ public class SQLStatements {
             "FROM person p\n" +
             "INNER JOIN zipcode z on p.zipcode = z.zipcode\n" +
             "where p.email = '?'";
-    public static String selectPartsListItemsFromID= "SELECT DISTINCT pli.amount, pli.`description`, p.`name`, p.`description`, p.length, p.unit, p.price\n" +
+    public static String selectPartsListItemsFromID= "SELECT DISTINCT pli.amount, pli.`description`, p.`name`, p.`description`, p.length, p.unit, p.price, p.parts_id\n" +
             "FROM partslistitem pli\n" +
             "INNER JOIN parts p ON pli.parts_id = p.parts_id\n" +
-            "WHERE pli.partslistitem_id = ?";
+            "WHERE pli.partslist_id = ?";
     public static String selectPartsListItemsFromRequestID= "SELECT DISTINCT pli.amount, pli.`description`, p.`name`, p.`description`, p.length, p.unit, p.price\n" +
             "\t\tFROM partslistitem pli\n" +
             "\t\tINNER JOIN parts p ON pli.parts_id = p.parts_id\n" +
             "        INNER JOIN partslist pl ON pli.partslist_id = pli.partslistitem_id\n" +
-            "\t\tWHERE pl.carport_request_id = '1'";
+            "\t\tWHERE pl.carport_request_id = ?";
 
 
     // insert
