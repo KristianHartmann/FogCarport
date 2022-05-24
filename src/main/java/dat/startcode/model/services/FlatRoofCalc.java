@@ -10,8 +10,8 @@ public class FlatRoofCalc implements ICalculator {
     private int carportLength;
     private int shedWidth;
     private int shedLength;
-    private int maxShedWidth = carportWidth - 70;
-    private double maxHalfShedWidth = maxShedWidth * 0.5;
+    private int maxShedWidth;
+    private double maxHalfShedWidth;
 
 
     public FlatRoofCalc(int carportWidth, int carportLength, int shedWidth, int shedLength) {
@@ -19,6 +19,8 @@ public class FlatRoofCalc implements ICalculator {
         this.carportLength = carportLength;
         this.shedWidth = shedWidth;
         this.shedLength = shedLength;
+        maxShedWidth = carportWidth - 70;
+        maxHalfShedWidth = maxShedWidth * 0.5;
     }
 
     @Override
@@ -283,7 +285,7 @@ public class FlatRoofCalc implements ICalculator {
             third = 2;
         }
 
-        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth) {
+        if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth || shedWidth < maxHalfShedWidth && shedWidth > 0); {
             if (shedLength <= 310) {
                 fourth = 2;
             } else {
@@ -481,8 +483,7 @@ public class FlatRoofCalc implements ICalculator {
         return 0;
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) { // Til test
 
         int a = 780;
         int b = 55;

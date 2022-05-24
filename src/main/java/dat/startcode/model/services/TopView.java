@@ -62,6 +62,7 @@ public class TopView {
         int remainingSpaceForBeams = cpLength - 130 - shedLength;
 
         // ØVERSTE STOLPER FAST
+        System.out.println("Så mange beams starter vi med: "+ remainingBeams);
         stringBuilder.append("<rect x=\"").append(xb1).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke-width=\"2\"\n").append("fill-opacity=\"0\" stroke=\"black\"></rect>"); // Første stolpe øverst
         stringBuilder.append("<rect x=\"").append(xb2).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"10\" stroke-width=\"2\"\n").append("stroke=\"black\" fill-opacity=\"0\"></rect>"); // Sidste stolpe øverst
 
@@ -100,6 +101,7 @@ public class TopView {
                     stringBuilder.append("<rect x=\"").append(LongShedMidLengthBeamX).append("\" y=\"").append(bottomBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke=\"black\" stroke-width=\"2\"\n").append("fill-opacity=\"0\"stroke=\"black\"></rect>"); // Tegner midterste stolpe på modsatte side af skuret, hvis det IKKE er fuldt skur, men det er længere end 310
                     remainingBeams = remainingBeams - 1;
 
+
                 }
             }
             if (shedWidth != halfShedWidth && shedWidth != fullShedWidth) { // Hvis det ikke er helt eller halvt skur, skal der tegnes en stolpe nederste højre hjørne
@@ -111,6 +113,8 @@ public class TopView {
         int remainingBeamsToPlace = remainingBeams / 2; // Hver beam her skal placeres både i top og i bund
         int placementX = remainingSpaceForBeams / (remainingBeamsToPlace + 1);
         int nextBeamPos = 100 + placementX;
+
+        System.out.println("Remaining beams to place inden loop: " + remainingBeamsToPlace);
 
         for (int i = 0; i < remainingBeamsToPlace; i++) {
             stringBuilder.append("<rect x=\"").append(nextBeamPos).append("\" y=\"").append(topBeamsY).append("\" height=\"").append(beamWidth).append("\" width=\"").append(beamWidth).append("\" stroke=\"black\" stroke-width=\"2\"\n").append("fill-opacity=\"0\"stroke=\"black\"></rect>");

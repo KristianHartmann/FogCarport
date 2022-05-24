@@ -40,6 +40,10 @@ public class SideView {
         if (isShed) {
             restbeam = 1;
             b1Tob2 = (cpLength - airBack - toolLength) - xb1;
+            if (b1Tob2 <= 310){
+                restbeam = 0;
+            }
+
         } else {
             b1Tob2 = xb2 - xb1;
             if (b1Tob2 <= 310){
