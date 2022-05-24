@@ -44,14 +44,14 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownProfileMenu">
                     <li>
-                        <form action="ProfileController" method="post" id="profileOrderForm">
-                            <c:forEach items="${applicationScope.orderArrayList}" var="order">
+                        <c:forEach items="${applicationScope.orderArrayList}" var="order">
+                            <form action="ProfileController" method="post" class="profileOrderForm">
                                 <input hidden value="${order.order_id}" name="orderID">
                                 <button class="dropdown-item"
                                         type="submit">Order ${order.order_id}
                                 </button>
-                            </c:forEach>
-                        </form>
+                            </form>
+                        </c:forEach>
                     </li>
                 </ul>
             </div>
@@ -62,12 +62,13 @@
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrder" aria-labelledby="offcanvasOrderLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasOrderLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body" style="text-align: center">
-                    <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#partList-table"
-                            aria-expanded="false" type="button" aria-controls="partList-table" name="StykListeKnap">vis stykliste
-                    </button>
+                <button class="btn btn-info" data-bs-toggle="collapse" data-bs-target="#partList-table"
+                        aria-expanded="false" type="button" aria-controls="partList-table" name="StykListeKnap">vis
+                    stykliste
+                </button>
 
 
                 <div class="collapse mt-2" id="partList-table">

@@ -137,7 +137,7 @@ $(document).ready(function () {
 
     $('#isRequest').trigger("change");
 
-    $('#profileOrderForm').submit(function (e) {
+    $('.profileOrderForm').submit(function (e) {
         e.preventDefault();
 
         var form = $(this);
