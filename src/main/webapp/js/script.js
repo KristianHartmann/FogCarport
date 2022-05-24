@@ -117,13 +117,13 @@ $(document).ready(function () {
 
     $('#confirmOrderForm').submit(function (e) { // vores bestil form's submit funktion
 
-        formCheckboxCheck();
+        formCheckboxCheck(); // checker om du har valgt raised roof eller skur
 
         e.preventDefault(); // sørger for at vores submit ikke laver et postback, det vil sige refresher vores side.
 
         var form = $(this); // sætter en variabel som indeholder vores form
 
-        if ($(form)[0].checkValidity() === false) {
+        if ($(form)[0].checkValidity() === false) { // checker for om formen er blevet valideret eller ej
             e.stopPropagation();
         } else {
             $.ajax({ // ajax er til for at vi kan fange et server response fra en servlet uden at skulle request.getDispatcher til en eller anden jsp side
