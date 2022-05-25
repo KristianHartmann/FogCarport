@@ -67,7 +67,8 @@
                                 Felter markeret * SKAL udfyldes!</p>
 
                             <p>Ønsket carport mål:</p>
-                            <form action="TestServlet" id="confirmOrderForm" method="post" class="needs-validation"
+                            <form action="RequestOrderController" id="confirmOrderForm" method="post"
+                                  class="needs-validation"
                                   novalidate
                                   style="width: 50%;">
                                 <input hidden value="" id="hiddenRequestInput" name="isRequestHidden">
@@ -93,14 +94,16 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="inputEmail" class="form-label">Email</label>
-                                            <input type="email" class="form-control contactvali" id="inputEmail" name="inputEmail">
+                                            <input type="email" class="form-control contactvali" id="inputEmail"
+                                                   name="inputEmail">
                                             <div class="invalid-feedback">
                                                 Indtast gyldig email!
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputName" class="form-label">Navn</label>
-                                            <input type="text" class="form-control contactvali" id="inputName" name="inputName">
+                                            <input type="text" class="form-control contactvali" id="inputName"
+                                                   name="inputName">
                                             <div class="invalid-feedback">
                                                 Indtast venligst navn!
                                             </div>
@@ -127,7 +130,8 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label for="inputZip" class="form-label">Zip</label>
-                                            <input type="text" class="form-control contactvali" id="inputZip" name="inputZip">
+                                            <input type="text" class="form-control contactvali" id="inputZip"
+                                                   name="inputZip">
                                             <div class="invalid-feedback">
                                                 Indtast venligst gyldig postnr!
                                             </div>
@@ -544,6 +548,18 @@
                 </div>
             </div>
         </div>
+<%--        &lt;%&ndash;    requestToats    &ndash;%&gt;--%>
+<%--        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="requestToast">--%>
+<%--            <div class="toast-header">--%>
+<%--                <img src="..." class="rounded me-2" alt="...">--%>
+<%--                <strong class="me-auto">Forespørgelse</strong>--%>
+<%--                <small class="text-muted">Now</small>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>--%>
+<%--            </div>--%>
+<%--            <div class="toast-body">--%>
+<%--                din forspøreglse er gået i gennem!--%>
+<%--            </div>--%>
+<%--        </div>--%>
     </jsp:body>
 
 </t:pagetemplate>

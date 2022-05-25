@@ -127,8 +127,13 @@ function formCheckboxCheck() {
 }
 
 $(document).ready(function () {
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    // popovers initialization
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
+    // // toasts initialization
+    // const toastElList = document.querySelectorAll('.toast');
+    // const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl, option));
 
     $('#isRequest').trigger("change");
 
@@ -173,7 +178,11 @@ $(document).ready(function () {
 
                     $('#svgSideViewPreview').html(response.sideview);
                     $('#svgTopViewPreview').html(response.topview);
-                    $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
+                    if(response.request === "false"){
+                        $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
+                    }else{
+                        alert(response.request);
+                    }
                 }
             });
         }
