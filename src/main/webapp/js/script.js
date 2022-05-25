@@ -181,7 +181,7 @@ $(document).ready(function () {
                     if(response.request === "false"){
                         $('#confirmModal').modal('show'); // jQuery funktion der kan kalde vores modal så den kommer frem på skærmen
                     }else{
-                        alert(response.request);
+                        alert("Forespørgelse oprettet: " + response.request);
                     }
                 }
             });

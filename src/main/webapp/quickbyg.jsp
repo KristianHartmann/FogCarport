@@ -206,7 +206,7 @@
                                     </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input" onchange="showShed()" type="checkbox"
+                                    <input class="form-check-input" type="checkbox"
                                            role="switch"
                                            id="isShed" name="isShed" disabled>
                                     <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj
