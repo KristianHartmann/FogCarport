@@ -55,7 +55,7 @@ public class ProfileController extends HttpServlet {
         PartsList list = new PartsList();
         list.setPartslist_id(orderitem.getPartslist_id());
         CarportRequest carportRequest = CarportRequestFacade.getRequestByPartsListID(connectionPool, list.getPartslist_id());
-        boolean isShed = carportRequest.getToolbox_length() == 0 && carportRequest.getToolbox_width() == 0;
+        boolean isShed = carportRequest.getToolbox_length() > 0 && carportRequest.getToolbox_width() > 0;
         list.setPartsListItemArrayList(PartsListItemFacade.getPartsListItems(connectionPool, list.getPartslist_id()));
         TopView topView = new TopView(carportRequest.getLength(), carportRequest.getWidth(), isShed, carportRequest.getToolbox_length(), carportRequest.getToolbox_width(), list);
         SideView sideView = new SideView(list, carportRequest.getLength(), carportRequest.getToolbox_length(), isShed);
