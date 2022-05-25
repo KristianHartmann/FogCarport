@@ -72,7 +72,28 @@ public class CarportRequestMapper extends SuperMapper {
                 }
             }
         }
-}
+    }
+    public void createCarportrequestEmail(CarportRequest request, String email) throws SQLException, DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        CarportRequest carportRequest;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.insertCarportRequest)) {
+                ps.setInt(1, request.getLength());
+                ps.setInt(2, request.getWidth());
+                ps.setString(3, request.getRooftype());
+                ps.setInt(4, request.getRoofpitch());
+                ps.setInt(5, request.getToolbox_length());
+                ps.setInt(6, request.getToolbox_width());
+                ps.setString(7, email);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 1) {
+                    System.out.println("success");
+                } else {
+                    throw new DatabaseException("Could not find a person with this email.");
+                }
+            }
+        }
+    }
 
 
     public ArrayList<CarportRequest> getAllCarportRequest() throws SQLException {
@@ -161,7 +182,8 @@ public class CarportRequestMapper extends SuperMapper {
                     return partsListID;
                 }
             }
-        } return Integer.parseInt(null);
+        }
+        return Integer.parseInt(null);
     }
 
 }
