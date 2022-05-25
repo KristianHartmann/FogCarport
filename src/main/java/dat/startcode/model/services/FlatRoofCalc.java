@@ -100,7 +100,6 @@ public class FlatRoofCalc implements ICalculator {
     }
 
 
-
     @Override
     public int underStern360Calc() {
         int first = 0;
@@ -251,15 +250,15 @@ public class FlatRoofCalc implements ICalculator {
     @Override
     public int raftersCalc() { // Denne regner hvor mange spær, der skal bruges på tværs af carporten
 
-        int amount = carportLength/55;
+        int amount = carportLength / 55;
 
-        float distance = carportLength/amount;
+        float distance = carportLength / amount;
 
-        if (distance> 55) {
-            amount = amount+2;
+        if (distance > 55) {
+            amount = amount + 2;
 
         } else {
-            amount = amount+1;
+            amount = amount + 1;
         }
         return amount;
     }
@@ -286,11 +285,11 @@ public class FlatRoofCalc implements ICalculator {
 
         if (shedWidth > 0 && shedLength > 0) {
             third = 2; // Tilføjer skurstolpe og dørstolpe hvis der er skur
-            if(shedWidth == maxHalfShedWidth && shedLength > 310) {
+            if (shedWidth == maxHalfShedWidth && shedLength > 310) {
                 fifth = 1;
             } // Tjekker om det er et halvt skur med længde på over 310 - så skal der tilføjes ekstra stolpe
 
-                if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth || shedWidth < maxHalfShedWidth) {
+            if (shedWidth > maxHalfShedWidth && shedWidth < maxShedWidth || shedWidth < maxHalfShedWidth) {
                 if (shedLength <= 310) {
                     fourth = 2;
                 } else {
@@ -494,16 +493,16 @@ public class FlatRoofCalc implements ICalculator {
         int a = 780;
         int b = 55;
 
-        int amount = a/55;
+        int amount = a / 55;
 
-        float distance = a/amount;
+        float distance = a / amount;
 
-        if (distance> 55) {
-            amount = amount+2;
+        if (distance > 55) {
+            amount = amount + 2;
 
         } else {
-            amount = amount+1;
+            amount = amount + 1;
         }
-        System.out.println("Du får den her mængte spær: " +amount);
+        System.out.println("Du får den her mængte spær: " + amount);
     }
 }
