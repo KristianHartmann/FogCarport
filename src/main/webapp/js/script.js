@@ -15,19 +15,30 @@ $('#isShed').change(function () {
     }
 });
 
-function showRaised() {
+$('#isRaised').change(function () {
     if (!(document.getElementById('isRaised').checked)) {
         document.getElementById('raisedRoofdiv').style.display = "none";
     } else {
         document.getElementById('raisedRoofdiv').style.display = "block";
     }
-}
+});
 
-function showRequestUserPass() {
+$('#requestCreateUserCheck').change(function () {
     if (!(document.getElementById('requestCreateUserCheck').checked)) {
         document.getElementById('requestCreateUserPassword').style.display = "none";
     } else {
         document.getElementById('requestCreateUserPassword').style.display = "block";
+    }
+    checkPasswordCheckbox();
+});
+
+function checkPasswordCheckbox(){
+    var contactPassCheck = document.getElementById("requestCreateUserCheck");
+    var passwordInput = document.getElementById("inputPassword");
+    if (contactPassCheck.checked){
+        passwordInput.required = true;
+    }else{
+        passwordInput.required = false;
     }
 }
 
@@ -44,6 +55,7 @@ $('#isRequest').change(function (){
         contactInfo.style.display = "block";
         orderBtn.innerText = "Forespørg";
         hiddenInput.setAttribute('value', 'request');
+        checkPasswordCheckbox();
     } else {
         for (let i = 0; i < requestInfoVali.length; i++) {
             requestInfoVali.item(i).required = false;

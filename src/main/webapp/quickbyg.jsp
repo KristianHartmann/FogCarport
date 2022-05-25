@@ -135,7 +135,6 @@
                                         <div class="col-12">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox"
-                                                       onchange="showRequestUserPass()"
                                                        id="requestCreateUserCheck" name="requestCreateUserCheck">
                                                 <label class="form-check-label" for="requestCreateUserCheck">
                                                     Lav en bruger med disse oplysninger
@@ -177,7 +176,7 @@
                                     </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input" onchange="showRaised()" type="checkbox"
+                                    <input class="form-check-input" type="checkbox"
                                            role="switch"
                                            id="isRaised" name="isRaised">
                                     <label class="form-check-label" for="isRaised" id="isRaisedLabel">Tilføj
