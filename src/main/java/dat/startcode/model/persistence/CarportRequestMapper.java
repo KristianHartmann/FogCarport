@@ -85,7 +85,7 @@ public class CarportRequestMapper extends SuperMapper {
                 }
             }
         }
-}
+    }
 
 
     public ArrayList<CarportRequest> getAllCarportRequest() throws SQLException {
