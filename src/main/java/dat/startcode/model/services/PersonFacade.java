@@ -20,6 +20,11 @@ public class PersonFacade {
         PersonMapper personMapper = new PersonMapper(connectionPool);
         personMapper.createPerson(email, address, name, phonenumber, zipcode);
     }
+  @SneakyThrows
+    public static boolean isPersonAUser(ConnectionPool connectionPool, String email) throws SQLException {
+        PersonMapper personMapper = new PersonMapper(connectionPool);
+        return personMapper.isPersonAUser(email);
+    }
 
 
 

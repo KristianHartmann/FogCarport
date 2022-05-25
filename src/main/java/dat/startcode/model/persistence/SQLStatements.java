@@ -14,6 +14,10 @@ public class SQLStatements {
     public static String selectCarportRequestByID = "select * from carport.carport_request where carport_request_id = ?";
     public static String selectAllCarportRequest = "SELECT * FROM carport.carport_request;";
     public static String selectAllUser = "select * from carport.user";
+    public static String isPersonAUser = "Select u.email, p.email\n" +
+            "FROM person p\n" +
+            "INNER JOIN `user` u on u.email = p.email\n" +
+            "WHERE p.email = ?";
     public static String isRequestApproved = "Select carport_request.carport_request_id, partslist.partslist_id \n" +
             "FROM carport_request \n" +
             "INNER JOIN partslist on partslist.carport_request_id = carport_request.carport_request_id\n" +

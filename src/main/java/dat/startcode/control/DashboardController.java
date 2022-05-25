@@ -3,6 +3,7 @@ package dat.startcode.control;
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.*;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.UserMapper;
 import dat.startcode.model.services.*;
 import lombok.SneakyThrows;
 
@@ -52,6 +53,9 @@ public class DashboardController extends HttpServlet {
         if(command.equals("Godkend")){
             CarportRequest carportRequest = CarportRequestFacade.getCarportRequestByID(connectionPool, requestID);
             PartsList partsList = PartsListFacade.getPartsList(connectionPool, carportRequest);
+            if(!PersonFacade.isPersonAUser(connectionPool, carportRequest.getEmail())){
+                UserFacade.createUser(carportRequest.getEmail(),"123", "customer", connectionPool);
+            }
             OrderFacade.createFullOrder(connectionPool, carportRequest.getUser(), carportRequest, partsList);
         }else if(command.equals("Annuller")){
             CarportRequestFacade.deleteOrder(connectionPool, requestID);

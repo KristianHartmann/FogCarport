@@ -82,4 +82,21 @@ public class PersonMapper extends SuperMapper implements IPersonMapper {
         return personArrayList;
     }
 
+    @Override
+    public boolean isPersonAUser(String email) throws SQLException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(SQLStatements.isPersonAUser)) {
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+
+
 }
