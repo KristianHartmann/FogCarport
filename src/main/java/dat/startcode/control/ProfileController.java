@@ -48,7 +48,7 @@ public class ProfileController extends HttpServlet {
         JSONObject jsonObject = new JSONObject();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-
+        ServletContext context = request.getServletContext();
         int orderId = Integer.parseInt(request.getParameter("orderID"));
         Order order = new Order(orderId, user);
         Orderitem orderitem = OrderItemFacade.getOrderItemByOrderId(order.getOrder_id(), connectionPool);
@@ -63,6 +63,7 @@ public class ProfileController extends HttpServlet {
         jsonObject.put("sideview", sideView.svgSideGen());
         jsonObject.put("order", orderId);
         jsonObject.put("partslist", list);
+        context.setAttribute("partsListArray", list.getPartsListItemArrayList());
 
         PrintWriter out = response.getWriter(); // vi får fat i en writer så vi kan skrive til vores response
         response.setContentType("application/json"); // vi sørger her for at vores response kan tage og håndtere json
