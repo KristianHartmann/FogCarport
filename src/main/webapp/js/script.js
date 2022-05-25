@@ -1,12 +1,19 @@
-function showShed() {
+$('#isShed').change(function () {
+    var radioShedVali = document.getElementsByClassName('radioShedVali');
     if (!(document.getElementById('isShed').checked)) {
+        for (let i = 0; i < radioShedVali.length; i++) {
+            radioShedVali.item(i).required = false;
+        }
         document.getElementById('cpshedlengthdiv').style.display = "none";
         document.getElementById('cpshedwidthdiv').style.display = "none";
     } else {
+        for (let i = 0; i < radioShedVali.length; i++) {
+            radioShedVali.item(i).required = true;
+        }
         document.getElementById('cpshedlengthdiv').style.display = "block";
         document.getElementById('cpshedwidthdiv').style.display = "block";
     }
-}
+});
 
 function showRaised() {
     if (!(document.getElementById('isRaised').checked)) {
@@ -29,11 +36,18 @@ $('#isRequest').change(function (){
     var hiddenInput = document.getElementById('hiddenRequestInput');
     var isRequestInput = document.getElementById('isRequest');
     var contactInfo = document.getElementById('contactInfodiv');
+    var requestInfoVali = document.getElementsByClassName('contactvali');
     if (isRequestInput.checked) {
+        for (let i = 0; i < requestInfoVali.length; i++) {
+            requestInfoVali.item(i).required = true;
+        }
         contactInfo.style.display = "block";
         orderBtn.innerText = "Forespørg";
         hiddenInput.setAttribute('value', 'request');
     } else {
+        for (let i = 0; i < requestInfoVali.length; i++) {
+            requestInfoVali.item(i).required = false;
+        }
         contactInfo.style.display = "none";
         orderBtn.innerText = "Bestil";
         hiddenInput.setAttribute('value', 'order');
@@ -72,7 +86,7 @@ function checkShed() {
     }
     if (shedButton.disabled === true) {
         shedButton.checked = false;
-        showShed();
+        $('#isShed').trigger("change");
         if (carportLength <= 0 || carportWidth <= 0) {
             shedLabel.innerHTML = "Tilføj redskabskur (vælg længde og bredde først!)";
         } else {

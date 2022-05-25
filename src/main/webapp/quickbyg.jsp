@@ -93,21 +93,33 @@
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="inputEmail" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+                                            <input type="email" class="form-control contactvali" id="inputEmail" name="inputEmail">
+                                            <div class="invalid-feedback">
+                                                Indtast gyldig email!
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputName" class="form-label">Navn</label>
-                                            <input type="text" class="form-control" id="inputName" name="inputName">
+                                            <input type="text" class="form-control contactvali" id="inputName" name="inputName">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst navn!
+                                            </div>
                                         </div>
                                         <div class="col-md-12">
                                             <label for="inputPhonenumber" class="form-label">Telefon Nummer</label>
-                                            <input type="number" class="form-control" id="inputPhonenumber"
+                                            <input type="number" class="form-control contactvali" id="inputPhonenumber"
                                                    name="inputPhonenumber">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst telefon nummer!
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <label for="inputAddress" class="form-label">Address</label>
-                                            <input type="text" class="form-control" id="inputAddress"
+                                            <input type="text" class="form-control contactvali" id="inputAddress"
                                                    placeholder="Jensjensensvej 9" name="inputAddress">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst adresse!
+                                            </div>
                                         </div>
                                         <div class="col-md-10">
                                             <label for="inputCity" class="form-label">City</label>
@@ -115,7 +127,10 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label for="inputZip" class="form-label">Zip</label>
-                                            <input type="text" class="form-control" id="inputZip" name="inputZip">
+                                            <input type="text" class="form-control contactvali" id="inputZip" name="inputZip">
+                                            <div class="invalid-feedback">
+                                                Indtast venligst gyldig postnr!
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-check">
@@ -162,7 +177,7 @@
                                     </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input no-validate" onchange="showRaised()" type="checkbox"
+                                    <input class="form-check-input" onchange="showRaised()" type="checkbox"
                                            role="switch"
                                            id="isRaised" name="isRaised">
                                     <label class="form-check-label" for="isRaised" id="isRaisedLabel">Tilføj
@@ -188,7 +203,7 @@
                                     </div>
                                 </div>
                                 <div class="form-check mb-2 form-switch">
-                                    <input class="form-check-input no-validate" onchange="showShed()" type="checkbox"
+                                    <input class="form-check-input" onchange="showShed()" type="checkbox"
                                            role="switch"
                                            id="isShed" name="isShed" disabled>
                                     <label class="form-check-label" for="isShed" id="isShedLabel">Tilføj
@@ -197,22 +212,22 @@
                                 </div>
                                 <div class="form-group mb-2" id="cpshedwidthdiv" style="display: none">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio1" value="option1">
                                         <label class="form-check-label" for="inlineRadio1">1/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio2" value="option2">
                                         <label class="form-check-label" for="inlineRadio2">2/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio3" value="option3">
                                         <label class="form-check-label" for="inlineRadio3">3/4 Skur</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="cpshedwidth"
+                                        <input class="form-check-input radioShedVali" type="radio" name="cpshedwidth"
                                                id="inlineRadio4" value="option3">
                                         <label class="form-check-label" for="inlineRadio3">4/4 Skur</label>
                                     </div>
