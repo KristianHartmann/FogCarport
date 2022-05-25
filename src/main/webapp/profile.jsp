@@ -56,7 +56,29 @@
                 </ul>
             </div>
         </div>
-
+<%--        <div class="collapse mt-2" id="partList-table2">--%>
+<%--            <table class="table table-hover">--%>
+<%--                <thead>--%>
+<%--                <tr>--%>
+<%--                    <th scope="col">PartlistItem Description</th>--%>
+<%--                    <th scope="col">PartlistItem Amount</th>--%>
+<%--                    <th scope="col">Part Description</th>--%>
+<%--                    <th scope="col">Part name</th>--%>
+<%--                </tr>--%>
+<%--                </thead>--%>
+<%--                <c:forEach items="${applicationScope.partsListArray}" var="item">--%>
+<%--                    <tr>--%>
+<%--                        <td>${item.description}</td>--%>
+<%--                        <td>${item.amount}</td>--%>
+<%--                        <td>${item.parts.description}</td>--%>
+<%--                        <td>${item.parts.name}</td>--%>
+<%--                    </tr>--%>
+<%--                </c:forEach>--%>
+<%--                </tbody>--%>
+<%--                <tfoot>--%>
+<%--                </tfoot>--%>
+<%--            </table>--%>
+<%--        </div>--%>
 
         <%--    Offcanvas    --%>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasOrder" aria-labelledby="offcanvasOrderLabel">
@@ -82,6 +104,14 @@
                         </tr>
                         </thead>
                         <tbody class="table-group-divider" id="partsListTableBody">
+                        <c:forEach items="${applicationScope.partsListArray}" var="item">
+                            <tr>
+                                <td>${item.description}</td>
+                                <td>${item.amount}</td>
+                                <td>${item.parts.description}</td>
+                                <td>${item.parts.name}</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                         <tfoot>
                         </tfoot>
