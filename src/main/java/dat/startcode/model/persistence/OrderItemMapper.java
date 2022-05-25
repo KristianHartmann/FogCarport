@@ -36,12 +36,12 @@ public class OrderItemMapper extends SuperMapper implements IOrderItemMapper {
         }
     }
 
-    public Orderitem getOrderItemByOrderId(Order order) throws DatabaseException, SQLException {
+    public Orderitem getOrderItemByOrderId(int id) throws DatabaseException, SQLException {
         Orderitem orderitem = null;
         Logger.getLogger("web").log(Level.INFO, "");
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectAllOrderItemByOrderID)) {
-                ps.setInt(1, order.getOrder_id());
+                ps.setInt(1, id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int orderitem_id = rs.getInt(1);

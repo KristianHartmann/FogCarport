@@ -27,5 +27,6 @@ public class User {
     }
 
     public User(String email) {
+        this.email = email;
     }
 }

@@ -9,9 +9,9 @@ import lombok.SneakyThrows;
 public class OrderItemFacade {
 
     @SneakyThrows
-    public static Orderitem getOrderItemByOrderId(Order order, ConnectionPool connectionPool) {
+    public static Orderitem getOrderItemByOrderId(int orderid, ConnectionPool connectionPool) {
         OrderItemMapper mapper = new OrderItemMapper(connectionPool);
-        return mapper.getOrderItemByOrderId(order);
+        return mapper.getOrderItemByOrderId(orderid);
 
     }
 }

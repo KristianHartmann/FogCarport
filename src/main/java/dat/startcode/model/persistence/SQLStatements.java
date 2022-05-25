@@ -66,8 +66,8 @@ public class SQLStatements {
 
     // update
     public static String  updateUserPasswordById= "UPDATE carport.user SET password = '?' WHERE carport.user.id = '?'";
-    public static String  removeUserBalance = "UPDATE `carport`.`user` SET balance = balance - ? WHERE user_id = ?;";
-    public static String  addUserBalanace = "UPDATE `carport`.`user` SET balance = balance + ? WHERE user_id = ?;";
+    public static String  removeUserBalance = "UPDATE `carport`.`user` SET `balance` = `balance` + -? WHERE (`user_id` = ?);\n";
+    public static String  addUserBalanace = "UPDATE `carport`.`user` SET `balance` = `balance` +? WHERE (`user_id` = ?);";
 
 
 }
