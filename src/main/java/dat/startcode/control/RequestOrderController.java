@@ -89,6 +89,7 @@ public class RequestOrderController extends HttpServlet {
         }else{
             user = (User) session.getAttribute("user");
             carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, user);
+            CarportRequestFacade.createCartportRequest(connectionPool,carportRequest);
             carportRequest.setCarport_request_id(CarportRequestFacade.getNewestCarportRequest(connectionPool));
             PartsListFacade.createPartsList(connectionPool, carportRequest);
             list = generator.generateFlatroofPartsList(carportRequest);
