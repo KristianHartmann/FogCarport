@@ -68,16 +68,23 @@ public class RequestOrderController extends HttpServlet {
             int zip = Integer.parseInt(request.getParameter("inputZip"));
 
             boolean createUser = request.getParameterMap().containsKey("requestCreateUserCheck");
-            PersonFacade.createPerson(email, address, name, phonenr, zip, connectionPool);
             if(createUser){
                 String password = request.getParameter("inputPassword");
                 user = new User("customer", password, email);
+                PersonFacade.createPerson(email, address, name, phonenr, zip, connectionPool);
                 UserFacade.createUser(user.getEmail(), user.getPassword(), user.getRole(), connectionPool);
                 carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, user);
             }else {
-                carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, email);
+                if(session.getAttribute("user") != null){
+                    user = (User) session.getAttribute("user");
+                    carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, user);
+                    CarportRequestFacade.createCartportRequest(connectionPool,carportRequest);
+                }else{
+                    PersonFacade.createPerson(email, address, name, phonenr, zip, connectionPool);
+                    carportRequest = new CarportRequest(cplength, cpwidth, rooftype, roofPitch, toolLength, toolWidth, email);
+                    CarportRequestFacade.createCartportRequestEmail(connectionPool,carportRequest, email);
+                }
             }
-            CarportRequestFacade.createCartportRequestEmail(connectionPool,carportRequest, email);
             jsonObject.put("request", "true");
         }else{
             user = (User) session.getAttribute("user");
