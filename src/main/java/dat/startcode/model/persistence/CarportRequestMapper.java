@@ -24,21 +24,21 @@ public class CarportRequestMapper extends SuperMapper {
         CarportRequest carportRequest;
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectCarportRequestByID)) {
-                ps.setInt(1, carport_request_id);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    String email = rs.getString("email");
-                    int length = rs.getInt("length");
-                    int width = rs.getInt("width");
-                    String rooftype = rs.getString("rooftype");
-                    int roofpitch = rs.getInt("roofpitch");
-                    int toolbox_length = rs.getInt("toolbox_length");
-                    int toolbox_width = rs.getInt("toolbox_width");
-                    carportRequest = new CarportRequest(length, width, rooftype, roofpitch, toolbox_length, toolbox_width, email);
-                    carportRequest.setCarport_request_id(carport_request_id);
-                    return carportRequest;
-                }
-            }
+                    ps.setInt(1, carport_request_id);
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        int length = rs.getInt("length");
+                        int width = rs.getInt("width");
+                        String rooftype = rs.getString("rooftype");
+                        int roofpitch = rs.getInt("roofpitch");
+                        int toolbox_length = rs.getInt("toolbox_length");
+                        int toolbox_width = rs.getInt("toolbox_width");
+                        String email = rs.getString("email");
+                        carportRequest = new CarportRequest(length, width, rooftype, roofpitch, toolbox_length, toolbox_width,email );
+                        carportRequest.setCarport_request_id(carport_request_id);
+                        return carportRequest;
+                        }
+                    }
         }
         return null;
     }
@@ -85,7 +85,7 @@ public class CarportRequestMapper extends SuperMapper {
                 }
             }
         }
-    }
+}
 
 
     public ArrayList<CarportRequest> getAllCarportRequest() throws SQLException {

@@ -15,7 +15,7 @@ public interface IUserMapper
 
     void removeUserBalance(int balance, User user) throws SQLException;
 
-    int getUserIDFromEmail(User user) throws SQLException;
+    User getUserByEmail(String email) throws SQLException;
 
     ArrayList<User> getAllUsers() throws SQLException;
 }

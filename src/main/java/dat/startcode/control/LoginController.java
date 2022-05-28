@@ -6,6 +6,7 @@ import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.MapperFacade;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.services.UserFacade;
+import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +41,7 @@ public class LoginController extends HttpServlet {
 
         try {
             user = UserFacade.login(username, password, connectionPool);
-            user.setUser_id(facade.getUserMapper().getUserIDFromEmail(user));
+            user.setUser_id(facade.getUserMapper().getUserByEmail(username).getUser_id());
         } catch (DatabaseException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {

@@ -31,9 +31,9 @@ public class DashboardController extends HttpServlet {
         ArrayList<CarportRequest> carportRequestArrayList = CarportRequestFacade.getAllCarportRequests(connectionPool);
 
         Iterator<CarportRequest> i = carportRequestArrayList.iterator();
-        while(i.hasNext()){
+        while (i.hasNext()) {
             CarportRequest c = i.next();
-            if(CarportRequestFacade.isRequestApproved(connectionPool, c.getCarport_request_id())){
+            if (CarportRequestFacade.isRequestApproved(connectionPool, c.getCarport_request_id())) {
                 i.remove();
             }
         }
@@ -50,23 +50,27 @@ public class DashboardController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String command = request.getParameter("Handle");
         int requestID = Integer.parseInt(request.getParameter("orderID"));
-        if(command.equals("Godkend")){
+        if (command.equals("Godkend")) {
             CarportRequest carportRequest = CarportRequestFacade.getCarportRequestByID(connectionPool, requestID);
             PartsList partsList = PartsListFacade.getPartsList(connectionPool, carportRequest);
-            User user = new User(carportRequest.getEmail());
-            if(!PersonFacade.isPersonAUser(connectionPool, carportRequest.getEmail())){
-                UserFacade.createUser(carportRequest.getEmail(),"123", "customer", connectionPool);
-                user.setUser_id(UserFacade.getUserIDFromEmail(connectionPool, user));
+            User user = null;
+
+
+            if (UserFacade.getUserByEmail(connectionPool, carportRequest.getEmail()) == null) {
+                UserFacade.createUser(carportRequest.getEmail(), "123", "customer", connectionPool);
+                user = UserFacade.getUserByEmail(connectionPool, carportRequest.getEmail());
+                OrderFacade.createFullOrder(connectionPool, user, carportRequest, partsList);
+            } else {
+                user = UserFacade.getUserByEmail(connectionPool, carportRequest.getEmail());
+                OrderFacade.createFullOrder(connectionPool, UserFacade.getUserByEmail(connectionPool, carportRequest.getEmail()), carportRequest, partsList);
             }
-            carportRequest.setUser(user);
-            OrderFacade.createFullOrder(connectionPool, carportRequest.getUser(), carportRequest, partsList);
             int orderID = OrderFacade.getNewestOrderID(connectionPool);
             Orderitem orderitem = OrderItemFacade.getOrderItemByOrderId(orderID, connectionPool);
             UserFacade.removeBalanace(connectionPool, orderitem.getPrice(), user);
-        }else if(command.equals("Annuller")){
+        } else if (command.equals("Annuller")) {
             CarportRequestFacade.deleteOrder(connectionPool, requestID);
         }
-        request.getRequestDispatcher("dashboard.jsp").forward(request,response);
+        request.getRequestDispatcher("dashboard.jsp").forward(request, response);
     }
 
 }

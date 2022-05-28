@@ -129,18 +129,22 @@ public class UserMapper extends SuperMapper implements IUserMapper {
     }
 
     @Override
-    public int getUserIDFromEmail(User user) throws SQLException {
+    public User getUserByEmail(String email) throws SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.selectUserIDFromEmail)) {
-                ps.setString(1, user.getEmail());
+                ps.setString(1, email);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    return rs.getInt("user_id");
+                     int user_id = rs.getInt("user_id");
+                     String role = rs.getString("role");
+                     int balance = rs.getInt("balance");
+                     String password = rs.getString("password");
+                     return new User(user_id, role, balance, password, email);
                 }
             }
         }
-        return Integer.parseInt(null);
+        return null;
     }
 
     @Override

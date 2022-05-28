@@ -24,7 +24,11 @@ public class UserFacade {
     public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) {
         UserMapper userMapper = new UserMapper(connectionPool);
         return userMapper.getAllUsers();
-
+    }
+    @SneakyThrows
+    public static User getUserByEmail(ConnectionPool connectionPool, String email) {
+        UserMapper userMapper = new UserMapper(connectionPool);
+        return userMapper.getUserByEmail(email);
     }
 
     @SneakyThrows
@@ -36,6 +40,6 @@ public class UserFacade {
     @SneakyThrows
     public static int getUserIDFromEmail(ConnectionPool connectionPool, User user) {
         UserMapper userMapper = new UserMapper(connectionPool);
-        return userMapper.getUserIDFromEmail(user);
+        return userMapper.getUserByEmail(user.getEmail()).getUser_id();
     }
 }
