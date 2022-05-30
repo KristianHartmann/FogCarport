@@ -138,8 +138,16 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"
-                                                       id="requestCreateUserCheck" name="requestCreateUserCheck">
+                                                <c:choose>
+                                                    <c:when test="${!sessionScope.containsKey('user')}">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               id="requestCreateUserCheck" name="requestCreateUserCheck">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input class="form-check-input" type="checkbox"
+                                                               id="requestCreateUserCheck" name="requestCreateUserCheck" disabled>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 <label class="form-check-label" for="requestCreateUserCheck">
                                                     Lav en bruger med disse oplysninger
                                                 </label>
@@ -152,6 +160,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <span id="userRequest"></span>
                                 <hr>
                                 <div class="form-group mb-2">
                                     <label for="cpwidth">Carport bredde:</label>

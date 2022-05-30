@@ -88,7 +88,7 @@
                             <button type="button" class="btn btn-light text-dark me-2" data-bs-toggle="modal"
                                     data-bs-target="#loginModal">Login
                             </button>
-                            <button type="button" class="btn btn-primary text-dark me-2" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal"
                                     data-bs-target="#signupModal">Sign Up
                             </button>
                         </c:otherwise>
