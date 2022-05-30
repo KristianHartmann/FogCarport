@@ -302,7 +302,7 @@ public class FlatRoofCalc implements ICalculator {
 
     @Override
     public int dressShedCalc() { // Denne beregner hvor mange brædder der skal bruges rundt om skuret
-        int dressingBoards = (int) (shedLength * 2) + (shedWidth * 2);
+        int dressingBoards = (shedLength * 2) + (shedWidth * 2);
         return (int) (dressingBoards / 7.4);
     }
 

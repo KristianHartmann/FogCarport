@@ -89,11 +89,7 @@ public class PersonMapper extends SuperMapper implements IPersonMapper {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.isPersonAUser)) {
                 ps.setString(1, email);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return rs.next();
             }
         }
     }

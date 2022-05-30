@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CreateUserController", value = "/CreateUserController")
 public class CreateUserController extends HttpServlet {
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public CreateUserController() {
         this.connectionPool = ApplicationStart.getConnectionPool();

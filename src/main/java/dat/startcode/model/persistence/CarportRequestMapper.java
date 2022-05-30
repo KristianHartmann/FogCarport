@@ -131,11 +131,7 @@ public class CarportRequestMapper extends SuperMapper {
             try (PreparedStatement ps = connection.prepareStatement(SQLStatements.isRequestApproved)) {
                 ps.setInt(1, ID);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return rs.next();
             }
         }
     }

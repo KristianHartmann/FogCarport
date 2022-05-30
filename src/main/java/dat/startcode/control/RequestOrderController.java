@@ -21,7 +21,7 @@ import java.sql.SQLException;
 @WebServlet(name = "RequestOrderController", value = "/RequestOrderController")
 public class RequestOrderController extends HttpServlet {
 
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public RequestOrderController() {
         this.connectionPool = ApplicationStart.getConnectionPool();

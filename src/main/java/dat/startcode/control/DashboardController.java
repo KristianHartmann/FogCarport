@@ -17,7 +17,7 @@ import java.util.Iterator;
 
 @WebServlet(name = "Dashboard", value = "/Dashboard")
 public class DashboardController extends HttpServlet {
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public DashboardController() {
         this.connectionPool = ApplicationStart.getConnectionPool();

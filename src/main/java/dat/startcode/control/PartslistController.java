@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "PartslistController", value = "/PartslistController")
 public class PartslistController extends HttpServlet {
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public PartslistController() {
         this.connectionPool = ApplicationStart.getConnectionPool();

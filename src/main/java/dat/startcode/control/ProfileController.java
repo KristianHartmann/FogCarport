@@ -24,7 +24,7 @@ import java.util.Arrays;
 @WebServlet(name = "ProfileController", value = "/ProfileController")
 public class ProfileController extends HttpServlet {
 
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public ProfileController() {
         this.connectionPool = ApplicationStart.getConnectionPool();

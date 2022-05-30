@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 @WebServlet(name = "Login", value = "/Login")
 public class LoginController extends HttpServlet {
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public LoginController()
     {
@@ -43,7 +43,8 @@ public class LoginController extends HttpServlet {
             user = UserFacade.login(username, password, connectionPool);
             user.setUser_id(facade.getUserMapper().getUserByEmail(username).getUser_id());
         } catch (DatabaseException e) {
-            throw new RuntimeException(e);
+            request.setAttribute("errormessage", e.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
         }

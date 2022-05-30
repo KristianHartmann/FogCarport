@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CreateOrderController", value = "/CreateOrderController")
 public class CreateOrderController extends HttpServlet {
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public CreateOrderController() {
         this.connectionPool = ApplicationStart.getConnectionPool();

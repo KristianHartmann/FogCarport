@@ -17,7 +17,7 @@ import java.io.IOException;
 @WebServlet(name = "QuickbygController", value = "/QuickbygController")
 public class QuickbygController extends HttpServlet {
 
-    private ConnectionPool connectionPool;
+    private final ConnectionPool connectionPool;
 
     public QuickbygController() {
         this.connectionPool = ApplicationStart.getConnectionPool();
